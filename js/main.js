@@ -45,23 +45,25 @@ async function start() {
 }
 
 function restoreFinishedState(state) {
+  const answerEvents = state.answerEvents || puzzle.events;
+  const answerOrder = state.answerOrder || [];
+  const userOrder = state.order || [];
+
   if (state.won) {
     const orderIds = state.order || [];
-    const eventMap = new Map(puzzle.events.map(e => [e.id, e]));
+    const eventMap = new Map(answerEvents.map(e => [e.id, e]));
     const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
     if (items.length === EVENTS_PER_PUZZLE) {
       ui.renderList(items);
     } else {
-      ui.renderList(puzzle.events);
+      ui.renderList(answerEvents);
     }
-    ui.revealAll();
+    ui.revealAll(answerEvents);
   } else {
-    const answerOrder = state.answerOrder || [];
-    const userOrder = state.order || [];
     if (answerOrder.length === EVENTS_PER_PUZZLE) {
-      ui.finalizeLossState(userOrder, answerOrder, puzzle.events);
+      ui.finalizeLossState(userOrder, answerOrder, answerEvents);
     } else {
-      ui.renderList(puzzle.events);
+      ui.renderList(answerEvents);
     }
   }
 
@@ -70,8 +72,6 @@ function restoreFinishedState(state) {
     ? '<strong>You already played today.</strong> See you tomorrow for the next puzzle!'
     : '<strong>You already played today.</strong> Here is the correct order.';
   if (!state.won) {
-    const eventMap = new Map(puzzle.events.map(e => [e.id, e]));
-    const answerEvents = answerOrder.map(id => eventMap.get(id)).filter(Boolean);
     const stats = loadStats();
     ui.showOverlay(false, state.triesUsed || state.tries || MAX_TRIES, stats, answerEvents);
   }
@@ -151,20 +151,19 @@ async function handleSubmit() {
 
     if (gameOver) {
       state.answerOrder = result.answerOrder;
+      state.answerEvents = result.answerEvents;
       const stats = updateStats(result.won, puzzle.todayStr);
       ui.renderStats(stats);
       ui.disableGame();
 
       if (result.won) {
         gameFinished = true;
-        ui.revealAll();
+        ui.revealAll(result.answerEvents);
         ui.showOverlay(true, triesUsed, stats, null);
       } else {
         gameFinished = true;
-        const eventMap = new Map(puzzle.events.map(e => [e.id, e]));
-        const answerEvents = result.answerOrder.map(id => eventMap.get(id)).filter(Boolean);
-        ui.finalizeLossState(userOrder, result.answerOrder, puzzle.events);
-        ui.showOverlay(false, triesUsed, stats, answerEvents);
+        ui.finalizeLossState(userOrder, result.answerOrder, result.answerEvents);
+        ui.showOverlay(false, triesUsed, stats, result.answerEvents);
       }
     } else {
       ui.submitBtn.textContent = 'Submit again';

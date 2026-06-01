@@ -12,6 +12,7 @@ export function fmtYear(y) {
 }
 
 export function fmtDate(ev) {
+  if (ev.year == null) return '';
   const y = ev.year;
   const yearStr = y < 0 ? `${Math.abs(y)} BCE` : `${y} CE`;
   if (!ev.month) return yearStr;

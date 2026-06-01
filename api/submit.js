@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     // Fetch today's puzzle answer
     const { data: puzzle, error: puzzleError } = await supabase
       .from('daily_puzzles')
-      .select('answer_order')
+      .select('answer_order, events')
       .eq('date', todayStr)
       .single();
 
@@ -31,6 +31,8 @@ export default async function handler(req, res) {
     }
 
     const answer = puzzle.answer_order;
+    const eventMap = new Map(puzzle.events.map(e => [e.id, e]));
+    const answerEvents = answer.map(id => eventMap.get(id)).filter(Boolean);
 
     // Validate answer
     const correctPositions = [];
@@ -112,7 +114,8 @@ export default async function handler(req, res) {
       isCorrect,
       won,
       gameOver,
-      answerOrder: gameOver ? answer : undefined
+      answerOrder: gameOver ? answer : undefined,
+      answerEvents: gameOver ? answerEvents : undefined
     });
   } catch (err) {
     console.error('Error in /api/submit:', err);

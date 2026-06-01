@@ -94,11 +94,16 @@ export function evaluateAndMark(correctPositions) {
   if (sortable) sortable.option('draggable', '.event-item:not(.locked)');
 }
 
-export function revealAll() {
+export function revealAll(eventsWithDates) {
+  const dateMap = eventsWithDates ? new Map(eventsWithDates.map(e => [e.id, e])) : null;
   Array.from(listEl.children).forEach(li => {
     li.classList.remove('wrong');
     li.classList.add('correct');
     const yearEl = li.querySelector('.event-year');
+    if (dateMap) {
+      const ev = dateMap.get(li.dataset.id);
+      if (ev) yearEl.textContent = fmtDate(ev);
+    }
     yearEl.classList.add('revealed');
     const sourceEl = li.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');

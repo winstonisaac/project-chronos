@@ -87,10 +87,13 @@ export default async function handler(req, res) {
       }
     }
 
+    // Strip date fields so the answer isn't leaked to the client
+    const safeEvents = puzzle.events.map(({ year, month, day, ...rest }) => rest);
+
     return res.status(200).json({
       puzzle: {
         date: puzzle.date,
-        events: puzzle.events
+        events: safeEvents
       },
       progress
     });
