@@ -1,0 +1,17 @@
+{
+  "name": "chronos-philippine-history",
+  "version": "2.0.0",
+  "description": "Daily Philippine history sort game",
+  "type": "module",
+  "scripts": {
+    "seed": "node scripts/seed.js",
+    "add-uuid": "node scripts/generate-uuids.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.0",
+    "uuid": "^9.0.0"
+  }
+}

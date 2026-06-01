@@ -1,0 +1,17 @@
+[
+  {
+    "id": "",
+    "year": 0,
+    "month": 1,
+    "day": 1,
+    "text": "Event description goes here",
+    "image": {
+      "url": "https://example.com/image.jpg",
+      "local": "images/filename.webp"
+    },
+    "source": {
+      "text": "Author. (Year). Article Title. Publisher.",
+      "url": "https://example.com/source"
+    }
+  }
+]

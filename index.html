@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Chronos — Daily Philippine History Sort</title>
+<link rel="stylesheet" href="css/styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+<script>
+  window.SUPABASE_URL = 'https://ayixefacepagvvnugejy.supabase.co';
+  window.SUPABASE_ANON_KEY = 'sb_publishable_AroCqCdem4IYk7Zl11vhuw_LQptGWFr';
+</script>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>Chronos</h1>
+      <div class="sub" id="date-display">Loading…</div>
+    </div>
+
+    <div class="auth-section" id="auth-section"></div>
+
+    <div class="stats">
+      <div class="stat-chip" title="Current streak">🔥 <span class="num" id="streak-val">0</span></div>
+      <div class="stat-chip" title="Best streak">🏆 <span class="num" id="best-val">0</span></div>
+    </div>
+
+    <div class="card instructions" id="instruction-card">
+      <strong>Sort these 7 events from earliest to latest.</strong>
+      Drag the cards into chronological order, then press <strong>Submit</strong>.
+      Correctly placed events will be marked. You have <strong>3 tries</strong>.
+    </div>
+
+    <div class="actions" id="game-actions">
+      <div class="tries-pill" id="tries-pill">Tries left: <span class="num" id="tries-val">3</span></div>
+      <button id="submit-btn">Submit</button>
+    </div>
+  </aside>
+
+  <main class="game-board">
+    <ul id="event-list"></ul>
+  </main>
+</div>
+
+<!-- Result Overlay -->
+<div class="overlay" id="result-overlay" aria-hidden="true">
+  <div class="overlay-bg"></div>
+  <div class="modal">
+    <div class="big" id="result-emoji">🎉</div>
+    <h2 id="result-title">Nice!</h2>
+    <p id="result-message">You got it right.</p>
+    <p>Next puzzle in <span class="countdown" id="countdown">00:00:00</span></p>
+    <div class="share-row">
+      <button id="share-btn" class="secondary">Share</button>
+      <button id="close-modal-btn" class="secondary">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Auth Overlay -->
+<div class="overlay auth-modal" id="auth-overlay" aria-hidden="true">
+  <div class="overlay-bg"></div>
+  <div class="modal">
+    <h2 id="auth-form-title">Sign In</h2>
+    <div class="input-group">
+      <label for="auth-email">Email</label>
+      <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" />
+    </div>
+    <div class="input-group">
+      <label for="auth-password">Password</label>
+      <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <div class="auth-error" id="auth-error"></div>
+    <button id="auth-action-btn">Sign In</button>
+    <div class="auth-toggle" id="auth-toggle">Need an account? Sign up</div>
+    <button id="auth-close" class="secondary" style="margin-top: 10px; width: 100%;">Close</button>
+  </div>
+</div>
+
+<!-- Error Toast -->
+<div class="error-toast" id="error-toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
