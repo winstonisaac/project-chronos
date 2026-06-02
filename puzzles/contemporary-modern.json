@@ -1,17 +1,467 @@
 [
   {
-    "id": "",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "1530e584-ec38-4b60-87dd-8c59a6f778d0",
+    "year": 2010,
+    "month": 5,
+    "day": 10,
+    "text": "The first automated elections in the Philippines",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/first-automated-election.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "Casanova, A. (2010, May 10). Philippine Elections 2010. Asia Society.",
+      "url": "https://asiasociety.org/philippines/philippine-elections-2010"
+    }
+  },
+  {
+    "id": "2db51b9e-d775-47a7-a53d-f92e68827b95",
+    "year": 2010,
+    "month": 8,
+    "day": 23,
+    "text": "Manila hostage crisis in Quirino Grandstand",
+    "image": {
+      "url": null,
+      "local": "images/manila-hostage-crisis.webp"
+    },
+    "source": {
+      "text": "Meikle, J. (2010, August 23). 'Gunman killed' as police storm Manila hostage bus. The Guardian.",
+      "url": "https://www.theguardian.com/world/2010/aug/23/police-storm-manila-hostage-bus"
+    }
+  },
+  {
+    "id": "2d20106d-94af-4e51-9d97-5fbb668b5cfd",
+    "year": 2011,
+    "month": 2,
+    "day": 19,
+    "text": "Taylor Swift performs in the Philippines for the first time",
+    "image": {
+      "url": null,
+      "local": "images/taylor-swift-philippines.webp"
+    },
+    "source": {
+      "text": "Jimenez, F. (2011, February 19). Taylor Swift arrives in Manila for one-night only concert. GMA News.",
+      "url": "https://www.gmanetwork.com/news/showbiz/content/213410/taylor-swift-arrives-in-manila-for-one-night-only-concert/story/"
+    }
+  },
+  {
+    "id": "a2747957-92db-4730-8c11-43b6d74e9745",
+    "year": 2012,
+    "month": 3,
+    "day": 23,
+    "text": "Lazada officially launches in the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/lazada-launch.webp"
+    },
+    "source": {
+      "text": "Lee, T. (2012, March 23). Rocket Internet's Amazon clone Lazada debuts in Southeast Asia. Tech in Asia.",
+      "url": "https://www.techinasia.com/rocket-internet-launches-amazon-clone-lazada-in-southeast-asia"
+    }
+  },
+  {
+    "id": "b32dfd3e-a171-41a0-80bf-984bb1727c60",
+    "year": 2012,
+    "month": 5,
+    "day": 29,
+    "text": "Chief Justice Corona is impeached",
+    "image": {
+      "url": null,
+      "local": "images/corona-impeachment.webp"
+    },
+    "source": {
+      "text": "Ager, M. (2012, May 29). Senate votes 20-3 to convict Corona. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/202929/senate-convicts-corona"
+    }
+  },
+  {
+    "id": "d313540b-1d36-43cd-bcf9-4639bff4da27",
+    "year": 2012,
+    "month": 9,
+    "day": 12,
+    "text": "Cybercrime Law (RA 10175) is officially signed",
+    "image": {
+      "url": null,
+      "local": "images/cybercrime-law.webp"
+    },
+    "source": {
+      "text": "Republic of the Philippines. (2012, September 12). Republic Act No. 10175. Official Gazette.",
+      "url": "https://www.officialgazette.gov.ph/2012/09/12/republic-act-no-10175/"
+    }
+  },
+  {
+    "id": "6903756a-aca8-4c28-b09e-0e0d60b9e5d5",
+    "year": 2013,
+    "month": 5,
+    "day": 15,
+    "text": "K-12 is adopted as the educational system",
+    "image": {
+      "url": null,
+      "local": "images/k12-education.webp"
+    },
+    "source": {
+      "text": "Cerda, J. (2013, May 15). Aquino signs K+12 bill into law. Philstar.com.",
+      "url": "https://www.philstar.com/other-sections/campus/2013/05/15/942425/aquino-signs-k12-bill-law"
+    }
+  },
+  {
+    "id": "e3c6eed5-e87d-4a5f-b8f2-336f6d3f44a0",
+    "year": 2013,
+    "month": 5,
+    "day": 28,
+    "text": "Megan Young becomes the first Filipina Miss World",
+    "image": {
+      "url": null,
+      "local": "images/megan-young-miss-world.webp"
+    },
+    "source": {
+      "text": "Associated Press. (2013, May 28). Megan Young crowned Miss World 2013. INQUIRER.net.",
+      "url": "https://lifestyle.inquirer.net/127875/megan-young-crowned-miss-world/"
+    }
+  },
+  {
+    "id": "b06e1271-7868-4f95-aaea-c3bbe0c81f97",
+    "year": 2013,
+    "month": 11,
+    "day": 8,
+    "text": "Super Typhoon Yolanda makes landfall in Eastern Samar",
+    "image": {
+      "url": null,
+      "local": "images/yolanda-landfall.webp"
+    },
+    "source": {
+      "text": "Rafferty, J. (2026, April 17). Super Typhoon Haiyan. Britannica.",
+      "url": "https://www.britannica.com/event/Super-Typhoon-Haiyan"
+    }
+  },
+  {
+    "id": "44fd2f8e-581e-42ac-9dd1-3b1f05af0cbd",
+    "year": 2014,
+    "month": 2,
+    "day": 11,
+    "text": "Uber officially launches in the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/uber-launch.webp"
+    },
+    "source": {
+      "text": "Nistal, P., & Regidor, J. (2026, August). Comparative Study of Uber and Regular Taxi Service Characteristics. NCTS.",
+      "url": "https://ncts.upd.edu.ph/tssp/wp-content/uploads/2016/08/Nistal-Regidor.pdf"
+    }
+  },
+  {
+    "id": "b1aa6815-42c5-43a2-9e50-73f458ca02ca",
+    "year": 2014,
+    "month": 7,
+    "day": 21,
+    "text": "Philippine Arena is inaugurated",
+    "image": {
+      "url": null,
+      "local": "images/phil-arena.webp"
+    },
+    "source": {
+      "text": "Ybanez, D. (2014, July 21). Aquino lauds Iglesia Ni Cristo on its victories during PHL Arena inauguration. Eagle News.",
+      "url": "https://www.eaglenews.ph/aquino-lauds-iglesia-ni-cristo-on-its-victories-during-phl-arena-inauguration/"
+    }
+  },
+  {
+    "id": "f93868c1-a646-48a8-9ab3-174b5a0f4e90",
+    "year": 2015,
+    "month": 1,
+    "day": 15,
+    "text": "Pope Francis visits the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/pope-francis-visits.webp"
+    },
+    "source": {
+      "text": "Agence France-Presse. (2015, January 15). Pope Francis arrives in the Philippines. The Guardian.",
+      "url": "https://www.theguardian.com/world/2015/jan/15/pope-francis-arrives-philippines"
+    }
+  },
+  {
+    "id": "d1657c24-0f06-41e6-9b65-5e5532d86712",
+    "year": 2015,
+    "month": 1,
+    "day": 25,
+    "text": "SAF 44 Mamasapano clash",
+    "image": {
+      "url": null,
+      "local": "images/saf-44-clash.webp"
+    },
+    "source": {
+      "text": "Department of Justice. (2015, April 22). DOJ's Report on the Mamasapano Incident released [...]. Department of Justice.",
+      "url": "https://www.doj.gov.ph/news_article.html?newsid=Zb5UE3vhCrTOoR-rlDMfmkS4Gs0t1d6F2D0B39z6Wx8"
+    }
+  },
+  {
+    "id": "99e48b24-b09c-455c-ae15-c4fc5f9d32a8",
+    "year": 2015,
+    "month": 5,
+    "day": 2,
+    "text": "Manny Pacquiao loses to Floyd Mayweather Jr.",
+    "image": {
+      "url": null,
+      "local": "images/pacquiao-mayweather.webp"
+    },
+    "source": {
+      "text": "Associated Press. (2015, May 2). Mayweather Jr. Defeats Pacquiao By Unanimous Decision. CBS News.",
+      "url": "https://www.cbsnews.com/losangeles/news/mayweather-jr-defeats-pacquiao-by-unanimous-decision/"
+    }
+  },
+  {
+    "id": "b4daee3a-6537-4d43-b446-e0cbf5bbbebe",
+    "year": 2015,
+    "month": 10,
+    "day": 24,
+    "text": "AlDub's 'Tamang Panahon' takes over Philippine Arena",
+    "image": {
+      "url": null,
+      "local": "images/aldub-tamang-panahon.webp"
+    },
+    "source": {
+      "text": "Quilingguing, U. (2015, October 24). 'Eat Bulaga' mounts grandest AlDub event. SunStar.",
+      "url": "https://www.sunstar.com.ph/more-articles/eat-bulaga-mounts-grandest-aldub-event"
+    }
+  },
+  {
+    "id": "5303e612-05cc-44b2-94f1-ada95619206b",
+    "year": 2015,
+    "month": 12,
+    "day": 11,
+    "text": "Shopee officially launches in the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/shopee-launch.webp"
+    },
+    "source": {
+      "text": "adobo magazine. (2015, December 15). Social mobile marketplace app Shopee launches in PH. adobo magazine.",
+      "url": "https://www.adobomagazine.com/philippine-news/social-mobile-marketplace-app-shopee-launches-in-ph/"
+    }
+  },
+  {
+    "id": "0508d2e9-5a70-4a00-8732-6524dc816498",
+    "year": 2015,
+    "month": 12,
+    "day": 20,
+    "text": "Pia Wurtzbach wins Miss Universe",
+    "image": {
+      "url": null,
+      "local": "images/pia-wurzbach-miss-universe.webp"
+    },
+    "source": {
+      "text": "Smith, C. (2015, December 20). Philippines's Pia Wurtzbach is 64th Miss Universe. PhilStar.com.",
+      "url": "https://www.philstar.com/entertainment/2015/12/20/1535007/philippiness-pia-wurtzbach-64th-miss-universe"
+    }
+  },
+  {
+    "id": "30cedc58-b011-4b12-b7b4-7e7295bc3a7f",
+    "year": 2017,
+    "month": 5,
+    "day": 23,
+    "text": "The Siege of Marawi begins",
+    "image": {
+      "url": null,
+      "local": "images/marawi-siege.webp"
+    },
+    "source": {
+      "text": "Bueza, M. (2017, May 23). Timeline: The 'liberation' of Marawi. Rappler.",
+      "url": "https://www.rappler.com/newsbreak/iq/185978-timeline-liberation-marawi-city/"
+    }
+  },
+  {
+    "id": "0efe77bc-d76d-487b-b01f-7f788adc36fd",
+    "year": 2018,
+    "month": 4,
+    "day": 16,
+    "text": "Uber stops operation in the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/uber-stops-operation.webp"
+    },
+    "source": {
+      "text": "Cabuenas, J. (2018, April 16). Uber officially ends PHL operations. GMA News.",
+      "url": "https://www.gmanetwork.com/news/money/motoring/650238/uber-officially-ends-phl-operations/story/"
+    }
+  },
+  {
+    "id": "09ed968a-83d6-453b-bf2f-8e63e4ab6c5e",
+    "year": 2019,
+    "month": 3,
+    "day": 17,
+    "text": "Philippines withdraws from ICC membership",
+    "image": {
+      "url": null,
+      "local": "images/icc-withdrawal.webp"
+    },
+    "source": {
+      "text": "Lopez, V. (2019, March 17). Duterte announces PHL withdrawal from ICC. GMA News.",
+      "url": "https://www.gmanetwork.com/news/topstories/nation/646575/duterte-announces-phl-withdrawal-from-icc/story/"
+    }
+  },
+  {
+    "id": "16bf2bf5-a375-447a-bc18-f54ab4ae7e27",
+    "year": 2020,
+    "month": 3,
+    "day": 16,
+    "text": "Luzon-wide ECQ is announced due to COVID-19",
+    "image": {
+      "url": null,
+      "local": "images/luzon-ecq-covid19.webp"
+    },
+    "source": {
+      "text": "Parrocha, A. (2020, March 16). Duterte places entire Luzon under 'enhanced community quarantine'. Philippine News Agency.",
+      "url": "https://www.pna.gov.ph/articles/1096801"
+    }
+  },
+  {
+    "id": "ab995356-df80-4377-967f-5c2c81ec831a",
+    "year": 2020,
+    "month": 5,
+    "day": 5,
+    "text": "ABS CBN's last broadcast",
+    "image": {
+      "url": null,
+      "local": "images/abs-cbn-last-broadcast.webp"
+    },
+    "source": {
+      "text": "ABS-CBN News. (2020, May 5). ABS-CBN to go off air in compliance with NTC order. ABS-CBN News.",
+      "url": "https://www.abs-cbn.com/news/05/05/20/abs-cbn-to-go-off-air-in-compliance-with-ntc-order"
+    }
+  },
+  {
+    "id": "562ca6b3-3a6d-4512-86ff-569a67a962be",
+    "year": 2021,
+    "month": 7,
+    "day": 26,
+    "text": "Hidilyn Diaz wins the country's first Olympic gold medal",
+    "image": {
+      "url": null,
+      "local": "images/hidilyn-diaz-first-gold.webp"
+    },
+    "source": {
+      "text": "Micaller, B. (2021, July 26). Hidilyn Diaz wins PH's first Olympic gold medal. GMA News.",
+      "url": "https://www.gmanetwork.com/news/sports/othersports/796884/hidilyn-diaz-wins-ph-s-first-olympic-gold-medal/story/"
+    }
+  },
+  {
+    "id": "a308c49e-1f26-45d2-8508-82b2a2bb664f",
+    "year": 2022,
+    "month": 12,
+    "day": 27,
+    "text": "The SIM Card Registration Act goes into full effect",
+    "image": {
+      "url": null,
+      "local": "images/sim-card-registration.webp"
+    },
+    "source": {
+      "text": "Ombay, G. (2022, December 27). 180-day SIM card registration period starts. GMA News.",
+      "url": "https://www.gmanetwork.com/news/topstories/nation/855579/180-day-sim-card-registration-period-starts/story/"
+    }
+  },
+  {
+    "id": "b8e70721-e899-4e5a-8ab8-6b84290ed7a7",
+    "year": 2023,
+    "month": 5,
+    "day": 21,
+    "text": "The Manila Central Post Office building burns down",
+    "image": {
+      "url": null,
+      "local": "images/manila-central-post-fire.webp"
+    },
+    "source": {
+      "text": "Del Mundo, E. (2023, May 21). Fire hits Manila Central Post Office. DZRH.",
+      "url": "https://www.dzrh.com.ph/post/manila-post-fire"
+    }
+  },
+  {
+    "id": "5b87f4c4-1741-4c4d-a04c-8fa018235ef7",
+    "year": 2023,
+    "month": 5,
+    "day": 31,
+    "text": "TVJ resigns from TAPE Inc.'s Eat Bulaga",
+    "image": {
+      "url": null,
+      "local": "images/TVJ-resigns-TAPE.webp"
+    },
+    "source": {
+      "text": "Tunac, H. (2023, May 31). TVJ confirms they are leaving TAPE. GMA News.",
+      "url": "https://www.gmanetwork.com/news/showbiz/chikaminute/871640/tvj-confirms-they-are-leaving-tape/story/"
+    }
+  },
+  {
+    "id": "5a448978-1d79-4bac-9d3f-e1bc1fe4fb6d",
+    "year": 2023,
+    "month": 7,
+    "day": 18,
+    "text": "Maharlika Investment Fund is signed into law",
+    "image": {
+      "url": null,
+      "local": "images/maharlika-fund-signed.webp"
+    },
+    "source": {
+      "text": "Gita-Carlos, R., & Reganit, C. (2023, July 18). Marcos inks MIF bill into law. Philippine News Agency.",
+      "url": "https://www.pna.gov.ph/articles/1205832"
+    }
+  },
+  {
+    "id": "f5baaf4c-4a07-466e-b216-571557c459a0",
+    "year": 2023,
+    "month": 11,
+    "day": 16,
+    "text": "BINI's viral hit Pantropiko is released",
+    "image": {
+      "url": null,
+      "local": "images/bini-pantropiko.webp"
+    },
+    "source": {
+      "text": "BINI Official. (2023, November 16). Pantropiko. YouTube.",
+      "url": "https://www.youtube.com/watch?v=L4KvD79RwbM"
+    }
+  },
+  {
+    "id": "4ec377ce-c6ee-4641-8c65-ce16a3522a36",
+    "year": 2024,
+    "month": 9,
+    "day": 3,
+    "text": "Dismissed mayor Alice Guo is arrested in Indonesia",
+    "image": {
+      "url": null,
+      "local": "images/alice-guo-arrested.webp"
+    },
+    "source": {
+      "text": "Laqui, I. (2024, September 4). Alice Guo arrested in Indonesia — DOJ, PAOCC. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2024/09/04/2382801/alice-guo-arrested-indonesia-doj-paocc"
+    }
+  },
+  {
+    "id": "9dc2cb87-b8ca-4e22-b5b4-9dc4d204f7e7",
+    "year": 2025,
+    "month": 3,
+    "day": 13,
+    "text": "President Duterte is detained in the ICC",
+    "image": {
+      "url": null,
+      "local": "images/duterte-icc.webp"
+    },
+    "source": {
+      "text": "van den Berg, S. (2025, March 14). Arrest of Philippines' Duterte offers a glimmer of hope at troubled ICC. Reuters.",
+      "url": "https://www.reuters.com/world/asia-pacific/arrest-philippines-duterte-offers-glimmer-hope-troubled-icc-2025-03-13/"
+    }
+  },
+  {
+    "id": "21e0da3a-8d16-485a-af18-23471d23400e",
+    "year": 2025,
+    "month": 11,
+    "day": 13,
+    "text": "Death of Juan Ponce Enrile",
+    "image": {
+      "url": null,
+      "local": "images/enrile-death.webp"
+    },
+    "source": {
+      "text": "Bajo, A. (2025, November 13). Juan Ponce Enrile dies at 101. GMA News.",
+      "url": "https://www.gmanetwork.com/news/topstories/nation/965745/juan-ponce-enrile-dies-at-101/story"
     }
   }
 ]
