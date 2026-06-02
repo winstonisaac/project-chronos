@@ -1,5 +1,5 @@
-import { supabase, createUserClient } from '../lib/supabase.js';
-import { getManilaDateStr, subtractDaysManila } from '../lib/time.js';
+import { supabase, createUserClient } from './lib/supabase.js';
+import { getManilaDateStr, subtractDaysManila } from './lib/time.js';
 
 const MAX_TRIES = 3;
 

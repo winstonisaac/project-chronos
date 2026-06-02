@@ -1,6 +1,6 @@
-import { supabase, supabaseAdmin, createUserClient } from '../lib/supabase.js';
-import { getManilaDateStr, subtractDaysManila } from '../lib/time.js';
-import { generatePuzzle } from '../lib/puzzle-generator.js';
+import { supabase, supabaseAdmin, createUserClient } from './lib/supabase.js';
+import { getManilaDateStr, subtractDaysManila } from './lib/time.js';
+import { generatePuzzle } from './lib/puzzle-generator.js';
 
 const COOLDOWN_DAYS = 30;
 
