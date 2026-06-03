@@ -1,17 +1,512 @@
 [
   {
-    "id": "5e651c75-86f0-4761-8220-c0ae03ec31ee",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "10411059-7c35-42fe-80bd-76a24cd0eaab",
+    "year": 1987,
+    "month": 2,
+    "day": 2,
+    "text": "The current Philippine Constitution is ratified",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/current-constitution-ratification.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "Aquino, C. (1987, February 11). Proclamation No. 58. Malacañan Palace.",
+      "url": "https://lawphil.net/executive/proc/proc1987/proc_58_1987.html"
+    }
+  },
+  {
+    "id": "82a4b730-b6b2-471b-bb03-0566390a3121",
+    "year": 1987,
+    "month": 7,
+    "day": 18,
+    "text": "Eat Bulaga! first airs on ABS-CBN",
+    "image": {
+      "url": null,
+      "local": "images/eat-bulaga-first-gma.webp"
+    },
+    "source": {
+      "text": "Eat... Bulaga!: Moving On! (n.d.). Eat... Bulaga! Wiki.",
+      "url": "https://eatbulaga.fandom.com/wiki/Eat..._Bulaga!:_Moving_On!"
+    }
+  },
+  {
+    "id": "43ac55c2-5e68-43fe-9fac-17b5944e954f",
+    "year": 1987,
+    "month": 12,
+    "day": 20,
+    "text": "MV Dona Paz collides with an oil tanker killing 4,385",
+    "image": {
+      "url": null,
+      "local": "images/mv-dona-paz.webp"
+    },
+    "source": {
+      "text": "Guiness World Records. (n.d.). Deadliest maritime disaster (peacetime). Guiness World Records.",
+      "url": "https://www.guinnessworldrecords.com/world-records/772666-deadliest-maritime-disaster-peacetime"
+    }
+  },
+  {
+    "id": "9bd5d439-38fe-4b6b-8515-946c096d3edb",
+    "year": 1989,
+    "month": 9,
+    "day": 28,
+    "text": "President Marcos Sr. dies in exile in Hawaii",
+    "image": {
+      "url": null,
+      "local": "images/marcos-sr-death.webp"
+    },
+    "source": {
+      "text": "Todt, R. (1989, September 28). Ferdinand Marcos dead. United Press International.",
+      "url": "https://www.upi.com/Archives/1989/09/28/Ferdinand-Marcos-dead/2055622958400/"
+    }
+  },
+  {
+    "id": "bc1dcddf-79e2-4066-9f4a-047cb1147f07",
+    "year": 1991,
+    "month": 6,
+    "day": 28,
+    "text": "SM Megamall opens to the public",
+    "image": {
+      "url": null,
+      "local": "images/sm-megamall-open.webp"
+    },
+    "source": {
+      "text": "SM Investments. (2016, August 16). At 25, SM Megamall Ushers New Mall Revolution.",
+      "url": "https://www.sminvestments.com/press_release/at-25-sm-megamall-ushers-new-mall-revolution/"
+    }
+  },
+  {
+    "id": "08c2c1b8-c181-421b-a430-202d882474eb",
+    "year": 1991,
+    "month": 6,
+    "day": 30,
+    "text": "Vizconde Massacre",
+    "image": {
+      "url": null,
+      "local": "images/vizconde-massacre.webp"
+    },
+    "source": {
+      "text": "Lejano v. People, G.R. No. 176389. (2010).",
+      "url": "https://lawphil.net/judjuris/juri2010/dec2010/gr_176389_2010.html"
+    }
+  },
+  {
+    "id": "108c4f75-c014-4402-af29-c1791abf4584",
+    "year": 1994,
+    "month": 3,
+    "day": 29,
+    "text": "Philippines connect to the Internet for the first time",
+    "image": {
+      "url": null,
+      "local": "images/philippines-connects-internet.webp"
+    },
+    "source": {
+      "text": "Reyes, B. (2026, March 29). 32 Years Online: How the Internet Continues to Shape Filipino Life. Manila Bulletin.",
+      "url": "https://mb.com.ph/2026/03/29/32-years-online-how-the-internet-continues-to-shape-filipino-life"
+    }
+  },
+  {
+    "id": "0f0c0f3b-d88c-426d-9259-34c98082489f",
+    "year": 1994,
+    "month": 6,
+    "day": 6,
+    "text": "Sine'skwela first aired on ABS-CBN",
+    "image": {
+      "url": null,
+      "local": "images/sineskwela-first-abscbn.webp"
+    },
+    "source": {
+      "text": "ABS-CBN Corporate. (2020, March 27). ABS-CBN brings back Sine'skwela, Bayani, Hiraya Manawari.",
+      "url": "https://corporate.abs-cbn.com/newsroom/news-releases/2020/2/5/abs-cbn-brings-back-sineskwela-bayani-hira"
+    }
+  },
+  {
+    "id": "6c7e355b-6e37-4ccd-814f-2022677943a1",
+    "year": 1995,
+    "month": 3,
+    "day": 17,
+    "text": "OFW Flor Contemplacion is executed in Singapore",
+    "image": {
+      "url": null,
+      "local": "images/flor-contemplacion.webp"
+    },
+    "source": {
+      "text": "Chew, V. (n.d.). Flor Contemplacion. National Library Board, Singapore.",
+      "url": "https://www.nlb.gov.sg/main/article-detail?cmsuuid=4e7e82e8-a0e1-481c-9605-12a516702a40"
+    }
+  },
+  {
+    "id": "a1ebdb8e-5e96-4535-ab0d-207212b5cb77",
+    "year": 1995,
+    "month": 10,
+    "day": 19,
+    "text": "Enchanted Kingdom opens to the public",
+    "image": {
+      "url": null,
+      "local": "images/enchanted-kingdom-opens.webp"
+    },
+    "source": {
+      "text": "Enchanted Kingdom. (n.d.). About EK affiliations.",
+      "url": "https://www.enchantedkingdom.ph/about-ek-affiliations/"
+    }
+  },
+  {
+    "id": "fa03853a-3153-41c5-8b04-a7f6a65f7292",
+    "year": 1996,
+    "month": 3,
+    "day": 18,
+    "text": "The Ozone Disco fire kills 162",
+    "image": {
+      "url": null,
+      "local": "images/ozone-disco-fire.webp"
+    },
+    "source": {
+      "text": "Philippine Daily Inquirer. (2013, January 29). WHAT WENT BEFORE: Ozone Disco is No. 6 [...]. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/348777/what-went-before-ozone-disco-is-no-6-in-worlds-deadliest-nightclub-fires"
+    }
+  },
+  {
+    "id": "20b4e69c-fefc-46a8-9136-4c5e28da30f4",
+    "year": 1999,
+    "month": 12,
+    "day": 15,
+    "text": "MRT 3's first trip",
+    "image": {
+      "url": null,
+      "local": "images/mrt-3-first-trip.webp"
+    },
+    "source": {
+      "text": "MRT-3. (n.d.). Philippine Railway Wiki.",
+      "url": "https://philippine-railway.fandom.com/wiki/MRT-3"
+    }
+  },
+  {
+    "id": "8e99f57a-b66a-4add-92fe-102f5fdbee45",
+    "year": 2000,
+    "month": 5,
+    "day": 4,
+    "text": "The ILOVEYOU virus is released",
+    "image": {
+      "url": null,
+      "local": "images/iloveyou-virus-release.webp"
+    },
+    "source": {
+      "text": "Poulsen, K. (2010, May 3). Tainted 'Love' Infects Computers. Wired.",
+      "url": "https://www.wired.com/2010/05/0504i-love-you-virus/"
+    }
+  },
+  {
+    "id": "c5d653a9-d472-427b-9fc5-48d2c7f57e90",
+    "year": 2000,
+    "month": 5,
+    "day": 25,
+    "text": "PAL flight 812 gets hijacked",
+    "image": {
+      "url": null,
+      "local": "images/pal-flight-812-hijacking.webp"
+    },
+    "source": {
+      "text": "Aviation Safety Network. (n.d.). [PAL flight 812 gets hijacked].",
+      "url": "https://aviation-safety.net/asndb/323500"
+    }
+  },
+  {
+    "id": "fa026c12-f787-47ae-8f93-7e882529d9e0",
+    "year": 2000,
+    "month": 7,
+    "day": 10,
+    "text": "The Payatas landfill landslide",
+    "image": {
+      "url": null,
+      "local": "images/payatas-landfill-landslide.webp"
+    },
+    "source": {
+      "text": "Sison Jr., B., & Felipe, C. (2001, July 10). Payatas tragedy: One year after. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2001/07/10/91819/payatas-tragedy-one-year-after"
+    }
+  },
+  {
+    "id": "a802c6a7-b010-4299-abdf-d804c95d7a73",
+    "year": 2001,
+    "month": 1,
+    "day": 20,
+    "text": "Former President Joseph Estrada is ousted",
+    "image": {
+      "url": null,
+      "local": "images/estrada-ousted-from-presidency.webp"
+    },
+    "source": {
+      "text": "Paddock, R. (2001, January 20). Estrada Quits; New Philippine Leader Installed. Los Angeles Times.",
+      "url": "https://www.latimes.com/archives/la-xpm-2001-jan-20-mn-14778-story.html"
+    }
+  },
+  {
+    "id": "0a5cc9b8-564b-4e80-8bbc-8ebbd0544ea9",
+    "year": 2001,
+    "month": 10,
+    "day": 8,
+    "text": "Game KNB? first aired on ABS-CBN",
+    "image": {
+      "url": null,
+      "local": "images/game-knb-premiere.webp"
+    },
+    "source": {
+      "text": "Media Meter. (2026, February 27). Popular Game Shows in the Philippines.",
+      "url": "https://media-meter.com/popular-game-shows-in-the-philippines/"
+    }
+  },
+  {
+    "id": "7cea0d98-a64e-4bc6-b7a4-ecc50f34b40c",
+    "year": 2003,
+    "month": 4,
+    "day": 5,
+    "text": "LRT 2's first trip",
+    "image": {
+      "url": null,
+      "local": "images/lrt-2-first-trip.webp"
+    },
+    "source": {
+      "text": "Light Railway Transit Authority. (n.d.). Railway Operations.",
+      "url": "https://www.lrta.gov.ph/railway-operations/"
+    }
+  },
+  {
+    "id": "3705540b-d1d9-489c-abbb-336b1d82ec1f",
+    "year": 2003,
+    "month": 5,
+    "day": 5,
+    "text": "Meteor Garden first aired on ABS-CBN",
+    "image": {
+      "url": null,
+      "local": "images/meteor-garden-premiere.webp"
+    },
+    "source": {
+      "text": "The Dubbing Database. (n.d.). Meteor Garden.",
+      "url": "https://dubdb.fandom.com/wiki/Meteor_Garden_(Filipino)"
+    }
+  },
+  {
+    "id": "aa2a1685-3576-4a11-9dc6-08d16f2e0a74",
+    "year": 2003,
+    "month": 7,
+    "day": 27,
+    "text": "The Oakwood Mutiny takes place",
+    "image": {
+      "url": null,
+      "local": "images/oakwood-mutiny.webp"
+    },
+    "source": {
+      "text": "Evangelista, A., & Bueza, M. (2018, September 15). Timeline: Trillanes, from mutiny to amnesty. Rappler.",
+      "url": "https://www.rappler.com/newsbreak/iq/211894-timeline-antonio-trillanes-iv-mutiny-to-amnesty/"
+    }
+  },
+  {
+    "id": "8fabb08d-0962-4077-8bf5-e755b13c8b65",
+    "year": 2003,
+    "month": 9,
+    "day": 1,
+    "text": "Daisy Siete first airs on GMA",
+    "image": {
+      "url": null,
+      "local": "images/daisy-siete-premiere.webp"
+    },
+    "source": {
+      "text": "Godinez, B. (2010, November 19). Rochelle Pangilinan understands life in showbiz is filled with uncertainty. PEP.",
+      "url": "https://www.pep.ph/lifestyle/parenting/27236/rochelle-pangilinan-understands-life-in-showbiz-is-filled-with-uncertainty"
+    }
+  },
+  {
+    "id": "cdcc96c5-6c9d-4c06-884b-4b3849ff3cb4",
+    "year": 2004,
+    "month": 11,
+    "day": 16,
+    "text": "The Hacienda Luisita massacre",
+    "image": {
+      "url": null,
+      "local": "images/hacienda-luisita-massacre.webp"
+    },
+    "source": {
+      "text": "Tuazon, B. (2004, November 27). The Hacienda Luisita Massacre, Landlordism and State Terrorism. Bulatlat.",
+      "url": "https://www.bulatlat.com/news/4-42/4-42-massacre.html?tztc=1"
+    }
+  },
+  {
+    "id": "dcb6505f-3cc3-47ac-b27f-8d08b95ef77c",
+    "year": 2004,
+    "month": 12,
+    "day": 14,
+    "text": "Fernando Poe Jr. passes away",
+    "image": {
+      "url": null,
+      "local": "images/fernando-poe-jr-death.webp"
+    },
+    "source": {
+      "text": "Reuters in Manila. (2004, December 14). Film star politician dies in Philippines. The Guardian.",
+      "url": "https://www.theguardian.com/world/2004/dec/14/philippines"
+    }
+  },
+  {
+    "id": "2c21a882-725f-4c2e-8258-d893927d0fb6",
+    "year": 2005,
+    "month": 6,
+    "day": 27,
+    "text": "President Arroyo delivers her I am sorry speech",
+    "image": {
+      "url": null,
+      "local": "images/arroyo-i-am-sorry-speech.webp"
+    },
+    "source": {
+      "text": "Calica, A., & Romero, P. (2005, June 28). GMA: I'm sorry, it's me on tape. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2005/06/28/283808/gma-i146m-sorry-it146s-me-tape"
+    }
+  },
+  {
+    "id": "b10797a3-5223-4627-ae32-f7b4bde0152b",
+    "year": 2005,
+    "month": 8,
+    "day": 21,
+    "text": "The first season of Pinoy Big Brother premiered",
+    "image": {
+      "url": null,
+      "local": "images/pinoy-big-brother-season-1-premiere.webp"
+    },
+    "source": {
+      "text": "Sabio, N. (2025, August 21). On this day: The Birth of Pinoy Big Brother and the Hosts Who Shaped It. ABS-CBN News.",
+      "url": "https://www.abs-cbn.com/entertainment/showbiz/movies-series/2025/8/21/on-this-day-the-birth-of-pinoy-big-brother-and-the-hosts-who-shaped-it-0837"
+    }
+  },
+  {
+    "id": "74f9be27-19f9-48f3-99c5-87bb5ac4cffe",
+    "year": 2006,
+    "month": 2,
+    "day": 4,
+    "text": "Wowowee Stampede (Ultra Stampede)",
+    "image": {
+      "url": null,
+      "local": "images/wowowee-stampede.webp"
+    },
+    "source": {
+      "text": "Macairan, E., & Calica, A. (2016, February 14). Ultra stampede preceded by minor one at another gate?. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2006/02/14/321633/ultra-stampede-preceded-minor-one-another-gate"
+    }
+  },
+  {
+    "id": "5a352a59-9545-491f-ac0b-77cf52a7796d",
+    "year": 2006,
+    "month": 5,
+    "day": 21,
+    "text": "SM Mall of Asia opens to the public",
+    "image": {
+      "url": null,
+      "local": "images/sm-mall-of-asia-opening.webp"
+    },
+    "source": {
+      "text": "SM Prime. (2006, May 28). Mall of Asia opens in Manila.",
+      "url": "https://www.smprime.com/latest_news/mall-of-asia-opens-in-manila/"
+    }
+  },
+  {
+    "id": "103c73af-a0be-4fab-8db9-412b157a9843",
+    "year": 2007,
+    "month": 9,
+    "day": 12,
+    "text": "Sandiganbayan finds President Estrada guilty of plunder",
+    "image": {
+      "url": null,
+      "local": "images/estrada-plunder-conviction.webp"
+    },
+    "source": {
+      "text": "Reuters. (2007, September 12). Philippines' Estrada Deadpan When Sentenced to Life. CNBC.",
+      "url": "https://www.cnbc.com/2007/09/12/philippines-estrada-deadpan-when-sentenced-to-life.html"
+    }
+  },
+  {
+    "id": "acd84af5-60dd-46ad-886a-ac8acc739f4e",
+    "year": 2007,
+    "month": 11,
+    "day": 29,
+    "text": "Manila Peninsula Siege (led by Senator Trillanes IV)",
+    "image": {
+      "url": null,
+      "local": "images/manila-peninsula-siege.webp"
+    },
+    "source": {
+      "text": "Sering, T. (2007, December 9). Inside a Siege. Philstar.com.",
+      "url": "https://www.philstar.com/other-sections/starweek-magazine/2007/12/09/32297/inside-siege"
+    }
+  },
+  {
+    "id": "c61f4c9a-5a47-4cdd-97b6-8c98c3c18c07",
+    "year": 2008,
+    "month": 6,
+    "day": 21,
+    "text": "MV Princess of the Stars capsizes killing 814",
+    "image": {
+      "url": null,
+      "local": "images/mv-princess-of-the-stars-capsizing.webp"
+    },
+    "source": {
+      "text": "Baird Maritime. (2008, June 21). Philippine appeals court finds shipowner guilty of negligence in 2008 ferry tragedy.",
+      "url": "https://www.bairdmaritime.com/security/incidents/accidents/philippine-appeals-court-finds-shipowner-guilty-of-negligence-in-2008-ferry-tragedy"
+    }
+  },
+  {
+    "id": "761a2a57-9451-451b-8dce-1957428bfc12",
+    "year": 2009,
+    "month": 3,
+    "day": 7,
+    "text": "Eraserheads The Final Set reunion concert",
+    "image": {
+      "url": null,
+      "local": "images/eraserheads-final-set-reunion-concert.webp"
+    },
+    "source": {
+      "text": "Godinez, B. (2020, December 9). New book chronicles the Eraserheads' 2009 'The Final Set' concert. GMA News.",
+      "url": "https://www.gmanetwork.com/entertainment/showbiznews/new-book-chronicles-the-eraserheads-2009-the-final-set-concert/72178/"
+    }
+  },
+  {
+    "id": "1c06aa2b-9bd5-4d0b-926a-de65f880ebdc",
+    "year": 2009,
+    "month": 8,
+    "day": 1,
+    "text": "President Cory Aquino passes away",
+    "image": {
+      "url": null,
+      "local": "images/cory-aquino-death.webp"
+    },
+    "source": {
+      "text": "James, F. (2009, July 31). Corazon Aquino, Former Philippines President, Dead At 76. NPR.",
+      "url": "https://www.npr.org/sections/thetwo-way/2009/07/corazon_aquino_former_philippi.html"
+    }
+  },
+  {
+    "id": "32a01641-8b2e-408b-b4e8-02d0e3fdce3a",
+    "year": 2009,
+    "month": 10,
+    "day": 24,
+    "text": "Showtime first airs on ABS-CBN",
+    "image": {
+      "url": null,
+      "local": "images/showtime-premiere.webp"
+    },
+    "source": {
+      "text": "Sabio, N. (2025, October 24). 'It's Showtime' turns 16: A look back at the fun segments we miss. ABS-CBN News.",
+      "url": "https://www.abs-cbn.com/entertainment/showbiz/movies-series/2025/10/24/on-this-day-it-s-showtime-turns-16-a-look-back-at-the-fun-and-unforgettable-segments-we-miss-1853"
+    }
+  },
+  {
+    "id": "0496beb1-f76a-438e-b35a-8b2c20efafa8",
+    "year": 2009,
+    "month": 11,
+    "day": 23,
+    "text": "Maguindanao massacre",
+    "image": {
+      "url": null,
+      "local": "images/maguindanao-massacre.webp"
+    },
+    "source": {
+      "text": "Inquirer Research. (2016, November 23). Fast facts: Maguindanao massacre. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/846981/fast-facts-maguindanao-massacre"
     }
   }
 ]
