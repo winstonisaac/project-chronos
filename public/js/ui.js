@@ -163,32 +163,23 @@ export function getUserOrder() {
 function snapLockedItems() {
   if (lockedPositions.size === 0 || answerOrderIds.length !== EVENTS_PER_PUZZLE) return;
 
-  const currentIds = Array.from(listEl.children).map(li => li.dataset.id);
+  // Surgical DOM fix: move each displaced locked item back to its correct slot
+  // without rebuilding the list (avoids conflict with SortableJS internal state)
+  lockedPositions.forEach(correctPos => {
+    const correctId = answerOrderIds[correctPos];
+    const children = Array.from(listEl.children);
+    const currentIdx = children.findIndex(li => li.dataset.id === correctId);
 
-  // Build new order: locked items pinned to their correct slots,
-  // unlocked items keep their relative order filling the gaps
-  const newOrder = new Array(EVENTS_PER_PUZZLE);
-  const usedLockedIds = new Set();
-
-  lockedPositions.forEach(pos => {
-    const correctId = answerOrderIds[pos];
-    newOrder[pos] = correctId;
-    usedLockedIds.add(correctId);
-  });
-
-  const remainingIds = currentIds.filter(id => !usedLockedIds.has(id));
-  let remIdx = 0;
-  for (let i = 0; i < EVENTS_PER_PUZZLE; i++) {
-    if (!lockedPositions.has(i)) {
-      newOrder[i] = remainingIds[remIdx++];
+    if (currentIdx !== -1 && currentIdx !== correctPos) {
+      const item = children[currentIdx];
+      const target = listEl.children[correctPos];
+      if (target) {
+        listEl.insertBefore(item, target);
+      } else {
+        listEl.appendChild(item);
+      }
     }
-  }
-
-  // Re-render preserving locked state
-  const itemMap = new Map(currentItems.map(e => [e.id, e]));
-  const newItems = newOrder.map(id => itemMap.get(id)).filter(Boolean);
-  renderList(newItems, lockedPositions, false, lockedPositions);
-  initSortable(clearMarks);
+  });
 }
 
 export function evaluateAndMark(correctPositions) {
