@@ -124,16 +124,26 @@ export function renderList(items, markedIndices = new Set(), revealSources = fal
 
 export function initSortable(onStart) {
   if (sortable) sortable.destroy();
+  const hasLocks = lockedPositions.size > 0;
   sortable = new Sortable(listEl, {
-    animation: 180,
+    animation: hasLocks ? 0 : 180,
     draggable: '.event-item:not(.locked)',
     handle: '.event-item',
     ghostClass: 'sortable-ghost',
     dragClass: 'sortable-drag',
     easing: 'cubic-bezier(1, 0, 0, 1)',
     onStart,
-    onEnd: function () {
-      snapLockedItems();
+    onMove: function (evt) {
+      // Block any drag that would cross a locked item
+      const children = Array.from(listEl.children);
+      const fromIndex = children.indexOf(evt.dragged);
+      const toIndex = children.indexOf(evt.related);
+      const start = Math.min(fromIndex, toIndex);
+      const end = Math.max(fromIndex, toIndex);
+      for (let i = start; i <= end; i++) {
+        if (children[i].classList.contains('locked')) return false;
+      }
+      return true;
     }
   });
 }
