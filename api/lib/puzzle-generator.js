@@ -1,6 +1,6 @@
 import { seededRandom } from './seeded-random.js';
 
-const MAX_PER_PERIOD = 3;
+const MAX_PER_PERIOD = 4; // TEMP: increased from 3 to support 2-period puzzles
 const MIN_PERIODS = 2;
 const EVENTS_PER_PUZZLE = 7;
 
@@ -26,18 +26,21 @@ function isChronologicallySorted(display) {
 }
 
 // Generate a random valid distribution of 7 events across periods
-// Constraints: sum = 7, max per period = 3, at least 4 periods used
-function generateDistribution(rng) {
-  const validDistributions = [
-    [3, 2, 1, 1],          // 4 periods
-    [3, 1, 1, 1, 1],       // 5 periods
-    [2, 2, 2, 1],          // 4 periods
-    [2, 2, 1, 1, 1],       // 5 periods
-    [2, 1, 1, 1, 1, 1],    // 6 periods
-    [1, 1, 1, 1, 1, 1, 1], // 7 periods
-  ];
-  const idx = Math.floor(rng() * validDistributions.length);
-  return [...validDistributions[idx]]; // Return a copy
+// TEMP: max per period = 4 (normally 3), min periods = 2 (normally 4)
+function generateDistribution(numPeriods, rng) {
+  // Distributions for different numbers of periods, sum = 7, max = 4 (temp)
+  const distributionsByPeriods = {
+    2: [[4, 3], [3, 4]],
+    3: [[3, 3, 1], [3, 2, 2], [4, 2, 1]],
+    4: [[3, 2, 1, 1], [2, 2, 2, 1], [4, 1, 1, 1]],
+    5: [[3, 1, 1, 1, 1], [2, 2, 1, 1, 1]],
+    6: [[2, 1, 1, 1, 1, 1]],
+    7: [[1, 1, 1, 1, 1, 1, 1]]
+  };
+
+  const valid = distributionsByPeriods[numPeriods] || distributionsByPeriods[7];
+  const idx = Math.floor(rng() * valid.length);
+  return [...valid[idx]]; // Return a copy
 }
 
 export function generatePuzzle(dateStr, availableEvents) {
@@ -62,7 +65,7 @@ export function generatePuzzle(dateStr, availableEvents) {
 
   // Try up to 50 times to find a valid assignment
   for (let attempt = 0; attempt < 50; attempt++) {
-    const dist = generateDistribution(rng);
+    const dist = generateDistribution(periods.length, rng);
     const shuffledPeriods = shuffle(periods, rng);
 
     const periodCounts = {};
