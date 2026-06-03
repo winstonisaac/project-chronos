@@ -79,29 +79,107 @@ if (imageLightbox) {
 
 export let sortable = null;
 
-export function renderList(items, markedIndices = new Set(), revealSources = false, lockedIndices = new Set()) {
-  currentItems = items;
-  listEl.innerHTML = '';
-  items.forEach((ev, idx) => {
-    const li = document.createElement('li');
-    li.className = 'event-item';
-    if (markedIndices.has(idx)) li.classList.add('correct');
-    if (lockedIndices.has(idx)) li.classList.add('locked');
-    li.dataset.date = fmtDate(ev);
-    li.dataset.id = ev.id;
+// When locked items exist, we use native HTML5 DnD instead of SortableJS
+// because SortableJS reorders ALL nodes and corrupts locked positions.
+let customDnDActive = false;
+let draggedItem = null;
+let customDnDOnStart = null;
 
-    const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
-    const imgUrl = getImageUrl(ev);
-    const thumbHtml = imgUrl
-      ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.textContent='${thumbLetter}'">`
-      : thumbLetter;
+export function initSortable(onStart) {
+  if (sortable) { sortable.destroy(); sortable = null; }
+  customDnDActive = false;
+  draggedItem = null;
 
-    let sourceText = ev.source?.text || ev.source_text || '';
-    const sourceUrl = ev.source?.url || ev.source_url || '';
-    // Redact parenthetical content in reading mode
-    if (readingMode && sourceText) {
-      sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
+  if (lockedPositions.size > 0) {
+    customDnDActive = true;
+    customDnDOnStart = onStart;
+    const items = Array.from(listEl.children);
+    items.forEach((li, i) => {
+      if (lockedPositions.has(i)) {
+        li.draggable = false;
+        li.style.cursor = 'default';
+      } else {
+        li.draggable = true;
+        li.style.cursor = 'grab';
+      }
+    });
+    return;
+  }
+
+  sortable = new Sortable(listEl, {
+    animation: 180,
+    draggable: '.event-item',
+    handle: '.event-item',
+    ghostClass: 'sortable-ghost',
+    dragClass: 'sortable-drag',
+    easing: 'cubic-bezier(1, 0, 0, 1)',
+    onStart
+  });
+}
+
+// Native DnD handlers (attached once at module load)
+listEl.addEventListener('dragstart', (e) => {
+  if (!customDnDActive) return;
+  const item = e.target.closest('.event-item');
+  if (!item || item.classList.contains('locked')) {
+    e.preventDefault();
+    return;
+  }
+  draggedItem = item;
+  if (customDnDOnStart) customDnDOnStart();
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', item.dataset.id);
+  item.classList.add('sortable-drag');
+});
+
+listEl.addEventListener('dragend', () => {
+  if (!customDnDActive) return;
+  if (draggedItem) {
+    draggedItem.classList.remove('sortable-drag');
+    draggedItem = null;
+  }
+});
+
+listEl.addEventListener('dragover', (e) => {
+  if (!customDnDActive) return;
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+});
+
+listEl.addEventListener('drop', (e) => {
+  if (!customDnDActive) return;
+  e.preventDefault();
+  if (!draggedItem) return;
+
+  const target = e.target.closest('.event-item');
+  if (!target || target === draggedItem) {
+    // Dropped in empty space — calculate insertion point from Y coordinate
+    const items = Array.from(listEl.children);
+    const dropY = e.clientY;
+    let insertBefore = null;
+    for (const item of items) {
+      const rect = item.getBoundingClientRect();
+      if (dropY < rect.top + rect.height / 2) {
+        if (item !== draggedItem && !item.classList.contains('locked')) {
+          insertBefore = item;
+        }
+        break;
+      }
     }
+    if (insertBefore) {
+      listEl.insertBefore(draggedItem, insertBefore);
+    } else {
+      const last = items[items.length - 1];
+      if (last !== draggedItem && !last.classList.contains('locked')) {
+        listEl.appendChild(draggedItem);
+      }
+    }
+  } else if (!target.classList.contains('locked')) {
+    listEl.insertBefore(draggedItem, target);
+  }
+
+  snapLockedItems();
+});
     const showSource = revealSources || readingMode;
     const sourceVisible = showSource && sourceText ? 'visible' : '';
     const sourceHtml = sourceText
@@ -291,8 +369,15 @@ export function startCountdown() {
 export function disableGame() {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Come back tomorrow';
-  if (sortable) sortable.option('disabled', true);
-  Array.from(listEl.children).forEach(li => li.style.cursor = 'default');
+  if (sortable) {
+    sortable.option('disabled', true);
+  }
+  if (customDnDActive) {
+    Array.from(listEl.children).forEach(li => {
+      li.draggable = false;
+      li.style.cursor = 'default';
+    });
+  }
 }
 
 export function showError(msg) {
