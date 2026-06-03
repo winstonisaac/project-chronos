@@ -111,6 +111,63 @@
   </div>
 </div>
 
+<!-- Mobile Game View -->
+<div id="mobile-game-view" class="mobile-game-view">
+  <div class="mobile-top-bar">
+    <div class="mobile-logo">CHRONOS</div>
+    <div class="mobile-stats-pill">
+      <span>🔥 <span id="mobile-streak-val">0</span></span>
+      <span>🏆 <span id="mobile-best-val">0</span></span>
+    </div>
+    <button class="mobile-settings-btn" id="mobile-settings-btn" aria-label="Settings">⚙️</button>
+  </div>
+
+  <div class="mobile-big-card-area">
+    <button class="mobile-nav-arrow mobile-nav-left" id="mobile-nav-left" aria-label="Move earlier">◀</button>
+    <div class="mobile-big-card" id="mobile-big-card">
+      <div class="mobile-placeholder">Loading puzzle…</div>
+    </div>
+    <button class="mobile-nav-arrow mobile-nav-right" id="mobile-nav-right" aria-label="Move later">▶</button>
+  </div>
+
+  <div class="mobile-answer-toggle" id="mobile-answer-toggle" style="display:none">
+    <button id="mobile-show-correct-btn" class="active">Correct Order</button>
+    <button id="mobile-show-guess-btn">My Guess</button>
+  </div>
+
+  <div class="mobile-slot-strip" id="mobile-slot-strip">
+    <!-- Populated by JS -->
+  </div>
+
+  <div class="mobile-bottom-bar">
+    <div class="mobile-tries">TRIES LEFT: <span id="mobile-tries-val">3</span></div>
+    <button id="mobile-submit-btn">SUBMIT</button>
+  </div>
+</div>
+
+<!-- Mobile Settings Overlay -->
+<div class="overlay" id="mobile-settings-overlay" aria-hidden="true">
+  <div class="overlay-bg"></div>
+  <div class="modal mobile-settings-modal">
+    <h2>Settings</h2>
+    <div class="mobile-settings-item">
+      <label class="toggle-switch">
+        <input type="checkbox" id="mobile-reading-mode-input">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">📖 Reading Mode</span>
+      </label>
+      <div class="toggle-hint">Show sources while playing</div>
+    </div>
+    <div class="mobile-settings-item">
+      <p class="mobile-instructions">
+        <strong>How to play:</strong><br>
+        Tap a thumbnail below to focus on that position. Swipe the big card left/right or tap the arrows to move that event earlier or later in the timeline. Correctly placed events will lock after each submit. You have 3 tries.
+      </p>
+    </div>
+    <button id="mobile-settings-close" class="secondary">Close</button>
+  </div>
+</div>
+
 <!-- Error Toast -->
 <div class="error-toast" id="error-toast"></div>
 

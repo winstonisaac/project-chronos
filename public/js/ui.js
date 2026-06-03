@@ -89,6 +89,8 @@ function createEventItem(ev) {
     ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
     : '';
 
+  li.dataset.event = JSON.stringify(ev);
+
   li.innerHTML = `
     <div class="check-mark">✓</div>
     <div class="event-thumb">${thumbHtml}</div>
@@ -125,6 +127,7 @@ export function renderSlots(items, lockedIndices = new Set()) {
       item.style.cursor = 'default';
     }
   });
+  updateMobileView();
 }
 
 function refreshAllEventItems() {
@@ -222,6 +225,7 @@ function initDnD() {
       sourceSlot.appendChild(targetItem);
     }
     slot.appendChild(draggedItem);
+    updateMobileView();
   });
 }
 
@@ -289,6 +293,7 @@ slotsContainer.addEventListener('touchend', () => {
   touchSlotIndex = -1;
   touchStartX = 0;
   touchCurrentX = 0;
+  updateMobileView();
 });
 
 export function initSortable(onStart) {
@@ -330,6 +335,7 @@ export function evaluateAndMark(correctPositions) {
       slot.classList.remove('locked');
     }
   });
+  updateMobileView();
 }
 
 export function revealAll(eventsWithDates) {
@@ -348,6 +354,7 @@ export function revealAll(eventsWithDates) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  updateMobileView();
 }
 
 export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
@@ -383,6 +390,7 @@ export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  updateMobileView();
 }
 
 export function renderUserGuess(userOrderIds, events) {
@@ -409,11 +417,13 @@ export function renderUserGuess(userOrderIds, events) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  updateMobileView();
 }
 
 export function updateTriesUI(triesUsed) {
   const left = Math.max(0, MAX_TRIES - triesUsed);
   triesVal.textContent = left;
+  if (mobileTriesVal) mobileTriesVal.textContent = left;
   if (left === 0) {
     triesPill.innerHTML = 'No tries left';
   } else if (left === 1) {
@@ -457,16 +467,24 @@ export function startCountdown() {
 export function showAnswerToggle() {
   const toggle = document.getElementById('answer-toggle');
   if (toggle) toggle.style.display = 'flex';
+  const mobileToggle = document.getElementById('mobile-answer-toggle');
+  if (mobileToggle) mobileToggle.style.display = 'flex';
 }
 
 export function hideAnswerToggle() {
   const toggle = document.getElementById('answer-toggle');
   if (toggle) toggle.style.display = 'none';
+  const mobileToggle = document.getElementById('mobile-answer-toggle');
+  if (mobileToggle) mobileToggle.style.display = 'none';
 }
 
 export function disableGame() {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Come back tomorrow';
+  if (mobileSubmitBtn) {
+    mobileSubmitBtn.disabled = true;
+    mobileSubmitBtn.textContent = 'Come back tomorrow';
+  }
   getSlots().forEach(slot => {
     const item = slot.querySelector('.event-item');
     if (item) {
@@ -485,4 +503,252 @@ export function showError(msg) {
 export function renderStats(stats) {
   streakVal.textContent = stats.currentStreak || 0;
   bestVal.textContent = stats.maxStreak || 0;
+  if (mobileStreakVal) mobileStreakVal.textContent = stats.currentStreak || 0;
+  if (mobileBestVal) mobileBestVal.textContent = stats.maxStreak || 0;
 }
+
+/* ============================================================
+   MOBILE VIEW
+   ============================================================ */
+
+const mobileGameView = document.getElementById('mobile-game-view');
+const mobileBigCard = document.getElementById('mobile-big-card');
+const mobileSlotStrip = document.getElementById('mobile-slot-strip');
+const mobileSubmitBtn = document.getElementById('mobile-submit-btn');
+const mobileTriesVal = document.getElementById('mobile-tries-val');
+const mobileStreakVal = document.getElementById('mobile-streak-val');
+const mobileBestVal = document.getElementById('mobile-best-val');
+const mobileNavLeft = document.getElementById('mobile-nav-left');
+const mobileNavRight = document.getElementById('mobile-nav-right');
+const mobileSettingsBtn = document.getElementById('mobile-settings-btn');
+const mobileSettingsOverlay = document.getElementById('mobile-settings-overlay');
+const mobileSettingsClose = document.getElementById('mobile-settings-close');
+const mobileReadingModeInput = document.getElementById('mobile-reading-mode-input');
+
+let activeSlotIndex = 0;
+
+function isMobileViewport() {
+  return window.innerWidth <= 480;
+}
+
+function getEventFromItem(item) {
+  try {
+    return JSON.parse(item.dataset.event || '{}');
+  } catch {
+    return null;
+  }
+}
+
+function canMoveActive(direction) {
+  const slots = getSlots();
+  const targetIdx = activeSlotIndex + direction;
+  if (targetIdx < 0 || targetIdx >= slots.length) return false;
+  const currentSlot = slots[activeSlotIndex];
+  const targetSlot = slots[targetIdx];
+  if (!currentSlot || !targetSlot) return false;
+  return !currentSlot.classList.contains('locked') && !targetSlot.classList.contains('locked');
+}
+
+function moveActiveEvent(direction) {
+  if (!canMoveActive(direction)) return false;
+  const slots = getSlots();
+  const currentSlot = slots[activeSlotIndex];
+  const targetSlot = slots[activeSlotIndex + direction];
+  const currentItem = currentSlot.querySelector('.event-item');
+  const targetItem = targetSlot.querySelector('.event-item');
+
+  if (targetItem) {
+    currentSlot.appendChild(targetItem);
+  }
+  targetSlot.appendChild(currentItem);
+
+  // Focus follows the event
+  activeSlotIndex = activeSlotIndex + direction;
+  updateMobileView();
+  return true;
+}
+
+function createMobileBigCardHtml(ev, isLocked, showDate) {
+  if (!ev) {
+    return '<div class="mobile-placeholder">Loading puzzle…</div>';
+  }
+
+  const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
+  const imgUrl = getImageUrl(ev);
+  const thumbHtml = imgUrl
+    ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.innerHTML='<span>${thumbLetter}</span>'">`
+    : `<span>${thumbLetter}</span>`;
+
+  let sourceText = ev.source?.text || ev.source_text || '';
+  const sourceUrl = ev.source?.url || ev.source_url || '';
+  if (readingMode && sourceText) {
+    sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
+  }
+  const sourceVisible = readingMode && sourceText ? 'visible' : '';
+  const sourceHtml = sourceText
+    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
+    : '';
+
+  const dateHtml = showDate ? `<div class="mobile-big-date">${fmtDate(ev)}</div>` : '';
+  const lockedHtml = isLocked ? `<div class="mobile-locked-badge">✓ LOCKED</div>` : '';
+
+  return `
+    <div class="mobile-big-thumb">${thumbHtml}</div>
+    <div class="mobile-big-text">${ev.text}</div>
+    ${sourceHtml}
+    ${dateHtml}
+    ${lockedHtml}
+  `;
+}
+
+export function updateMobileView() {
+  if (!isMobileViewport() || !mobileGameView) return;
+
+  const slots = getSlots();
+  if (slots.length === 0) return;
+
+  // Determine if game is over (dates revealed on any item)
+  const firstItem = slots[0]?.querySelector('.event-item');
+  const isGameOver = firstItem ? firstItem.querySelector('.event-year')?.classList.contains('revealed') || false : false;
+
+  // Render slot strip
+  if (mobileSlotStrip) {
+    mobileSlotStrip.innerHTML = '';
+    slots.forEach((slot, i) => {
+      const item = slot.querySelector('.event-item');
+      const ev = item ? getEventFromItem(item) : null;
+      const isLocked = slot.classList.contains('locked');
+      const isCorrect = item ? item.classList.contains('correct') : false;
+      const isWrong = item ? item.classList.contains('wrong') : false;
+      const isActive = i === activeSlotIndex;
+
+      const div = document.createElement('div');
+      div.className = 'mobile-slot';
+      if (isActive) div.classList.add('active');
+      if (isLocked) div.classList.add('locked');
+      if (isCorrect) div.classList.add('correct');
+      if (isWrong) div.classList.add('wrong');
+      div.dataset.index = i;
+
+      if (ev) {
+        const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
+        const imgUrl = getImageUrl(ev);
+        if (imgUrl) {
+          div.innerHTML = `<img src="${imgUrl}" alt="" onerror="this.style.display='none'; this.parentElement.textContent='${thumbLetter}'">`;
+        } else {
+          div.textContent = thumbLetter;
+        }
+      }
+
+      // Tap to focus this position
+      div.addEventListener('click', () => {
+        activeSlotIndex = i;
+        updateMobileView();
+      });
+
+      mobileSlotStrip.appendChild(div);
+    });
+  }
+
+  // Render big card
+  if (mobileBigCard) {
+    const activeSlot = slots[activeSlotIndex];
+    const activeItem = activeSlot ? activeSlot.querySelector('.event-item') : null;
+    const ev = activeItem ? getEventFromItem(activeItem) : null;
+    const isLocked = activeSlot ? activeSlot.classList.contains('locked') : false;
+    mobileBigCard.innerHTML = createMobileBigCardHtml(ev, isLocked, isGameOver);
+
+    // Wire up lightbox on the big card image
+    const bigThumb = mobileBigCard.querySelector('.mobile-big-thumb');
+    if (bigThumb) {
+      bigThumb.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG') {
+          openLightbox(e.target.dataset.imgUrl, e.target.dataset.caption);
+        }
+      });
+    }
+  }
+
+  // Update nav arrows
+  if (mobileNavLeft) mobileNavLeft.disabled = !canMoveActive(-1);
+  if (mobileNavRight) mobileNavRight.disabled = !canMoveActive(1);
+}
+
+// Mobile arrow buttons
+if (mobileNavLeft) {
+  mobileNavLeft.addEventListener('click', () => moveActiveEvent(-1));
+}
+if (mobileNavRight) {
+  mobileNavRight.addEventListener('click', () => moveActiveEvent(1));
+}
+
+// Mobile swipe on big card
+let mobileTouchStartX = 0;
+let mobileTouchCurrentX = 0;
+
+if (mobileBigCard) {
+  mobileBigCard.addEventListener('touchstart', (e) => {
+    mobileTouchStartX = e.touches[0].clientX;
+    mobileTouchCurrentX = mobileTouchStartX;
+  }, { passive: true });
+
+  mobileBigCard.addEventListener('touchmove', (e) => {
+    mobileTouchCurrentX = e.touches[0].clientX;
+    const diff = mobileTouchCurrentX - mobileTouchStartX;
+    mobileBigCard.style.transform = `translateX(${diff * 0.25}px)`;
+  }, { passive: true });
+
+  mobileBigCard.addEventListener('touchend', () => {
+    mobileBigCard.style.transform = '';
+    const diff = mobileTouchCurrentX - mobileTouchStartX;
+    const threshold = 50;
+
+    if (Math.abs(diff) >= threshold) {
+      if (diff < 0) {
+        moveActiveEvent(-1); // swipe left = move earlier
+      } else {
+        moveActiveEvent(1);  // swipe right = move later
+      }
+    }
+
+    mobileTouchStartX = 0;
+    mobileTouchCurrentX = 0;
+  });
+}
+
+// Mobile settings overlay
+if (mobileSettingsBtn && mobileSettingsOverlay) {
+  mobileSettingsBtn.addEventListener('click', () => {
+    mobileSettingsOverlay.classList.add('show');
+    mobileSettingsOverlay.setAttribute('aria-hidden', 'false');
+  });
+}
+if (mobileSettingsClose && mobileSettingsOverlay) {
+  mobileSettingsClose.addEventListener('click', () => {
+    mobileSettingsOverlay.classList.remove('show');
+    mobileSettingsOverlay.setAttribute('aria-hidden', 'true');
+  });
+  mobileSettingsOverlay.querySelector('.overlay-bg')?.addEventListener('click', () => {
+    mobileSettingsOverlay.classList.remove('show');
+    mobileSettingsOverlay.setAttribute('aria-hidden', 'true');
+  });
+}
+
+// Mobile reading mode toggle
+if (mobileReadingModeInput) {
+  mobileReadingModeInput.addEventListener('change', () => {
+    const enabled = mobileReadingModeInput.checked;
+    readingMode = enabled;
+    localStorage.setItem('chronos_reading_mode', String(enabled));
+    // Sync desktop toggle
+    const desktopToggle = document.getElementById('reading-mode-input');
+    if (desktopToggle) desktopToggle.checked = enabled;
+    refreshAllEventItems();
+    updateMobileView();
+  });
+}
+
+// Window resize to switch views
+window.addEventListener('resize', () => {
+  updateMobileView();
+});

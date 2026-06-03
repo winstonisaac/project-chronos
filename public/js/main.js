@@ -23,12 +23,16 @@ function initReadingMode() {
   const enabled = saved === 'true';
   readingModeInput.checked = enabled;
   ui.setReadingMode(enabled);
+  const mobileToggle = document.getElementById('mobile-reading-mode-input');
+  if (mobileToggle) mobileToggle.checked = enabled;
 }
 
 function handleReadingModeToggle() {
   const enabled = readingModeInput.checked;
   localStorage.setItem(READING_MODE_KEY, String(enabled));
   ui.setReadingMode(enabled);
+  const mobileToggle = document.getElementById('mobile-reading-mode-input');
+  if (mobileToggle) mobileToggle.checked = enabled;
 }
 
 async function start() {
@@ -157,6 +161,11 @@ function startNewGame() {
   ui.hideAnswerToggle();
   ui.submitBtn.disabled = false;
   ui.submitBtn.textContent = 'Submit';
+  const mobileSubmitBtn = document.getElementById('mobile-submit-btn');
+  if (mobileSubmitBtn) {
+    mobileSubmitBtn.disabled = false;
+    mobileSubmitBtn.textContent = 'SUBMIT';
+  }
   ui.instructionCard.innerHTML = `
     <strong>Sort these 7 events from earliest to latest.</strong>
     Drag the cards into chronological order, then press <strong>Submit</strong>.
@@ -215,6 +224,8 @@ async function handleSubmit() {
       }
     } else {
       ui.submitBtn.textContent = 'Submit again';
+      const mobileSubmitBtn2 = document.getElementById('mobile-submit-btn');
+      if (mobileSubmitBtn2) mobileSubmitBtn2.textContent = 'SUBMIT AGAIN';
     }
 
     saveDayState(puzzle.todayStr, state);
@@ -367,6 +378,9 @@ if (readingModeInput) {
 // ===================== EVENT LISTENERS =====================
 
 ui.submitBtn.addEventListener('click', handleSubmit);
+const mobileSubmitBtn = document.getElementById('mobile-submit-btn');
+if (mobileSubmitBtn) mobileSubmitBtn.addEventListener('click', handleSubmit);
+
 ui.shareBtn.addEventListener('click', doShare);
 ui.closeModalBtn.addEventListener('click', () => {
   ui.overlay.classList.remove('show');
@@ -396,6 +410,34 @@ if (showCorrectBtn && showGuessBtn) {
   showGuessBtn.addEventListener('click', () => {
     showGuessBtn.classList.add('active');
     showCorrectBtn.classList.remove('active');
+    if (window._lastUserOrder && window._lastAnswerEvents) {
+      ui.renderUserGuess(window._lastUserOrder, window._lastAnswerEvents);
+    }
+  });
+}
+
+// Mobile answer toggle buttons
+const mobileShowCorrectBtn = document.getElementById('mobile-show-correct-btn');
+const mobileShowGuessBtn = document.getElementById('mobile-show-guess-btn');
+
+if (mobileShowCorrectBtn && mobileShowGuessBtn) {
+  mobileShowCorrectBtn.addEventListener('click', () => {
+    mobileShowCorrectBtn.classList.add('active');
+    mobileShowGuessBtn.classList.remove('active');
+    if (window._lastAnswerOrder && window._lastAnswerEvents) {
+      if (window._lastUserOrder) {
+        ui.finalizeLossState(window._lastUserOrder, window._lastAnswerOrder, window._lastAnswerEvents);
+      } else {
+        const allLocked = new Set([0,1,2,3,4,5,6]);
+        ui.renderSlots(window._lastAnswerEvents, allLocked);
+        ui.revealAll(window._lastAnswerEvents);
+      }
+    }
+  });
+
+  mobileShowGuessBtn.addEventListener('click', () => {
+    mobileShowGuessBtn.classList.add('active');
+    mobileShowCorrectBtn.classList.remove('active');
     if (window._lastUserOrder && window._lastAnswerEvents) {
       ui.renderUserGuess(window._lastUserOrder, window._lastAnswerEvents);
     }
