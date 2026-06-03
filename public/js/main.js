@@ -103,6 +103,11 @@ function restoreInProgressState(state) {
   const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
   const correctPositions = new Set(state.correctPositions || []);
 
+  // Restore answer order so snapLockedItems knows where to anchor
+  if (state.answerOrder && state.answerOrder.length === EVENTS_PER_PUZZLE) {
+    ui.setAnswerOrder(state.answerOrder);
+  }
+
   if (items.length === EVENTS_PER_PUZZLE) {
     ui.renderList(items, correctPositions, false, correctPositions);
   } else {
@@ -166,11 +171,11 @@ async function handleSubmit() {
       order: userOrder,
       finished: gameOver,
       won: result.won,
-      correctPositions: result.correctPositions
+      correctPositions: result.correctPositions,
+      answerOrder: result.answerOrder
     };
 
     if (gameOver) {
-      state.answerOrder = result.answerOrder;
       state.answerEvents = result.answerEvents;
       const stats = updateStats(result.won, puzzle.todayStr);
       ui.renderStats(stats);

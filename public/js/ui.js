@@ -163,22 +163,32 @@ export function getUserOrder() {
 function snapLockedItems() {
   if (lockedPositions.size === 0 || answerOrderIds.length !== EVENTS_PER_PUZZLE) return;
 
-  // Surgical DOM fix: move each displaced locked item back to its correct slot
-  // without rebuilding the list (avoids conflict with SortableJS internal state)
-  lockedPositions.forEach(correctPos => {
-    const correctId = answerOrderIds[correctPos];
-    const children = Array.from(listEl.children);
-    const currentIdx = children.findIndex(li => li.dataset.id === correctId);
+  // Build desired order: locked items at their correct slots,
+  // unlocked items keep their current relative order filling gaps
+  const currentIds = Array.from(listEl.children).map(li => li.dataset.id);
+  const desiredOrder = new Array(EVENTS_PER_PUZZLE);
+  const usedLockedIds = new Set();
 
-    if (currentIdx !== -1 && currentIdx !== correctPos) {
-      const item = children[currentIdx];
-      const target = listEl.children[correctPos];
-      if (target) {
-        listEl.insertBefore(item, target);
-      } else {
-        listEl.appendChild(item);
-      }
+  lockedPositions.forEach(pos => {
+    const correctId = answerOrderIds[pos];
+    desiredOrder[pos] = correctId;
+    usedLockedIds.add(correctId);
+  });
+
+  const remainingIds = currentIds.filter(id => !usedLockedIds.has(id));
+  let remIdx = 0;
+  for (let i = 0; i < EVENTS_PER_PUZZLE; i++) {
+    if (!lockedPositions.has(i)) {
+      desiredOrder[i] = remainingIds[remIdx++];
     }
+  }
+
+  // Surgical reorder: appendChild each node in desired sequence
+  // (appendChild on existing child moves it to end, preserving all state)
+  const nodeMap = new Map(Array.from(listEl.children).map(li => [li.dataset.id, li]));
+  desiredOrder.forEach(id => {
+    const node = nodeMap.get(id);
+    if (node) listEl.appendChild(node);
   });
 }
 
@@ -193,6 +203,7 @@ export function evaluateAndMark(correctPositions) {
       li.classList.add('wrong');
     }
   });
+  // Re-init Sortable only once — snapLockedItems in onEnd handles the rest
   initSortable(clearMarks);
 }
 
