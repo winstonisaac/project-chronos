@@ -227,6 +227,70 @@ function initDnD() {
 
 initDnD();
 
+// Touch swipe-to-swap for mobile
+const SWIPE_THRESHOLD = 80;
+let touchStartX = 0;
+let touchCurrentX = 0;
+let touchSlotIndex = -1;
+let touchItem = null;
+
+function getSlotIndex(slot) {
+  return Array.from(slotsContainer.children).indexOf(slot);
+}
+
+slotsContainer.addEventListener('touchstart', (e) => {
+  const item = e.target.closest('.event-item');
+  if (!item || item.classList.contains('locked')) return;
+  const slot = item.parentElement;
+  if (!slot || slot.classList.contains('locked')) return;
+
+  touchItem = item;
+  touchSlotIndex = getSlotIndex(slot);
+  touchStartX = e.touches[0].clientX;
+  touchCurrentX = touchStartX;
+}, { passive: true });
+
+slotsContainer.addEventListener('touchmove', (e) => {
+  if (!touchItem) return;
+  touchCurrentX = e.touches[0].clientX;
+  const diff = touchCurrentX - touchStartX;
+  // Visual feedback
+  touchItem.style.transform = `translateX(${diff}px)`;
+  touchItem.style.transition = 'none';
+}, { passive: true });
+
+slotsContainer.addEventListener('touchend', () => {
+  if (!touchItem) return;
+
+  const diff = touchCurrentX - touchStartX;
+  touchItem.style.transform = '';
+  touchItem.style.transition = '';
+
+  if (Math.abs(diff) >= SWIPE_THRESHOLD) {
+    const direction = diff > 0 ? 1 : -1; // right = +1 (swap with next), left = -1 (swap with prev)
+    const targetIndex = touchSlotIndex + direction;
+    const slots = getSlots();
+
+    if (targetIndex >= 0 && targetIndex < slots.length) {
+      const targetSlot = slots[targetIndex];
+      if (!targetSlot.classList.contains('locked')) {
+        // Swap
+        const targetItem = targetSlot.querySelector('.event-item');
+        const sourceSlot = slots[touchSlotIndex];
+        if (targetItem) {
+          sourceSlot.appendChild(targetItem);
+        }
+        targetSlot.appendChild(touchItem);
+      }
+    }
+  }
+
+  touchItem = null;
+  touchSlotIndex = -1;
+  touchStartX = 0;
+  touchCurrentX = 0;
+});
+
 export function initSortable(onStart) {
   // No-op: slots handle their own DnD. Kept for API compatibility.
 }
