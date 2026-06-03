@@ -10,8 +10,26 @@ let puzzle = null;
 let gameFinished = false;
 let triesUsed = 0;
 
+// Reading mode
+const READING_MODE_KEY = 'chronos_reading_mode';
+const readingModeInput = document.getElementById('reading-mode-input');
+
 // Auth modal state
 let authMode = 'login'; // 'login' or 'signup'
+
+function initReadingMode() {
+  if (!readingModeInput) return;
+  const saved = localStorage.getItem(READING_MODE_KEY);
+  const enabled = saved === 'true';
+  readingModeInput.checked = enabled;
+  ui.setReadingMode(enabled);
+}
+
+function handleReadingModeToggle() {
+  const enabled = readingModeInput.checked;
+  localStorage.setItem(READING_MODE_KEY, String(enabled));
+  ui.setReadingMode(enabled);
+}
 
 async function start() {
   const todayStr = getManilaDateStr();
@@ -310,6 +328,12 @@ if (authToggle) authToggle.addEventListener('click', () => {
 });
 if (authClose) authClose.addEventListener('click', closeAuth);
 
+// ===================== READING MODE =====================
+
+if (readingModeInput) {
+  readingModeInput.addEventListener('change', handleReadingModeToggle);
+}
+
 // ===================== EVENT LISTENERS =====================
 
 ui.submitBtn.addEventListener('click', handleSubmit);
@@ -328,5 +352,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initAuth(supabaseUrl, supabaseKey);
     getCurrentUser().then(user => updateAuthSectionUI(user));
   }
+  initReadingMode();
   start();
 });

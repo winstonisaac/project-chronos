@@ -20,6 +20,28 @@ export const instructionCard = document.getElementById('instruction-card');
 export const errorToast = document.getElementById('error-toast');
 export const authSection = document.getElementById('auth-section');
 
+// Reading mode state
+let readingMode = false;
+
+export function isReadingMode() {
+  return readingMode;
+}
+
+export function setReadingMode(enabled) {
+  readingMode = enabled;
+  // Update all existing source elements on the page
+  Array.from(listEl.children).forEach(li => {
+    const sourceEl = li.querySelector('.event-source');
+    if (sourceEl) {
+      if (enabled) {
+        sourceEl.classList.add('visible');
+      } else {
+        sourceEl.classList.remove('visible');
+      }
+    }
+  });
+}
+
 // Lightbox elements
 const imageLightbox = document.getElementById('image-lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -64,7 +86,8 @@ export function renderList(items, markedIndices = new Set(), revealSources = fal
 
     const sourceText = ev.source?.text || ev.source_text || '';
     const sourceUrl = ev.source?.url || ev.source_url || '';
-    const sourceVisible = revealSources && sourceText ? 'visible' : '';
+    const showSource = revealSources || readingMode;
+    const sourceVisible = showSource && sourceText ? 'visible' : '';
     const sourceHtml = sourceText
       ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
       : '';
