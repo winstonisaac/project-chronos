@@ -183,18 +183,20 @@ h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
 .event-source {
   font-size: 12px;
   color: var(--muted);
+  max-height: 0;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity .3s ease, transform .3s ease;
+  overflow: hidden;
+  transition: max-height .3s ease, opacity .3s ease, margin-top .3s ease;
   text-decoration: underline;
   text-underline-offset: 2px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 0;
 }
 .event-source.visible {
+  max-height: 40px;
   opacity: 1;
-  transform: translateY(0);
+  margin-top: 4px;
 }
 .event-source:hover { color: var(--accent); }
 
