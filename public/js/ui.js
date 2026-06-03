@@ -134,7 +134,7 @@ export function initSortable(onStart) {
     easing: 'cubic-bezier(1, 0, 0, 1)',
     onStart,
     onEnd: function () {
-      setTimeout(snapLockedItems, 0);
+      setTimeout(snapLockedItems, 100);
     }
   });
 }
