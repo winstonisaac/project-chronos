@@ -154,6 +154,7 @@ async function handleSubmit() {
 
   try {
     const result = await submitAnswer(userOrder, triesUsed);
+    ui.setAnswerOrder(result.answerOrder);
     ui.evaluateAndMark(result.correctPositions);
     ui.updateTriesUI(triesUsed);
 

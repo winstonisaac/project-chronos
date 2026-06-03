@@ -26,20 +26,30 @@ export const authSection = document.getElementById('auth-section');
 // Reading mode state
 let readingMode = false;
 
+// Locked items tracking
+let lockedPositions = new Set();
+let answerOrderIds = [];
+
 export function isReadingMode() {
   return readingMode;
 }
 
+export function setAnswerOrder(orderIds) {
+  answerOrderIds = orderIds || [];
+}
+
 export function setReadingMode(enabled) {
   readingMode = enabled;
-  // Preserve locked indices before re-rendering
   const children = Array.from(listEl.children);
   const lockedIndices = new Set();
   children.forEach((li, i) => {
     if (li.classList.contains('locked')) lockedIndices.add(i);
   });
-  // Re-render with reading mode state
-  renderList(currentItems, lockedIndices, false, lockedIndices);
+  // Preserve current user sort order
+  const itemMap = new Map(currentItems.map(e => [e.id, e]));
+  const orderedItems = children.map(li => itemMap.get(li.dataset.id)).filter(Boolean);
+  renderList(orderedItems, lockedIndices, false, lockedIndices);
+  initSortable(clearMarks);
 }
 
 // Lightbox elements
@@ -122,10 +132,8 @@ export function initSortable(onStart) {
     dragClass: 'sortable-drag',
     easing: 'cubic-bezier(1, 0, 0, 1)',
     onStart,
-    onMove: function (evt) {
-      // Prevent dropping onto or displacing a locked item
-      if (evt.related && evt.related.classList.contains('locked')) return false;
-      return true;
+    onEnd: function () {
+      snapLockedItems();
     }
   });
 }
@@ -151,19 +159,48 @@ export function getUserOrder() {
   return Array.from(listEl.children).map(li => li.dataset.id);
 }
 
+function snapLockedItems() {
+  if (lockedPositions.size === 0 || answerOrderIds.length !== EVENTS_PER_PUZZLE) return;
+
+  const currentIds = Array.from(listEl.children).map(li => li.dataset.id);
+
+  // Build new order: locked items pinned to their correct slots,
+  // unlocked items keep their relative order filling the gaps
+  const newOrder = new Array(EVENTS_PER_PUZZLE);
+  const usedLockedIds = new Set();
+
+  lockedPositions.forEach(pos => {
+    const correctId = answerOrderIds[pos];
+    newOrder[pos] = correctId;
+    usedLockedIds.add(correctId);
+  });
+
+  const remainingIds = currentIds.filter(id => !usedLockedIds.has(id));
+  let remIdx = 0;
+  for (let i = 0; i < EVENTS_PER_PUZZLE; i++) {
+    if (!lockedPositions.has(i)) {
+      newOrder[i] = remainingIds[remIdx++];
+    }
+  }
+
+  // Re-render preserving locked state
+  const itemMap = new Map(currentItems.map(e => [e.id, e]));
+  const newItems = newOrder.map(id => itemMap.get(id)).filter(Boolean);
+  renderList(newItems, lockedPositions, false, lockedPositions);
+  initSortable(clearMarks);
+}
+
 export function evaluateAndMark(correctPositions) {
+  lockedPositions = new Set(correctPositions);
   const children = Array.from(listEl.children);
-  const lockedIndices = new Set();
   children.forEach((li, i) => {
     li.classList.remove('correct', 'wrong', 'locked');
     if (correctPositions.includes(i)) {
       li.classList.add('correct', 'locked');
-      lockedIndices.add(i);
     } else {
       li.classList.add('wrong');
     }
   });
-  // Re-init Sortable so locked items are fully excluded
   initSortable(clearMarks);
 }
 
