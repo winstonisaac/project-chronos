@@ -3,6 +3,9 @@ import { fmtDate, getImageUrl } from './game.js';
 
 // DOM element references
 export const listEl = document.getElementById('event-list');
+
+// Store current rendered items for re-render (e.g., reading mode toggle)
+let currentItems = [];
 export const submitBtn = document.getElementById('submit-btn');
 export const triesVal = document.getElementById('tries-val');
 export const triesPill = document.getElementById('tries-pill');
@@ -29,17 +32,14 @@ export function isReadingMode() {
 
 export function setReadingMode(enabled) {
   readingMode = enabled;
-  // Update all existing source elements on the page
-  Array.from(listEl.children).forEach(li => {
-    const sourceEl = li.querySelector('.event-source');
-    if (sourceEl) {
-      if (enabled) {
-        sourceEl.classList.add('visible');
-      } else {
-        sourceEl.classList.remove('visible');
-      }
-    }
+  // Preserve locked indices before re-rendering
+  const children = Array.from(listEl.children);
+  const lockedIndices = new Set();
+  children.forEach((li, i) => {
+    if (li.classList.contains('locked')) lockedIndices.add(i);
   });
+  // Re-render with reading mode state
+  renderList(currentItems, lockedIndices, false, lockedIndices);
 }
 
 // Lightbox elements
@@ -69,12 +69,14 @@ if (imageLightbox) {
 
 export let sortable = null;
 
-export function renderList(items, markedIndices = new Set(), revealSources = false) {
+export function renderList(items, markedIndices = new Set(), revealSources = false, lockedIndices = new Set()) {
+  currentItems = items;
   listEl.innerHTML = '';
   items.forEach((ev, idx) => {
     const li = document.createElement('li');
     li.className = 'event-item';
     if (markedIndices.has(idx)) li.classList.add('correct');
+    if (lockedIndices.has(idx)) li.classList.add('locked');
     li.dataset.date = fmtDate(ev);
     li.dataset.id = ev.id;
 
@@ -84,8 +86,12 @@ export function renderList(items, markedIndices = new Set(), revealSources = fal
       ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.textContent='${thumbLetter}'">`
       : thumbLetter;
 
-    const sourceText = ev.source?.text || ev.source_text || '';
+    let sourceText = ev.source?.text || ev.source_text || '';
     const sourceUrl = ev.source?.url || ev.source_url || '';
+    // Redact parenthetical content in reading mode
+    if (readingMode && sourceText) {
+      sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
+    }
     const showSource = revealSources || readingMode;
     const sourceVisible = showSource && sourceText ? 'visible' : '';
     const sourceHtml = sourceText
@@ -116,6 +122,11 @@ export function initSortable(onStart) {
     dragClass: 'sortable-drag',
     easing: 'cubic-bezier(1, 0, 0, 1)',
     onStart,
+    onMove: function (evt) {
+      // Prevent dropping onto or displacing a locked item
+      if (evt.related && evt.related.classList.contains('locked')) return false;
+      return true;
+    }
   });
 }
 
@@ -142,15 +153,18 @@ export function getUserOrder() {
 
 export function evaluateAndMark(correctPositions) {
   const children = Array.from(listEl.children);
+  const lockedIndices = new Set();
   children.forEach((li, i) => {
     li.classList.remove('correct', 'wrong', 'locked');
     if (correctPositions.includes(i)) {
       li.classList.add('correct', 'locked');
+      lockedIndices.add(i);
     } else {
       li.classList.add('wrong');
     }
   });
-  if (sortable) sortable.option('draggable', '.event-item:not(.locked)');
+  // Re-init Sortable so locked items are fully excluded
+  initSortable(clearMarks);
 }
 
 export function revealAll(eventsWithDates) {

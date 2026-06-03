@@ -71,17 +71,18 @@ function restoreFinishedState(state) {
     const orderIds = state.order || [];
     const eventMap = new Map(answerEvents.map(e => [e.id, e]));
     const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
+    const allLocked = new Set([0,1,2,3,4,5,6]);
     if (items.length === EVENTS_PER_PUZZLE) {
-      ui.renderList(items);
+      ui.renderList(items, allLocked, true, allLocked);
     } else {
-      ui.renderList(answerEvents);
+      ui.renderList(answerEvents, allLocked, true, allLocked);
     }
     ui.revealAll(answerEvents);
   } else {
     if (answerOrder.length === EVENTS_PER_PUZZLE) {
       ui.finalizeLossState(userOrder, answerOrder, answerEvents);
     } else {
-      ui.renderList(answerEvents);
+      ui.renderList(answerEvents, new Set(), true);
     }
   }
 
@@ -100,11 +101,12 @@ function restoreInProgressState(state) {
   const orderIds = state.order || [];
   const eventMap = new Map(puzzle.events.map(e => [e.id, e]));
   const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
+  const correctPositions = new Set(state.correctPositions || []);
 
   if (items.length === EVENTS_PER_PUZZLE) {
-    ui.renderList(items);
+    ui.renderList(items, correctPositions, false, correctPositions);
   } else {
-    ui.renderList(puzzle.events);
+    ui.renderList(puzzle.events, correctPositions, false, correctPositions);
   }
 
   ui.initSortable(ui.clearMarks);
@@ -120,8 +122,7 @@ function restoreInProgressState(state) {
   }
 
   if (triesUsed > 0) {
-    const correctPositions = state.correctPositions || [];
-    ui.evaluateAndMark(correctPositions);
+    ui.evaluateAndMark([...correctPositions]);
   }
 }
 
@@ -129,7 +130,7 @@ function startNewGame() {
   triesUsed = 0;
   gameFinished = false;
   ui.updateTriesUI(triesUsed);
-  ui.renderList(puzzle.events);
+  ui.renderList(puzzle.events, new Set(), false, new Set());
   ui.initSortable(ui.clearMarks);
   ui.submitBtn.disabled = false;
   ui.submitBtn.textContent = 'Submit';
