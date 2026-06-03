@@ -20,6 +20,31 @@ export const instructionCard = document.getElementById('instruction-card');
 export const errorToast = document.getElementById('error-toast');
 export const authSection = document.getElementById('auth-section');
 
+// Lightbox elements
+const imageLightbox = document.getElementById('image-lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const lightboxClose = document.getElementById('lightbox-close');
+
+function openLightbox(imgUrl, caption) {
+  if (!imgUrl) return;
+  lightboxImg.src = imgUrl;
+  lightboxCaption.textContent = caption || '';
+  imageLightbox.classList.add('show');
+  imageLightbox.setAttribute('aria-hidden', 'false');
+}
+
+function closeLightbox() {
+  imageLightbox.classList.remove('show');
+  imageLightbox.setAttribute('aria-hidden', 'true');
+  lightboxImg.src = '';
+}
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (imageLightbox) {
+  imageLightbox.querySelector('.overlay-bg')?.addEventListener('click', closeLightbox);
+}
+
 export let sortable = null;
 
 export function renderList(items, markedIndices = new Set(), revealSources = false) {
@@ -34,7 +59,7 @@ export function renderList(items, markedIndices = new Set(), revealSources = fal
     const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
     const imgUrl = getImageUrl(ev);
     const thumbHtml = imgUrl
-      ? `<img src="${imgUrl}" alt="" onerror="this.parentElement.textContent='${thumbLetter}'">`
+      ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.textContent='${thumbLetter}'">`
       : thumbLetter;
 
     const sourceText = ev.source?.text || ev.source_text || '';
@@ -70,6 +95,15 @@ export function initSortable(onStart) {
     onStart,
   });
 }
+
+// Click-to-enlarge images
+listEl.addEventListener('click', (e) => {
+  const img = e.target.closest('.event-thumb img');
+  if (!img) return;
+  const url = img.dataset.imgUrl;
+  const caption = img.dataset.caption;
+  if (url) openLightbox(url, caption);
+});
 
 export function clearMarks() {
   Array.from(listEl.children).forEach(li => {
