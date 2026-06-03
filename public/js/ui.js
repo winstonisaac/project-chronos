@@ -518,8 +518,6 @@ const mobileSubmitBtn = document.getElementById('mobile-submit-btn');
 const mobileTriesVal = document.getElementById('mobile-tries-val');
 const mobileStreakVal = document.getElementById('mobile-streak-val');
 const mobileBestVal = document.getElementById('mobile-best-val');
-const mobileNavLeft = document.getElementById('mobile-nav-left');
-const mobileNavRight = document.getElementById('mobile-nav-right');
 const mobileSettingsBtn = document.getElementById('mobile-settings-btn');
 const mobileSettingsOverlay = document.getElementById('mobile-settings-overlay');
 const mobileSettingsClose = document.getElementById('mobile-settings-close');
@@ -592,12 +590,19 @@ function createMobileBigCardHtml(ev, isLocked, showDate) {
   const dateHtml = showDate ? `<div class="mobile-big-date">${fmtDate(ev)}</div>` : '';
   const lockedHtml = isLocked ? `<div class="mobile-locked-badge">✓ LOCKED</div>` : '';
 
+  const earlierDisabled = !canMoveActive(-1) ? 'disabled' : '';
+  const laterDisabled = !canMoveActive(1) ? 'disabled' : '';
+
   return `
     <div class="mobile-big-thumb">${thumbHtml}</div>
     <div class="mobile-big-text">${ev.text}</div>
     ${sourceHtml}
     ${dateHtml}
     ${lockedHtml}
+    <div class="mobile-reorder-bar">
+      <button class="mobile-reorder-btn mobile-earlier-btn" ${earlierDisabled}>← Earlier</button>
+      <button class="mobile-reorder-btn mobile-later-btn" ${laterDisabled}>Later →</button>
+    </div>
   `;
 }
 
@@ -669,20 +674,18 @@ export function updateMobileView() {
     }
   }
 
-  // Update nav arrows
-  if (mobileNavLeft) mobileNavLeft.disabled = !canMoveActive(-1);
-  if (mobileNavRight) mobileNavRight.disabled = !canMoveActive(1);
+  // Wire up reorder buttons inside the big card
+  const earlierBtn = mobileBigCard.querySelector('.mobile-earlier-btn');
+  const laterBtn = mobileBigCard.querySelector('.mobile-later-btn');
+  if (earlierBtn) {
+    earlierBtn.addEventListener('click', () => moveActiveEvent(-1));
+  }
+  if (laterBtn) {
+    laterBtn.addEventListener('click', () => moveActiveEvent(1));
+  }
 }
 
-// Mobile arrow buttons
-if (mobileNavLeft) {
-  mobileNavLeft.addEventListener('click', () => moveActiveEvent(-1));
-}
-if (mobileNavRight) {
-  mobileNavRight.addEventListener('click', () => moveActiveEvent(1));
-}
-
-// Mobile swipe on big card
+// Mobile swipe on big card — cycles focus, does NOT reorder
 let mobileTouchStartX = 0;
 let mobileTouchCurrentX = 0;
 
@@ -702,13 +705,17 @@ if (mobileBigCard) {
     mobileBigCard.style.transform = '';
     const diff = mobileTouchCurrentX - mobileTouchStartX;
     const threshold = 50;
+    const slots = getSlots();
 
     if (Math.abs(diff) >= threshold) {
       if (diff < 0) {
-        moveActiveEvent(-1); // swipe left = move earlier
+        // swipe left → next slot (later event)
+        activeSlotIndex = Math.min(activeSlotIndex + 1, slots.length - 1);
       } else {
-        moveActiveEvent(1);  // swipe right = move later
+        // swipe right → previous slot (earlier event)
+        activeSlotIndex = Math.max(activeSlotIndex - 1, 0);
       }
+      updateMobileView();
     }
 
     mobileTouchStartX = 0;
