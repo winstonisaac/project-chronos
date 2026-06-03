@@ -14,12 +14,11 @@ export function fmtYear(y) {
 export function fmtDate(ev) {
   if (ev.year == null) return '';
   const y = ev.year;
-  const yearStr = y < 0 ? `${Math.abs(y)} BCE` : `${y} CE`;
-  if (!ev.month) return yearStr;
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  if (!ev.month) return String(y);
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const mStr = months[ev.month - 1];
-  if (!ev.day) return `${mStr} ${yearStr}`;
-  return `${ev.day} ${mStr} ${yearStr}`;
+  if (!ev.day) return `${mStr} ${y}`;
+  return `${ev.day} ${mStr} ${y}`;
 }
 
 export function getImageUrl(ev) {

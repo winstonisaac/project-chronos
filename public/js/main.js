@@ -67,6 +67,11 @@ function restoreFinishedState(state) {
   const answerOrder = state.answerOrder || [];
   const userOrder = state.order || [];
 
+  // Store for toggle
+  window._lastUserOrder = userOrder;
+  window._lastAnswerOrder = answerOrder;
+  window._lastAnswerEvents = answerEvents;
+
   if (state.won) {
     const orderIds = state.order || [];
     const eventMap = new Map(answerEvents.map(e => [e.id, e]));
@@ -84,13 +89,15 @@ function restoreFinishedState(state) {
     } else {
       const noneLocked = new Set();
       ui.renderSlots(answerEvents, noneLocked);
-      // Force reveal sources since game is over
+      // Force reveal sources and dates since game is over
       const slots = ui.slotsContainer?.children;
       if (slots) {
-        Array.from(slots).forEach(slot => {
+        Array.from(slots).forEach((slot, i) => {
           const item = slot.querySelector('.event-item');
           if (item) {
+            const ev = answerEvents[i];
             const yearEl = item.querySelector('.event-year');
+            if (ev) yearEl.textContent = fmtDate(ev);
             yearEl.classList.add('revealed');
             const sourceEl = item.querySelector('.event-source');
             if (sourceEl) sourceEl.classList.add('visible');
@@ -100,6 +107,7 @@ function restoreFinishedState(state) {
     }
   }
 
+  ui.showAnswerToggle();
   ui.disableGame();
   ui.instructionCard.innerHTML = state.won
     ? '<strong>You already played today.</strong> See you tomorrow for the next puzzle!'
@@ -146,6 +154,7 @@ function startNewGame() {
   ui.updateTriesUI(triesUsed);
   ui.renderSlots(puzzle.events, new Set());
   ui.initSortable(ui.clearMarks);
+  ui.hideAnswerToggle();
   ui.submitBtn.disabled = false;
   ui.submitBtn.textContent = 'Submit';
   ui.instructionCard.innerHTML = `
@@ -188,6 +197,12 @@ async function handleSubmit() {
       const stats = updateStats(result.won, puzzle.todayStr);
       ui.renderStats(stats);
       ui.disableGame();
+      ui.showAnswerToggle();
+
+      // Store for toggle
+      window._lastUserOrder = userOrder;
+      window._lastAnswerOrder = result.answerOrder;
+      window._lastAnswerEvents = result.answerEvents;
 
       if (result.won) {
         gameFinished = true;
@@ -357,6 +372,35 @@ ui.closeModalBtn.addEventListener('click', () => {
   ui.overlay.classList.remove('show');
   ui.overlay.setAttribute('aria-hidden', 'true');
 });
+
+// Answer toggle buttons
+const showCorrectBtn = document.getElementById('show-correct-btn');
+const showGuessBtn = document.getElementById('show-guess-btn');
+
+if (showCorrectBtn && showGuessBtn) {
+  showCorrectBtn.addEventListener('click', () => {
+    showCorrectBtn.classList.add('active');
+    showGuessBtn.classList.remove('active');
+    if (window._lastAnswerOrder && window._lastAnswerEvents) {
+      if (window._lastUserOrder) {
+        ui.finalizeLossState(window._lastUserOrder, window._lastAnswerOrder, window._lastAnswerEvents);
+      } else {
+        // Won state
+        const allLocked = new Set([0,1,2,3,4,5,6]);
+        ui.renderSlots(window._lastAnswerEvents, allLocked);
+        ui.revealAll(window._lastAnswerEvents);
+      }
+    }
+  });
+
+  showGuessBtn.addEventListener('click', () => {
+    showGuessBtn.classList.add('active');
+    showCorrectBtn.classList.remove('active');
+    if (window._lastUserOrder && window._lastAnswerEvents) {
+      ui.renderUserGuess(window._lastUserOrder, window._lastAnswerEvents);
+    }
+  });
+}
 
 // ===================== INIT =====================
 

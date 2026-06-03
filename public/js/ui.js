@@ -307,13 +307,41 @@ export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
   slots.forEach((slot, i) => {
     const item = slot.querySelector('.event-item');
     if (!item) return;
+    const ev = answerEvents[i];
     const yearEl = item.querySelector('.event-year');
+    if (ev) yearEl.textContent = fmtDate(ev);
     yearEl.classList.add('revealed');
     if (correctIndices.has(i)) {
       item.classList.add('correct');
     } else {
       item.classList.add('wrong');
     }
+    const sourceEl = item.querySelector('.event-source');
+    if (sourceEl) sourceEl.classList.add('visible');
+  });
+}
+
+export function renderUserGuess(userOrderIds, events) {
+  const eventMap = new Map(events.map(e => [e.id, e]));
+  const guessEvents = userOrderIds.map(id => eventMap.get(id)).filter(Boolean);
+  const slots = getSlots();
+
+  guessEvents.forEach((ev, idx) => {
+    const slot = slots[idx];
+    slot.innerHTML = '';
+    slot.classList.remove('locked', 'drag-over');
+    const item = createEventItem(ev);
+    slot.appendChild(item);
+  });
+
+  // Show dates on all
+  slots.forEach((slot, i) => {
+    const item = slot.querySelector('.event-item');
+    if (!item) return;
+    const ev = guessEvents[i];
+    const yearEl = item.querySelector('.event-year');
+    if (ev) yearEl.textContent = fmtDate(ev);
+    yearEl.classList.add('revealed');
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
@@ -360,6 +388,16 @@ export function startCountdown() {
   tick();
   if (window._cdInterval) clearInterval(window._cdInterval);
   window._cdInterval = setInterval(tick, 1000);
+}
+
+export function showAnswerToggle() {
+  const toggle = document.getElementById('answer-toggle');
+  if (toggle) toggle.style.display = 'flex';
+}
+
+export function hideAnswerToggle() {
+  const toggle = document.getElementById('answer-toggle');
+  if (toggle) toggle.style.display = 'none';
 }
 
 export function disableGame() {
