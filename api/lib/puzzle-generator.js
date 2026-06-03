@@ -1,7 +1,7 @@
 import { seededRandom } from './seeded-random.js';
 
 const MAX_PER_PERIOD = 3;
-const MIN_PERIODS = 4;
+const MIN_PERIODS = 2;
 const EVENTS_PER_PUZZLE = 7;
 
 function compareEvents(a, b) {
