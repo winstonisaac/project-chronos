@@ -696,7 +696,7 @@ button:disabled { opacity: .5; cursor: not-allowed; transform: none !important; 
     display: flex;
     gap: 10px;
     justify-content: center;
-    margin-top: 8px;
+    padding: 8px 0;
   }
 
   .mobile-reorder-btn {

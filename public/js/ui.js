@@ -518,6 +518,9 @@ const mobileSubmitBtn = document.getElementById('mobile-submit-btn');
 const mobileTriesVal = document.getElementById('mobile-tries-val');
 const mobileStreakVal = document.getElementById('mobile-streak-val');
 const mobileBestVal = document.getElementById('mobile-best-val');
+const mobileEarlierBtn = document.getElementById('mobile-earlier-btn');
+const mobileLaterBtn = document.getElementById('mobile-later-btn');
+const mobileReorderBar = document.getElementById('mobile-reorder-bar');
 const mobileSettingsBtn = document.getElementById('mobile-settings-btn');
 const mobileSettingsOverlay = document.getElementById('mobile-settings-overlay');
 const mobileSettingsClose = document.getElementById('mobile-settings-close');
@@ -539,20 +542,33 @@ function getEventFromItem(item) {
 
 function canMoveActive(direction) {
   const slots = getSlots();
-  const targetIdx = activeSlotIndex + direction;
-  if (targetIdx < 0 || targetIdx >= slots.length) return false;
+  if (activeSlotIndex < 0 || activeSlotIndex >= slots.length) return false;
   const currentSlot = slots[activeSlotIndex];
-  const targetSlot = slots[targetIdx];
-  if (!currentSlot || !targetSlot) return false;
-  return !currentSlot.classList.contains('locked') && !targetSlot.classList.contains('locked');
+  if (!currentSlot || currentSlot.classList.contains('locked')) return false;
+
+  // Scan in the requested direction for the nearest unlocked slot
+  let idx = activeSlotIndex + direction;
+  while (idx >= 0 && idx < slots.length) {
+    if (!slots[idx].classList.contains('locked')) return true;
+    idx += direction;
+  }
+  return false;
 }
 
 function moveActiveEvent(direction) {
   if (!canMoveActive(direction)) return false;
   const slots = getSlots();
   const currentSlot = slots[activeSlotIndex];
-  const targetSlot = slots[activeSlotIndex + direction];
   const currentItem = currentSlot.querySelector('.event-item');
+
+  // Find nearest unlocked slot in the requested direction
+  let targetIdx = activeSlotIndex + direction;
+  while (targetIdx >= 0 && targetIdx < slots.length && slots[targetIdx].classList.contains('locked')) {
+    targetIdx += direction;
+  }
+  if (targetIdx < 0 || targetIdx >= slots.length) return false;
+
+  const targetSlot = slots[targetIdx];
   const targetItem = targetSlot.querySelector('.event-item');
 
   if (targetItem) {
@@ -560,8 +576,8 @@ function moveActiveEvent(direction) {
   }
   targetSlot.appendChild(currentItem);
 
-  // Focus follows the event
-  activeSlotIndex = activeSlotIndex + direction;
+  // Focus follows the event to its new position
+  activeSlotIndex = targetIdx;
   updateMobileView();
   return true;
 }
@@ -590,19 +606,12 @@ function createMobileBigCardHtml(ev, isLocked, showDate) {
   const dateHtml = showDate ? `<div class="mobile-big-date">${fmtDate(ev)}</div>` : '';
   const lockedHtml = isLocked ? `<div class="mobile-locked-badge">✓ LOCKED</div>` : '';
 
-  const earlierDisabled = !canMoveActive(-1) ? 'disabled' : '';
-  const laterDisabled = !canMoveActive(1) ? 'disabled' : '';
-
   return `
     <div class="mobile-big-thumb">${thumbHtml}</div>
     <div class="mobile-big-text">${ev.text}</div>
     ${sourceHtml}
     ${dateHtml}
     ${lockedHtml}
-    <div class="mobile-reorder-bar">
-      <button class="mobile-reorder-btn mobile-earlier-btn" ${earlierDisabled}>← Earlier</button>
-      <button class="mobile-reorder-btn mobile-later-btn" ${laterDisabled}>Later →</button>
-    </div>
   `;
 }
 
@@ -674,15 +683,18 @@ export function updateMobileView() {
     }
   }
 
-  // Wire up reorder buttons inside the big card
-  const earlierBtn = mobileBigCard.querySelector('.mobile-earlier-btn');
-  const laterBtn = mobileBigCard.querySelector('.mobile-later-btn');
-  if (earlierBtn) {
-    earlierBtn.addEventListener('click', () => moveActiveEvent(-1));
-  }
-  if (laterBtn) {
-    laterBtn.addEventListener('click', () => moveActiveEvent(1));
-  }
+  // Update standalone reorder buttons
+  if (mobileEarlierBtn) mobileEarlierBtn.disabled = !canMoveActive(-1);
+  if (mobileLaterBtn) mobileLaterBtn.disabled = !canMoveActive(1);
+  if (mobileReorderBar) mobileReorderBar.style.display = 'flex';
+}
+
+// Standalone reorder button listeners
+if (mobileEarlierBtn) {
+  mobileEarlierBtn.addEventListener('click', () => moveActiveEvent(-1));
+}
+if (mobileLaterBtn) {
+  mobileLaterBtn.addEventListener('click', () => moveActiveEvent(1));
 }
 
 // Mobile swipe on big card — cycles focus, does NOT reorder
