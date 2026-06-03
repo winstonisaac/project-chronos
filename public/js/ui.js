@@ -1,11 +1,10 @@
 import { MAX_TRIES, EVENTS_PER_PUZZLE } from './config.js';
 import { fmtDate, getImageUrl } from './game.js';
 
-// DOM element references
-export const listEl = document.getElementById('event-list');
+// Slot container
+export const slotsContainer = document.getElementById('slots-container');
 
-// Store current rendered items for re-render (e.g., reading mode toggle)
-let currentItems = [];
+// DOM element references
 export const submitBtn = document.getElementById('submit-btn');
 export const triesVal = document.getElementById('tries-val');
 export const triesPill = document.getElementById('tries-pill');
@@ -28,28 +27,14 @@ let readingMode = false;
 
 // Locked items tracking
 let lockedPositions = new Set();
-let answerOrderIds = [];
 
 export function isReadingMode() {
   return readingMode;
 }
 
-export function setAnswerOrder(orderIds) {
-  answerOrderIds = orderIds || [];
-}
-
 export function setReadingMode(enabled) {
   readingMode = enabled;
-  const children = Array.from(listEl.children);
-  const lockedIndices = new Set();
-  children.forEach((li, i) => {
-    if (li.classList.contains('locked')) lockedIndices.add(i);
-  });
-  // Preserve current user sort order
-  const itemMap = new Map(currentItems.map(e => [e.id, e]));
-  const orderedItems = children.map(li => itemMap.get(li.dataset.id)).filter(Boolean);
-  renderList(orderedItems, lockedIndices, false, lockedIndices);
-  initSortable(clearMarks);
+  refreshAllEventItems();
 }
 
 // Lightbox elements
@@ -77,226 +62,226 @@ if (imageLightbox) {
   imageLightbox.querySelector('.overlay-bg')?.addEventListener('click', closeLightbox);
 }
 
-export let sortable = null;
+function getSlots() {
+  return Array.from(slotsContainer.children);
+}
 
-// When locked items exist, we use native HTML5 DnD instead of SortableJS
-// because SortableJS reorders ALL nodes and corrupts locked positions.
-let customDnDActive = false;
-let draggedItem = null;
-let customDnDOnStart = null;
+function createEventItem(ev) {
+  const li = document.createElement('div');
+  li.className = 'event-item';
+  li.dataset.id = ev.id;
+  li.draggable = true;
 
-export function initSortable(onStart) {
-  if (sortable) { sortable.destroy(); sortable = null; }
-  customDnDActive = false;
-  draggedItem = null;
+  const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
+  const imgUrl = getImageUrl(ev);
+  const thumbHtml = imgUrl
+    ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.textContent='${thumbLetter}'">`
+    : thumbLetter;
 
-  if (lockedPositions.size > 0) {
-    customDnDActive = true;
-    customDnDOnStart = onStart;
-    const items = Array.from(listEl.children);
-    items.forEach((li, i) => {
-      if (lockedPositions.has(i)) {
-        li.draggable = false;
-        li.style.cursor = 'default';
-      } else {
-        li.draggable = true;
-        li.style.cursor = 'grab';
-      }
-    });
-    return;
+  let sourceText = ev.source?.text || ev.source_text || '';
+  const sourceUrl = ev.source?.url || ev.source_url || '';
+  if (readingMode && sourceText) {
+    sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
   }
+  const showSource = readingMode;
+  const sourceVisible = showSource && sourceText ? 'visible' : '';
+  const sourceHtml = sourceText
+    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
+    : '';
 
-  sortable = new Sortable(listEl, {
-    animation: 180,
-    draggable: '.event-item',
-    handle: '.event-item',
-    ghostClass: 'sortable-ghost',
-    dragClass: 'sortable-drag',
-    easing: 'cubic-bezier(1, 0, 0, 1)',
-    onStart
+  li.innerHTML = `
+    <div class="check-mark">✓</div>
+    <div class="event-thumb">${thumbHtml}</div>
+    <div class="event-info">
+      <div class="event-text">${ev.text}</div>
+      ${sourceHtml}
+    </div>
+    <div class="event-year"></div>
+    <div class="drag-handle">⋮⋮</div>
+  `;
+
+  // Click-to-enlarge image
+  li.querySelector('.event-thumb')?.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG') {
+      openLightbox(e.target.dataset.imgUrl, e.target.dataset.caption);
+    }
+  });
+
+  return li;
+}
+
+export function renderSlots(items, lockedIndices = new Set()) {
+  const slots = getSlots();
+  items.forEach((ev, idx) => {
+    const slot = slots[idx];
+    slot.innerHTML = '';
+    slot.classList.remove('locked', 'drag-over');
+    const item = createEventItem(ev);
+    slot.appendChild(item);
+    if (lockedIndices.has(idx)) {
+      slot.classList.add('locked');
+      item.classList.add('correct', 'locked');
+      item.draggable = false;
+      item.style.cursor = 'default';
+    }
   });
 }
 
-// Native DnD handlers (attached once at module load)
-listEl.addEventListener('dragstart', (e) => {
-  if (!customDnDActive) return;
-  const item = e.target.closest('.event-item');
-  if (!item || item.classList.contains('locked')) {
-    e.preventDefault();
-    return;
-  }
-  draggedItem = item;
-  if (customDnDOnStart) customDnDOnStart();
-  e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('text/plain', item.dataset.id);
-  item.classList.add('sortable-drag');
-});
+function refreshAllEventItems() {
+  const slots = getSlots();
+  slots.forEach(slot => {
+    const item = slot.querySelector('.event-item');
+    if (!item) return;
+    const sourceEl = item.querySelector('.event-source');
+    if (!sourceEl) return;
 
-listEl.addEventListener('dragend', () => {
-  if (!customDnDActive) return;
-  if (draggedItem) {
-    draggedItem.classList.remove('sortable-drag');
-    draggedItem = null;
-  }
-});
-
-listEl.addEventListener('dragover', (e) => {
-  if (!customDnDActive) return;
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-});
-
-listEl.addEventListener('drop', (e) => {
-  if (!customDnDActive) return;
-  e.preventDefault();
-  if (!draggedItem) return;
-
-  const target = e.target.closest('.event-item');
-  if (!target || target === draggedItem) {
-    // Dropped in empty space — calculate insertion point from Y coordinate
-    const items = Array.from(listEl.children);
-    const dropY = e.clientY;
-    let insertBefore = null;
-    for (const item of items) {
-      const rect = item.getBoundingClientRect();
-      if (dropY < rect.top + rect.height / 2) {
-        if (item !== draggedItem && !item.classList.contains('locked')) {
-          insertBefore = item;
-        }
-        break;
+    // Re-apply reading mode visibility
+    if (readingMode) {
+      sourceEl.classList.add('visible');
+      // Re-apply redaction
+      const originalText = sourceEl.textContent;
+      if (!originalText.includes('■■■■')) {
+        sourceEl.textContent = originalText.replace(/\([^)]*\)/g, '(■■■■)');
       }
-    }
-    if (insertBefore) {
-      listEl.insertBefore(draggedItem, insertBefore);
     } else {
-      const last = items[items.length - 1];
-      if (last !== draggedItem && !last.classList.contains('locked')) {
-        listEl.appendChild(draggedItem);
+      if (!slot.classList.contains('locked')) {
+        sourceEl.classList.remove('visible');
       }
     }
-  } else if (!target.classList.contains('locked')) {
-    listEl.insertBefore(draggedItem, target);
-  }
-
-  snapLockedItems();
-});
-    const showSource = revealSources || readingMode;
-    const sourceVisible = showSource && sourceText ? 'visible' : '';
-    const sourceHtml = sourceText
-      ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
-      : '';
-
-    li.innerHTML = `
-      <div class="check-mark">✓</div>
-      <div class="event-thumb">${thumbHtml}</div>
-      <div class="event-info">
-        <div class="event-text">${ev.text}</div>
-        ${sourceHtml}
-      </div>
-      <div class="event-year">${fmtDate(ev)}</div>
-      <div class="drag-handle">⋮⋮</div>
-    `;
-    listEl.appendChild(li);
   });
 }
 
-export function initSortable(onStart) {
-  if (sortable) sortable.destroy();
-  const hasLocks = lockedPositions.size > 0;
-  sortable = new Sortable(listEl, {
-    animation: hasLocks ? 0 : 180,
-    draggable: '.event-item:not(.locked)',
-    handle: '.event-item',
-    ghostClass: 'sortable-ghost',
-    dragClass: 'sortable-drag',
-    easing: 'cubic-bezier(1, 0, 0, 1)',
-    onStart,
-    onEnd: function () {
-      setTimeout(snapLockedItems, 100);
+// Native HTML5 DnD for slot-based swapping
+let draggedItem = null;
+let sourceSlot = null;
+
+function initDnD() {
+  slotsContainer.addEventListener('dragstart', (e) => {
+    const item = e.target.closest('.event-item');
+    if (!item || item.classList.contains('locked')) {
+      e.preventDefault();
+      return;
+    }
+    draggedItem = item;
+    sourceSlot = item.parentElement;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', item.dataset.id);
+  });
+
+  slotsContainer.addEventListener('dragend', () => {
+    if (draggedItem) {
+      draggedItem.classList.remove('dragging');
+      draggedItem = null;
+      sourceSlot = null;
+    }
+    getSlots().forEach(s => s.classList.remove('drag-over'));
+  });
+
+  slotsContainer.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const slot = e.target.closest('.event-slot');
+    if (!slot) return;
+
+    getSlots().forEach(s => s.classList.remove('drag-over'));
+
+    if (!slot.classList.contains('locked')) {
+      slot.classList.add('drag-over');
+      e.dataTransfer.dropEffect = 'move';
+    } else {
+      e.dataTransfer.dropEffect = 'none';
     }
   });
+
+  slotsContainer.addEventListener('dragleave', (e) => {
+    const slot = e.target.closest('.event-slot');
+    if (slot) slot.classList.remove('drag-over');
+  });
+
+  slotsContainer.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const slot = e.target.closest('.event-slot');
+    if (!slot || !draggedItem) return;
+
+    slot.classList.remove('drag-over');
+
+    if (slot.classList.contains('locked')) {
+      // Reject drop on locked slot
+      return;
+    }
+
+    const targetItem = slot.querySelector('.event-item');
+
+    if (slot === sourceSlot) {
+      // Dropped in same slot — nothing to do
+      return;
+    }
+
+    // Swap items between slots
+    if (targetItem) {
+      sourceSlot.appendChild(targetItem);
+    }
+    slot.appendChild(draggedItem);
+  });
 }
 
-// Click-to-enlarge images
-listEl.addEventListener('click', (e) => {
-  const img = e.target.closest('.event-thumb img');
-  if (!img) return;
-  const url = img.dataset.imgUrl;
-  const caption = img.dataset.caption;
-  if (url) openLightbox(url, caption);
-});
+initDnD();
+
+export function initSortable(onStart) {
+  // No-op: slots handle their own DnD. Kept for API compatibility.
+}
 
 export function clearMarks() {
-  Array.from(listEl.children).forEach(li => {
-    if (!li.classList.contains('locked')) {
-      li.classList.remove('correct', 'wrong');
+  getSlots().forEach(slot => {
+    const item = slot.querySelector('.event-item');
+    if (item && !item.classList.contains('locked')) {
+      item.classList.remove('correct', 'wrong');
     }
   });
 }
 
 export function getUserOrder() {
-  return Array.from(listEl.children).map(li => li.dataset.id);
-}
-
-function snapLockedItems() {
-  if (lockedPositions.size === 0 || answerOrderIds.length !== EVENTS_PER_PUZZLE) return;
-
-  // Build desired order: locked items at their correct slots,
-  // unlocked items keep their current relative order filling gaps
-  const currentIds = Array.from(listEl.children).map(li => li.dataset.id);
-  const desiredOrder = new Array(EVENTS_PER_PUZZLE);
-  const usedLockedIds = new Set();
-
-  lockedPositions.forEach(pos => {
-    const correctId = answerOrderIds[pos];
-    desiredOrder[pos] = correctId;
-    usedLockedIds.add(correctId);
-  });
-
-  const remainingIds = currentIds.filter(id => !usedLockedIds.has(id));
-  let remIdx = 0;
-  for (let i = 0; i < EVENTS_PER_PUZZLE; i++) {
-    if (!lockedPositions.has(i)) {
-      desiredOrder[i] = remainingIds[remIdx++];
-    }
-  }
-
-  // Surgical reorder: appendChild each node in desired sequence
-  // (appendChild on existing child moves it to end, preserving all state)
-  const nodeMap = new Map(Array.from(listEl.children).map(li => [li.dataset.id, li]));
-  desiredOrder.forEach(id => {
-    const node = nodeMap.get(id);
-    if (node) listEl.appendChild(node);
-  });
+  return getSlots().map(slot => {
+    const item = slot.querySelector('.event-item');
+    return item ? item.dataset.id : null;
+  }).filter(Boolean);
 }
 
 export function evaluateAndMark(correctPositions) {
   lockedPositions = new Set(correctPositions);
-  const children = Array.from(listEl.children);
-  children.forEach((li, i) => {
-    li.classList.remove('correct', 'wrong', 'locked');
+  const slots = getSlots();
+  slots.forEach((slot, i) => {
+    const item = slot.querySelector('.event-item');
+    if (!item) return;
+    item.classList.remove('correct', 'wrong', 'locked');
     if (correctPositions.includes(i)) {
-      li.classList.add('correct', 'locked');
+      item.classList.add('correct', 'locked');
+      item.draggable = false;
+      item.style.cursor = 'default';
+      slot.classList.add('locked');
     } else {
-      li.classList.add('wrong');
+      item.classList.add('wrong');
+      item.draggable = true;
+      item.style.cursor = 'grab';
+      slot.classList.remove('locked');
     }
   });
-  // Re-init Sortable only once — snapLockedItems in onEnd handles the rest
-  initSortable(clearMarks);
 }
 
 export function revealAll(eventsWithDates) {
   const dateMap = eventsWithDates ? new Map(eventsWithDates.map(e => [e.id, e])) : null;
-  Array.from(listEl.children).forEach(li => {
-    li.classList.remove('wrong');
-    li.classList.add('correct');
-    const yearEl = li.querySelector('.event-year');
+  getSlots().forEach(slot => {
+    const item = slot.querySelector('.event-item');
+    if (!item) return;
+    item.classList.remove('wrong');
+    item.classList.add('correct');
+    const yearEl = item.querySelector('.event-year');
     if (dateMap) {
-      const ev = dateMap.get(li.dataset.id);
+      const ev = dateMap.get(item.dataset.id);
       if (ev) yearEl.textContent = fmtDate(ev);
     }
     yearEl.classList.add('revealed');
-    const sourceEl = li.querySelector('.event-source');
+    const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
 }
@@ -304,21 +289,32 @@ export function revealAll(eventsWithDates) {
 export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
   const eventMap = new Map(puzzleEvents.map(e => [e.id, e]));
   const answerEvents = answerOrderIds.map(id => eventMap.get(id)).filter(Boolean);
+  const slots = getSlots();
+
+  answerEvents.forEach((ev, idx) => {
+    const slot = slots[idx];
+    slot.innerHTML = '';
+    slot.classList.remove('locked', 'drag-over');
+    const item = createEventItem(ev);
+    slot.appendChild(item);
+  });
 
   const correctIndices = new Set();
   userOrderIds.forEach((id, i) => {
     if (id === answerOrderIds[i]) correctIndices.add(i);
   });
 
-  renderList(answerEvents, correctIndices, true);
-
-  Array.from(listEl.children).forEach((li, i) => {
-    const yearEl = li.querySelector('.event-year');
+  slots.forEach((slot, i) => {
+    const item = slot.querySelector('.event-item');
+    if (!item) return;
+    const yearEl = item.querySelector('.event-year');
     yearEl.classList.add('revealed');
-    if (!correctIndices.has(i)) {
-      li.classList.add('wrong');
+    if (correctIndices.has(i)) {
+      item.classList.add('correct');
+    } else {
+      item.classList.add('wrong');
     }
-    const sourceEl = li.querySelector('.event-source');
+    const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
 }
@@ -369,15 +365,13 @@ export function startCountdown() {
 export function disableGame() {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Come back tomorrow';
-  if (sortable) {
-    sortable.option('disabled', true);
-  }
-  if (customDnDActive) {
-    Array.from(listEl.children).forEach(li => {
-      li.draggable = false;
-      li.style.cursor = 'default';
-    });
-  }
+  getSlots().forEach(slot => {
+    const item = slot.querySelector('.event-item');
+    if (item) {
+      item.draggable = false;
+      item.style.cursor = 'default';
+    }
+  });
 }
 
 export function showError(msg) {

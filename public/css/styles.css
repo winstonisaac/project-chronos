@@ -89,14 +89,29 @@ h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
 }
 .instructions strong { color: var(--text); }
 
-#event-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.slots-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-height: 200px;
+}
+
+.event-slot {
+  min-height: 88px;
+  border: 2px dashed transparent;
+  border-radius: var(--radius);
+  transition: border-color .2s ease, background .2s ease;
+}
+.event-slot.locked {
+  border-color: rgba(74,222,128,0.3);
+}
+.event-slot.drag-over {
+  border-color: var(--accent);
+  background: rgba(56,189,248,0.08);
+}
+.event-slot.drag-over.locked {
+  border-color: rgba(74,222,128,0.3);
+  background: transparent;
 }
 
 .event-item {
@@ -140,6 +155,10 @@ h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
 .event-item.locked .drag-handle {
   opacity: 0.35;
   cursor: default;
+}
+.event-item.dragging {
+  opacity: 0.5;
+  transform: scale(1.02);
 }
 
 .event-thumb {

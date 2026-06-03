@@ -73,16 +73,30 @@ function restoreFinishedState(state) {
     const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
     const allLocked = new Set([0,1,2,3,4,5,6]);
     if (items.length === EVENTS_PER_PUZZLE) {
-      ui.renderList(items, allLocked, true, allLocked);
+      ui.renderSlots(items, allLocked);
     } else {
-      ui.renderList(answerEvents, allLocked, true, allLocked);
+      ui.renderSlots(answerEvents, allLocked);
     }
     ui.revealAll(answerEvents);
   } else {
     if (answerOrder.length === EVENTS_PER_PUZZLE) {
       ui.finalizeLossState(userOrder, answerOrder, answerEvents);
     } else {
-      ui.renderList(answerEvents, new Set(), true);
+      const noneLocked = new Set();
+      ui.renderSlots(answerEvents, noneLocked);
+      // Force reveal sources since game is over
+      const slots = ui.slotsContainer?.children;
+      if (slots) {
+        Array.from(slots).forEach(slot => {
+          const item = slot.querySelector('.event-item');
+          if (item) {
+            const yearEl = item.querySelector('.event-year');
+            yearEl.classList.add('revealed');
+            const sourceEl = item.querySelector('.event-source');
+            if (sourceEl) sourceEl.classList.add('visible');
+          }
+        });
+      }
     }
   }
 
@@ -103,15 +117,10 @@ function restoreInProgressState(state) {
   const items = orderIds.map(id => eventMap.get(id)).filter(Boolean);
   const correctPositions = new Set(state.correctPositions || []);
 
-  // Restore answer order so snapLockedItems knows where to anchor
-  if (state.answerOrder && state.answerOrder.length === EVENTS_PER_PUZZLE) {
-    ui.setAnswerOrder(state.answerOrder);
-  }
-
   if (items.length === EVENTS_PER_PUZZLE) {
-    ui.renderList(items, correctPositions, false, correctPositions);
+    ui.renderSlots(items, correctPositions);
   } else {
-    ui.renderList(puzzle.events, correctPositions, false, correctPositions);
+    ui.renderSlots(puzzle.events, correctPositions);
   }
 
   ui.initSortable(ui.clearMarks);
@@ -135,7 +144,7 @@ function startNewGame() {
   triesUsed = 0;
   gameFinished = false;
   ui.updateTriesUI(triesUsed);
-  ui.renderList(puzzle.events, new Set(), false, new Set());
+  ui.renderSlots(puzzle.events, new Set());
   ui.initSortable(ui.clearMarks);
   ui.submitBtn.disabled = false;
   ui.submitBtn.textContent = 'Submit';
@@ -159,7 +168,6 @@ async function handleSubmit() {
 
   try {
     const result = await submitAnswer(userOrder, triesUsed);
-    ui.setAnswerOrder(result.answerOrder);
     ui.evaluateAndMark(result.correctPositions);
     ui.updateTriesUI(triesUsed);
 
