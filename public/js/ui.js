@@ -37,9 +37,11 @@ export function renderList(items, markedIndices = new Set(), revealSources = fal
       ? `<img src="${imgUrl}" alt="" onerror="this.parentElement.textContent='${thumbLetter}'">`
       : thumbLetter;
 
-    const sourceVisible = revealSources && ev.source ? 'visible' : '';
-    const sourceHtml = ev.source
-      ? `<a class="event-source ${sourceVisible}" href="${ev.source.url || '#'}" target="_blank" rel="noopener">${ev.source.text || ''}</a>`
+    const sourceText = ev.source?.text || ev.source_text || '';
+    const sourceUrl = ev.source?.url || ev.source_url || '';
+    const sourceVisible = revealSources && sourceText ? 'visible' : '';
+    const sourceHtml = sourceText
+      ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
       : '';
 
     li.innerHTML = `

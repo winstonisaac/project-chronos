@@ -23,9 +23,12 @@ export function fmtDate(ev) {
 }
 
 export function getImageUrl(ev) {
-  if (!ev.image) return '';
-  if (ev.image.local) return ev.image.local;
-  return ev.image.url || '';
+  // Handle nested format (from JSON files) and flat format (from API/database)
+  if (ev.image?.local) return ev.image.local;
+  if (ev.image?.url) return ev.image.url;
+  if (ev.image_local) return ev.image_local;
+  if (ev.image_url) return ev.image_url;
+  return '';
 }
 
 export function dayNumber(todayStr) {
