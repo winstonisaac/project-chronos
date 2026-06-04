@@ -9,9 +9,7 @@ const puzzlesDir = path.join(__dirname, '..', 'puzzles');
 const periodFiles = [
   'precolonial.json',
   'spanish.json',
-  'revolution-american.json',
-  'postwar.json',
-  'marcos-edsa.json',
+  'modern.json',
   'contemporary-early.json',
   'contemporary-modern.json',
 ];

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "df03a6a7-50e6-4b39-8131-1ebbac59358d",
+    "year": 0,
+    "month": 1,
+    "day": 1,
+    "text": "Event description goes here",
+    "image": {
+      "url": "https://example.com/image.jpg",
+      "local": "images/filename.webp"
+    },
+    "source": {
+      "text": "Author. (Year). Article Title. Publisher.",
+      "url": "https://example.com/source"
+    }
+  },
+  {
+    "id": "6cffa590-6ce0-4cd2-b2fe-efc166a6ea32",
+    "year": 0,
+    "month": 1,
+    "day": 1,
+    "text": "Event description goes here",
+    "image": {
+      "url": "https://example.com/image.jpg",
+      "local": "images/filename.webp"
+    },
+    "source": {
+      "text": "Author. (Year). Article Title. Publisher.",
+      "url": "https://example.com/source"
+    }
+  },
+  {
+    "id": "f5a907e0-1a88-4179-8548-944510b32e31",
+    "year": 0,
+    "month": 1,
+    "day": 1,
+    "text": "Event description goes here",
+    "image": {
+      "url": "https://example.com/image.jpg",
+      "local": "images/filename.webp"
+    },
+    "source": {
+      "text": "Author. (Year). Article Title. Publisher.",
+      "url": "https://example.com/source"
+    }
+  }
+]

@@ -27,6 +27,7 @@ function isChronologicallySorted(display) {
 
 // Generate a random valid distribution of 7 events across periods
 // TEMP: max per period = 4 (normally 3), min periods = 2 (normally 4)
+// Periods: precolonial, spanish, modern, contemporary-early, contemporary-modern
 function generateDistribution(numPeriods, rng) {
   // Distributions for different numbers of periods, sum = 7, max = 4 (temp)
   const distributionsByPeriods = {
