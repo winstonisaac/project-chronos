@@ -28,6 +28,13 @@ let readingMode = false;
 // Locked items tracking
 let lockedPositions = new Set();
 
+// Game over state — prevents reordering after game ends
+let isGameOver = false;
+
+export function setGameOver(value) {
+  isGameOver = value;
+}
+
 export function isReadingMode() {
   return readingMode;
 }
@@ -70,7 +77,7 @@ function createEventItem(ev) {
   const li = document.createElement('div');
   li.className = 'event-item';
   li.dataset.id = ev.id;
-  li.draggable = true;
+  li.draggable = !isGameOver;
 
   const thumbLetter = ev.text ? ev.text.charAt(0).toUpperCase() : '?';
   const imgUrl = getImageUrl(ev);
@@ -479,6 +486,7 @@ export function hideAnswerToggle() {
 }
 
 export function disableGame() {
+  isGameOver = true;
   submitBtn.disabled = true;
   submitBtn.textContent = 'Come back tomorrow';
   if (mobileSubmitBtn) {
@@ -492,6 +500,10 @@ export function disableGame() {
       item.style.cursor = 'default';
     }
   });
+  // Hide mobile reorder controls
+  if (mobileReorderBar) mobileReorderBar.style.display = 'none';
+  if (mobileEarlierBtn) mobileEarlierBtn.disabled = true;
+  if (mobileLaterBtn) mobileLaterBtn.disabled = true;
 }
 
 export function showError(msg) {
@@ -541,6 +553,7 @@ function getEventFromItem(item) {
 }
 
 function canMoveActive(direction) {
+  if (isGameOver) return false;
   const slots = getSlots();
   if (activeSlotIndex < 0 || activeSlotIndex >= slots.length) return false;
   const currentSlot = slots[activeSlotIndex];
@@ -684,9 +697,15 @@ export function updateMobileView() {
   }
 
   // Update standalone reorder buttons
-  if (mobileEarlierBtn) mobileEarlierBtn.disabled = !canMoveActive(-1);
-  if (mobileLaterBtn) mobileLaterBtn.disabled = !canMoveActive(1);
-  if (mobileReorderBar) mobileReorderBar.style.display = 'flex';
+  if (isGameOver) {
+    if (mobileReorderBar) mobileReorderBar.style.display = 'none';
+    if (mobileEarlierBtn) mobileEarlierBtn.disabled = true;
+    if (mobileLaterBtn) mobileLaterBtn.disabled = true;
+  } else {
+    if (mobileEarlierBtn) mobileEarlierBtn.disabled = !canMoveActive(-1);
+    if (mobileLaterBtn) mobileLaterBtn.disabled = !canMoveActive(1);
+    if (mobileReorderBar) mobileReorderBar.style.display = 'flex';
+  }
 }
 
 // Standalone reorder button listeners

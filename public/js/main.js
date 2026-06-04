@@ -155,6 +155,7 @@ function restoreInProgressState(state) {
 function startNewGame() {
   triesUsed = 0;
   gameFinished = false;
+  ui.setGameOver(false);
   ui.updateTriesUI(triesUsed);
   ui.renderSlots(puzzle.events, new Set());
   ui.initSortable(ui.clearMarks);
