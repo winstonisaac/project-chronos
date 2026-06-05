@@ -1,47 +1,467 @@
 [
   {
-    "id": "df03a6a7-50e6-4b39-8131-1ebbac59358d",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "a9e1829b-7fd1-4fe8-9a03-a6495f64cad1",
+    "year": 1904,
+    "month": 10,
+    "day": 19,
+    "text": "PUP is established (as Manila Business School)",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/pup-established.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "Polytechnic University of the Philippines. (n.d.). History: 1904-1951.",
+      "url": "https://www.pup.edu.ph/about/1904"
     }
   },
   {
-    "id": "6cffa590-6ce0-4cd2-b2fe-efc166a6ea32",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "6371dda5-c8c8-4ff5-873c-a03f744e73c3",
+    "year": 1908,
+    "month": 6,
+    "day": 18,
+    "text": "UP is established",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/up-established.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "University of the Philippines. (n.d.). Honor and Excellence and Service to the Nation: UP in the Past 117 Years.",
+      "url": "https://up.edu.ph/university-history/"
     }
   },
   {
-    "id": "f5a907e0-1a88-4179-8548-944510b32e31",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "0039bdf8-78d9-4bfd-b7a1-796198b631ce",
+    "year": 1944,
+    "month": 10,
+    "day": 20,
+    "text": "General Douglas MacArthur returns",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/macarthur-returns.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "National Museum of the U.S. Navy. (n.d.). Invasion of Leyte.",
+      "url": "https://www.history.navy.mil/content/history/museums/nmusn/explore/photography/wwii/wwii-pacific/leyte/leyte-invasion.html"
+    }
+  },
+  {
+    "id": "2b03e2c7-981f-4178-a4d1-51ac8a5762b1",
+    "year": 1957,
+    "month": 3,
+    "day": 17,
+    "text": "President Magsaysay dies in a plane crash",
+    "image": {
+      "url": null,
+      "local": "images/magsaysay-plane-crash.webp"
+    },
+    "source": {
+      "text": "Afinidad-Bernardo D. (2025 April 9). CIA? Hukbalahap? Foul play? Grandson shares discoveries on Ramon Magsaysay's death. Philstar.com",
+      "url": "https://newsinfo.inquirer.net/881473/did-you-know-60th-death-anniversary-of-president-ramon-magsaysay/"
+    }
+  },
+  {
+    "id": "d64620d3-b47b-4826-a7e5-695f65d9c1fc",
+    "year": 1961,
+    "month": 10,
+    "day": 29,
+    "text": "GMA Network (as RBS) starts broadcasting",
+    "image": {
+      "url": null,
+      "local": "images/gma-network-rbs.webp"
+    },
+    "source": {
+      "text": "GMA Careers. (n.d.). About Us.",
+      "url": "https://careers.gmanetwork.com/AboutUs"
+    }
+  },
+  {
+    "id": "c1d722e7-4a10-468a-84f2-001ad4b5df7a",
+    "year": 1966,
+    "month": 7,
+    "day": 4,
+    "text": "The Beatles performs their infamous concert in the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/beatles-philippines-concert.webp"
+    },
+    "source": {
+      "text": "Wang M. (2025 February 7). The Beatles visited the Philippines in 1966 they hated it. Rolling Stone.",
+      "url": "https://rollingstonephilippines.com/music/the-beatles-1966-visit-philippines-manila/"
+    }
+  },
+  {
+    "id": "a826fceb-76e9-4be9-9cbe-82e6da9e7a72",
+    "year": 1967,
+    "month": 8,
+    "day": 8,
+    "text": "Philippines become a founding member of ASEAN",
+    "image": {
+      "url": null,
+      "local": "images/asean-founded.webp"
+    },
+    "source": {
+      "text": "ASEAN. (n.d.). The founding of ASEAN.",
+      "url": "https://asean.org/the-founding-of-asean/"
+    }
+  },
+  {
+    "id": "a94b55d5-79b6-469c-9d6d-c87b7079258b",
+    "year": 1968,
+    "month": 3,
+    "day": 18,
+    "text": "The Jabidah Massacre happened",
+    "image": {
+      "url": null,
+      "local": "images/jabidah-massacre.webp"
+    },
+    "source": {
+      "text": "Yusop B. (2024 March 29). Jabidah Massacre on its 56th year of remembrance. BARMM.",
+      "url": "https://bangsamoro.gov.ph/news/latest-news/jabidah-massacre-on-its-56th-year-of-remembrance-reflecting-on-its-impact-in-shaping-the-bangsamoro/"
+    }
+  },
+  {
+    "id": "d9e5eeb6-0bea-412d-a445-674369a37c7c",
+    "year": 1968,
+    "month": 8,
+    "day": 2,
+    "text": "Casiguran earthquake in kills ~270",
+    "image": {
+      "url": null,
+      "local": "images/casiguran-earthquake.webp"
+    },
+    "source": {
+      "text": "Limos M. (2019 April 23). History of the Worst Earthquakes in the Philippines. Esquire.",
+      "url": "https://www.esquiremag.ph/long-reads/history-of-the-worst-earthquakes-in-the-philippines-a00293-20190423-lfrm"
+    }
+  },
+  {
+    "id": "743ff10f-bbc6-4274-a0e2-432dccf1ae96",
+    "year": 1969,
+    "month": 3,
+    "day": 29,
+    "text": "The New People's Army (NPA) is established",
+    "image": {
+      "url": null,
+      "local": "images/npa-founded.webp"
+    },
+    "source": {
+      "text": "de Villa K. (2017 March 26). This week's milestone. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/883795/this-weeks-milestone"
+    }
+  },
+  {
+    "id": "2c3eb86e-00e4-43ad-948d-e8388d2808bb",
+    "year": 1969,
+    "month": 7,
+    "day": 19,
+    "text": "Gloria Diaz wins Miss Universe",
+    "image": {
+      "url": null,
+      "local": "images/gloria-diaz-miss-universe-win.webp"
+    },
+    "source": {
+      "text": "Villano A. (2020 July 19). Why the year 1969 is sentimental for Gloria Diaz. Rappler.",
+      "url": "https://www.rappler.com/entertainment/pageants/why-1969-sentimental-for-gloria-diaz/"
+    }
+  },
+  {
+    "id": "94c8ac5b-8c8d-493d-8981-646b272f9663",
+    "year": 1970,
+    "month": 11,
+    "day": 27,
+    "text": "Pope Paul VI almost assassinated during visit",
+    "image": {
+      "url": null,
+      "local": "images/pope-paul-vi-visits.webp"
+    },
+    "source": {
+      "text": "EWTN. (2023 November 20). On a day like today Pope Paul VI narrowly escaped assassination.",
+      "url": "https://ewtnvatican.com/articles/on-a-day-like-today-pope-paul-vi-narrowly-escaped-assassination-1891"
+    }
+  },
+  {
+    "id": "ca44c801-a8b7-4dae-afa6-36b2472628ff",
+    "year": 1971,
+    "month": 8,
+    "day": 21,
+    "text": "Plaza Miranda bombing disrupts a campaign rally",
+    "image": {
+      "url": null,
+      "local": "images/plaza-miranda-bombing.webp"
+    },
+    "source": {
+      "text": "Caedo M. (2025 August 20). Plaza Miranda: forgotten square unforgotten tragedy. Daily Tribune.",
+      "url": "https://tribune.net.ph/2025/08/20/plaza-miranda-forgotten-square-unforgotten-tragedy"
+    }
+  },
+  {
+    "id": "2be7b82d-ef61-43bf-bace-95a57e02519a",
+    "year": 1972,
+    "month": 9,
+    "day": 23,
+    "text": "President Marcos Sr. announces Martial Law in the country",
+    "image": {
+      "url": null,
+      "local": "images/martial-law-declaration.webp"
+    },
+    "source": {
+      "text": "Pasion F. (2023 September 22). The real date of the Declaration of Martial Law: 23 September 1972. NHCP.",
+      "url": "https://nhcp.gov.ph/articles/the-real-date-of-the-declaration-of-martial-law-23-september-1972/"
+    }
+  },
+  {
+    "id": "149edc88-7321-4d26-9043-6dba1e6b25a2",
+    "year": 1973,
+    "month": 7,
+    "day": 2,
+    "text": "The San Juanico Bridge connecting Samar and Leyte opens",
+    "image": {
+      "url": null,
+      "local": "images/san-juanico-bridge-opening.webp"
+    },
+    "source": {
+      "text": "Kahimyang Project. (2024 July 2). Today in Filipino history July 2 1973 San Juanico Bridge was inaugurated. Province of Leyte.",
+      "url": "https://leyteprovince.gov.ph/2024/07/02/today-in-filipino-history-july-2-1973-san-juanico-bridge-was-inaugurated"
+    }
+  },
+  {
+    "id": "554d26fa-959d-41fb-989e-e7bccb8bdc4e",
+    "year": 1973,
+    "month": 7,
+    "day": 21,
+    "text": "Margie Moran wins Miss Universe",
+    "image": {
+      "url": null,
+      "local": "images/margie-moran-miss-universe.webp"
+    },
+    "source": {
+      "text": "Tantiangco A. (2018 July 3). Miss Universe posts stunning throwback photo of Margie Moran after being crowned in 1973. GMA News.",
+      "url": "https://www.gmanetwork.com/news/lifestyle/content/659016/miss-universe-posts-stunning-throwback-photo-of-margie-moran-after-being-crowned-in-1973/story/"
+    }
+  },
+  {
+    "id": "7bf512c3-78e8-4ed2-bce3-6f0bb5814d44",
+    "year": 1974,
+    "month": 5,
+    "day": 1,
+    "text": "Operation Thunderbolt is launched to fight NPA",
+    "image": {
+      "url": null,
+      "local": "images/operation-thunderbolt.webp"
+    },
+    "source": {
+      "text": "Asia Watch Report. (1990). The Philippines: violation of the laws of war by both sides 124.",
+      "url": "https://www.hrw.org/reports/pdfs/p/philippn/philippi908.pdf"
+    }
+  },
+  {
+    "id": "fc75949b-7565-4025-84c5-aff565430692",
+    "year": 1975,
+    "month": 4,
+    "day": 9,
+    "text": "Philippine Basketball Association plays its first game",
+    "image": {
+      "url": null,
+      "local": "images/pba-first-game.webp"
+    },
+    "source": {
+      "text": "Liao H. (2024 April 9). Know your history: PBA played its first game. Sports Bytes.",
+      "url": "https://sportsbytes.com.ph/2024/04/09/know-your-history-pba-played-its-first-game-on-april-9-1975/"
+    }
+  },
+  {
+    "id": "bbd37cfa-03ae-40b3-90b7-c7ebff70e3a0",
+    "year": 1975,
+    "month": 10,
+    "day": 1,
+    "text": "Thrilla in Manila boxing match",
+    "image": {
+      "url": null,
+      "local": "images/thrilla-in-manila.webp"
+    },
+    "source": {
+      "text": "Wallenfeldt E. (n.d.). International boxing. Brittanica.",
+      "url": "https://www.britannica.com/topic/Thrilla-in-Manila"
+    }
+  },
+  {
+    "id": "47259385-1fb6-40a5-a58d-e2fcaaeebe50",
+    "year": 1976,
+    "month": 5,
+    "day": 29,
+    "text": "Country's capital changed back to Manila",
+    "image": {
+      "url": null,
+      "local": "images/capital-returned-to-manila.webp"
+    },
+    "source": {
+      "text": "Marcos F. (1976 May 29). Presidential Decree No. 940 s. 1976. Malacan Palace.",
+      "url": "https://ldr.senate.gov.ph/legislative%2Bissuances/Presidential%20Decree%20No.%20940%2C%20s.%201976"
+    }
+  },
+  {
+    "id": "ae1e8656-b194-4eb5-88e0-29790d157b2b",
+    "year": 1978,
+    "month": 5,
+    "day": 5,
+    "text": "Voltes V first airs on GMA",
+    "image": {
+      "url": null,
+      "local": "images/voltes-v-premiere.webp"
+    },
+    "source": {
+      "text": "Garcia C. (2020 May 5). ON THIS DAY: 'Voltes V' aired on GMA 42 years ago. GMA News.",
+      "url": "https://www.gmanetwork.com/entertainment/showbiznews/on-this-day-voltes-v-aired-on-gma-42-years-ago/62927/"
+    }
+  },
+  {
+    "id": "6333e441-82ca-43d5-b09f-9eda92898c99",
+    "year": 1979,
+    "month": 7,
+    "day": 30,
+    "text": "First episode of Eat Bulaga! aired",
+    "image": {
+      "url": null,
+      "local": "images/eat-bulaga-premiere.webp"
+    },
+    "source": {
+      "text": "Balane J. (2019 July 30). Tito Vic and Joey mark Eat Bulaga's 40th anniversary. GMA News.",
+      "url": "https://www.gmanetwork.com/news/showbiz/chikaminute/702820/tito-vic-and-joey-mark-eat-bulaga-s-40th-anniversary/story/"
+    }
+  },
+  {
+    "id": "e92bc672-a0fa-4d20-95e3-ebe674a29842",
+    "year": 1979,
+    "month": 8,
+    "day": 27,
+    "text": "Voltes V is banned by President Marcos Sr.",
+    "image": {
+      "url": null,
+      "local": "images/voltes-v-ban.webp"
+    },
+    "source": {
+      "text": "Garcia N. (2022 September 21). Why did Marcos ban 'Voltes V' during Martial Law?. Philstar.com.",
+      "url": "https://philstarlife.com/news-and-views/746701-why-did-marcos-ban-voltes-v-during-martial-law"
+    }
+  },
+  {
+    "id": "e36c7393-2962-4070-b477-b32d9f05a088",
+    "year": 1981,
+    "month": 2,
+    "day": 17,
+    "text": "Pope John Paul II visits Philippines for the first time",
+    "image": {
+      "url": null,
+      "local": "images/pope-john-paul-ii-first-philippines-visit.webp"
+    },
+    "source": {
+      "text": "John Paul II. (1981 February 17). Message of His Holiness John Paul II to the President and to the People of the Philippines. Vatican Archives.",
+      "url": "https://www.vatican.va/content/john-paul-ii/en/speeches/1981/february/documents/hf_jp-ii_spe_19810217_manila-presidente.html?utm_source=chatgpt.com"
+    }
+  },
+  {
+    "id": "54621d6e-bb6f-4741-9bf3-9a0ff7c509fb",
+    "year": 1981,
+    "month": 9,
+    "day": 27,
+    "text": "McDonald's opens its first branch in the country",
+    "image": {
+      "url": null,
+      "local": "images/mcdo-philippines.webp"
+    },
+    "source": {
+      "text": "Rappler. (2018 September 26). There's much reason to celebrate this September for McDonald's Philippines. Rappler.",
+      "url": "https://www.rappler.com/brandrap/travel-and-food/212878-mcdonalds-philippines-chairmans-treat-september-2018/"
+    }
+  },
+  {
+    "id": "91832af0-c7d7-4451-8fbf-a63b46f78946",
+    "year": 1983,
+    "month": 8,
+    "day": 21,
+    "text": "Ninoy Aquino Jr. is assassinated",
+    "image": {
+      "url": null,
+      "local": "images/ninoy-aquino-assassination.webp"
+    },
+    "source": {
+      "text": "National Historical Commission of the Philippines. (2024 August 16). 41st Death Anniversary of Sen. Benigno Ninoy Aquino Jr. to be Commemorated.",
+      "url": "https://nhcp.gov.ph/news_and_updates/41st-death-anniversary-of-sen-benigno-ninoy-aquino-jr-to-be-commemorated"
+    }
+  },
+  {
+    "id": "20cb3551-7cab-4063-9495-7c6262d5a308",
+    "year": 1984,
+    "month": 12,
+    "day": 1,
+    "text": "LRT 1's first trip",
+    "image": {
+      "url": null,
+      "local": "images/lrt-1-first-trip.webp"
+    },
+    "source": {
+      "text": "Light Railway Transit Authority. (n.d.). Railway Operations.",
+      "url": "https://www.lrta.gov.ph/railway-operations/"
+    }
+  },
+  {
+    "id": "2499dd35-3e7a-415e-a434-9e070af09ddf",
+    "year": 1985,
+    "month": 11,
+    "day": 25,
+    "text": "SM City North EDSA opened to the public",
+    "image": {
+      "url": null,
+      "local": "images/sm-city-north-edsa-opening.webp"
+    },
+    "source": {
+      "text": "Flores W. (2010 August 15). The mall that started it all: celebrating 25 years of SM City North EDSA. Philstar.com",
+      "url": "https://www.philstar.com/lifestyle/sunday-life/2010/08/15/602978/mall-started-it-all-celebrating-25-years-sm-city-north-edsa"
+    }
+  },
+  {
+    "id": "add40b69-1cc6-4037-816f-0663e7a381a5",
+    "year": 1986,
+    "month": 1,
+    "day": 6,
+    "text": "That's Entertainment premieres on GMA",
+    "image": {
+      "url": null,
+      "local": "images/thats-entertainment-gma.webp"
+    },
+    "source": {
+      "text": "Young R. and Dimaculangan J. (2019 October 28). That's Entertainment. PEP.",
+      "url": "https://www.pep.ph/peptionary/147046/that-s-entertainment-cast-a4495-a2670-20191028-lfrm2?utm_source=chatgpt.com"
+    }
+  },
+  {
+    "id": "77aa7872-ce5e-4f97-b640-dc2599b80056",
+    "year": 1986,
+    "month": 2,
+    "day": 22,
+    "text": "Start of the People Power Revolution",
+    "image": {
+      "url": null,
+      "local": "images/people-power-revolution-end.webp"
+    },
+    "source": {
+      "text": "Licsi A. (2026 February 25). Timeline: The events and important people of the 1986 People Power Revolution. Philstar.com.",
+      "url": "https://philstarlife.com/geeky/414480-timeline-events-important-people-1986-people-power-revolution"
+    }
+  },
+  {
+    "id": "bb4d9271-154d-4127-832a-41f106b98a9b",
+    "year": 1986,
+    "month": 2,
+    "day": 25,
+    "text": "Cory Aquino becomes the country's first female president",
+    "image": {
+      "url": null,
+      "local": "images/cory-aquino-presidency-begins.webp"
+    },
+    "source": {
+      "text": "Britannica Editors. (n.d.). Corazon Aquino. Britannica.",
+      "url": "https://www.britannica.com/biography/Corazon-Aquino"
     }
   }
 ]
