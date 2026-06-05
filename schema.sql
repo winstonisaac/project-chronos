@@ -9,11 +9,8 @@ CREATE TABLE IF NOT EXISTS events (
   day INTEGER,
   text TEXT NOT NULL,
   period TEXT NOT NULL CHECK (period IN (
-    'precolonial',
-    'spanish',
-    'revolution-american',
-    'postwar',
-    'marcos-edsa',
+    'pre-1898',
+    'modern',
     'contemporary-early',
     'contemporary-modern'
   )),

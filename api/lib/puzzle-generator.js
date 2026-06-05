@@ -1,7 +1,7 @@
 import { seededRandom } from './seeded-random.js';
 
-const MAX_PER_PERIOD = 4; // TEMP: increased from 3 to support 2-period puzzles
-const MIN_PERIODS = 2;
+const MAX_PER_PERIOD = 3;
+const MIN_PERIODS = 4;
 const EVENTS_PER_PUZZLE = 7;
 
 function compareEvents(a, b) {
@@ -26,8 +26,7 @@ function isChronologicallySorted(display) {
 }
 
 // Generate a random valid distribution of 7 events across periods
-// TEMP: max per period = 4 (normally 3), min periods = 2 (normally 4)
-// Periods: precolonial, spanish, modern, contemporary-early, contemporary-modern
+// Periods: pre-1898, modern, contemporary-early, contemporary-modern
 function generateDistribution(numPeriods, rng) {
   // Distributions for different numbers of periods, sum = 7, max = 4 (temp)
   const distributionsByPeriods = {

@@ -27,8 +27,7 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
 });
 
 const periodFiles = [
-  { file: 'precolonial.json', period: 'precolonial' },
-  { file: 'spanish.json', period: 'spanish' },
+  { file: 'pre-1898.json', period: 'pre-1898' },
   { file: 'modern.json', period: 'modern' },
   { file: 'contemporary-early.json', period: 'contemporary-early' },
   { file: 'contemporary-modern.json', period: 'contemporary-modern' },

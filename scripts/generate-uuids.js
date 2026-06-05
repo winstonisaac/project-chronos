@@ -7,8 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const puzzlesDir = path.join(__dirname, '..', 'puzzles');
 
 const periodFiles = [
-  'precolonial.json',
-  'spanish.json',
+  'pre-1898.json',
   'modern.json',
   'contemporary-early.json',
   'contemporary-modern.json',
