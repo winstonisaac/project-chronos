@@ -1,32 +1,242 @@
 [
   {
-    "id": "9e56d9b1-cdd2-4695-bb59-bb304a62cb90",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "a0d3309f-4a0f-4596-966e-ebf0899b03ed",
+    "year": 1521,
+    "month": 4,
+    "day": 27,
+    "text": "Ferdinand Magellan is killed in battle on Cebu",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/magellan-killed.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "World History Encyclopedia. (n.d.). Ferdinand Magellan.",
+      "url": "https://www.worldhistory.org/timeline/Ferdinand_Magellan/"
     }
   },
   {
-    "id": "ac223f56-9bc2-42b1-ae41-2c235228720a",
-    "year": 0,
-    "month": 1,
-    "day": 1,
-    "text": "Event description goes here",
+    "id": "2dee50f0-6ccb-4c04-b417-620f22b53ca9",
+    "year": 1611,
+    "month": 4,
+    "day": 28,
+    "text": "UST is established",
     "image": {
-      "url": "https://example.com/image.jpg",
-      "local": "images/filename.webp"
+      "url": null,
+      "local": "images/ust-establishment.webp"
     },
     "source": {
-      "text": "Author. (Year). Article Title. Publisher.",
-      "url": "https://example.com/source"
+      "text": "University of Sto. Tomas. (n.d.). History.",
+      "url": "https://www.ust.edu.ph/university-history/"
+    }
+  },
+  {
+    "id": "77efa01c-7e7e-4e00-b3e9-45fbafb94dee",
+    "year": 1762,
+    "month": 10,
+    "day": 6,
+    "text": "Kingdom of Great Britain occupies Manila",
+    "image": {
+      "url": null,
+      "local": "images/british-occupation-of-manila.webp"
+    },
+    "source": {
+      "text": "Juan C. (n.d.). The Manila-Madras Connection and the 1762 British Invasion of Spanish-ruled Philippines. Mapping Philippine Material Culture.",
+      "url": "https://philippinestudies.uk/mapping/tours/show/34"
+    }
+  },
+  {
+    "id": "6e28cf2a-b9e7-4b6f-a90b-81e668ed6de0",
+    "year": 1763,
+    "month": 5,
+    "day": 28,
+    "text": "Diego Silang is assassinated",
+    "image": {
+      "url": null,
+      "local": "images/diego-silang-assassination.webp"
+    },
+    "source": {
+      "text": "National Historical Commission of the Philippines. (n.d.). Diego Silang (1730–1763).",
+      "url": "https://philhistoricsites.nhcp.gov.ph/registry_database/diego-silang-1730-1763/"
+    }
+  },
+  {
+    "id": "9852811a-d95e-4a49-af59-1e23f0bad1d4",
+    "year": 1812,
+    "month": 1,
+    "day": 6,
+    "text": "Melchora Aquino (Tandang Sora) is born",
+    "image": {
+      "url": null,
+      "local": "images/melchora-aquino-birth.webp"
+    },
+    "source": {
+      "text": "Presidential Communications Development and Strategic Planning Office. (2014). Official Calendar Of The Republic.",
+      "url": "https://archive.org/details/official-calendar-of-the-republic/page/n75/mode/2up"
+    }
+  },
+  {
+    "id": "28e1911e-cb46-4114-afd8-b92aec2b2b21",
+    "year": 1851,
+    "month": 8,
+    "day": 1,
+    "text": "The first commercial bank is established in the country",
+    "image": {
+      "url": null,
+      "local": "images/first-commercial-bank-establishment.webp"
+    },
+    "source": {
+      "text": "Bank of the Philippine Islands. (2026 January 11). Alam mo ba na BPI ang kauna-unahang bangko sa Pilipinas?. Facebook.",
+      "url": "https://www.facebook.com/bpi/posts/alam-mo-ba-na-bpi-ang-kauna-unahang-bangko-sa-pilipinas-established-as-el-banco-/1321275903377097/"
+    }
+  },
+  {
+    "id": "5a3508a3-0f06-4e4b-9d17-e9a1b3d8dfff",
+    "year": 1859,
+    "month": 12,
+    "day": 10,
+    "text": "Ateneo is established",
+    "image": {
+      "url": null,
+      "local": "images/ateneo-establishment.webp"
+    },
+    "source": {
+      "text": "Ateneo. (2021 December 10). 162 years ago on December 10 1859 Jesuit missionaries inaugurated the Escuela Municipal de Manila. Facebook.",
+      "url": "https://www.facebook.com/ateneodemanila/photos/162-years-ago-on-december-10-1859-jesuit-missionaries-inaugurated-the-escuela-mu/10165599685935153/"
+    }
+  },
+  {
+    "id": "8e72682b-5be2-426b-af8a-2c5989b6dcfe",
+    "year": 1861,
+    "month": 6,
+    "day": 19,
+    "text": "Jose Rizal's birthday",
+    "image": {
+      "url": null,
+      "local": "images/jose-rizal-birth.webp"
+    },
+    "source": {
+      "text": "Rodriguez F. (2025 June 18). Remembering Rizal on his birthday. Manila Bulletin.",
+      "url": "https://mb.com.ph/2025/06/18/remembering-rizal-on-his-birthday"
+    }
+  },
+  {
+    "id": "e6321dd8-eac6-4287-b9db-2ac6f55cb182",
+    "year": 1872,
+    "month": 2,
+    "day": 17,
+    "text": "GomBurZa's executions",
+    "image": {
+      "url": null,
+      "local": "images/gomburza-executions.webp"
+    },
+    "source": {
+      "text": "Quilatan F. (2024 February 22). GomBurZa and the Recoletos: Uncovering Historical Facts. Recoletos.",
+      "url": "https://recoletos.ph/2024/02/22/gomburza-and-the-recoletos-uncovering-historical-facts/"
+    }
+  },
+  {
+    "id": "275eb8cb-234f-42d8-a63f-4a5e9e6b9178",
+    "year": 1887,
+    "month": 3,
+    "day": 21,
+    "text": "Noli Me Tangere first printed in Germany",
+    "image": {
+      "url": null,
+      "local": "images/noli-me-tangere-first-printing.webp"
+    },
+    "source": {
+      "text": "Presidential Communications Development and Strategic Planning Office. (2014). Official Calendar Of The Republic.",
+      "url": "https://archive.org/details/official-calendar-of-the-republic/page/n65/mode/2up"
+    }
+  },
+  {
+    "id": "2e7187d8-afa0-466f-ba3f-88492d1b22eb",
+    "year": 1892,
+    "month": 7,
+    "day": 3,
+    "text": "La Liga Filipina is founded",
+    "image": {
+      "url": null,
+      "local": "images/la-liga-filipina-founding.webp"
+    },
+    "source": {
+      "text": "Medina M. (2018 July 3). DID YOU KNOW: Rizal founded La Liga Filipina. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/1006343/did-you-know-604"
+    }
+  },
+  {
+    "id": "e332766e-a46d-4c8e-b1c0-7944a1bc5c7d",
+    "year": 1892,
+    "month": 7,
+    "day": 7,
+    "text": "The Katipunan is founded by Andres Bonifacio",
+    "image": {
+      "url": null,
+      "local": "images/katipunan-founding.webp"
+    },
+    "source": {
+      "text": "Buela J. (n.d.). Philippine Revolution. Philippine Business for Education.",
+      "url": "https://pbed.ph/module/philippine-revolution/"
+    }
+  },
+  {
+    "id": "77ce5971-c652-4f6f-97cb-5dcc9d11750b",
+    "year": 1892,
+    "month": 11,
+    "day": 24,
+    "text": "The first train system opens in the country",
+    "image": {
+      "url": null,
+      "local": "images/first-train-system-opening.webp"
+    },
+    "source": {
+      "text": "Presidential Communications Development and Strategic Planning Office. (2014). Official Calendar Of The Republic.",
+      "url": "https://archive.org/details/official-calendar-of-the-republic/page/n65/mode/2up"
+    }
+  },
+  {
+    "id": "c9803ec4-cf72-4a18-a38e-580ec97ec7b0",
+    "year": 1896,
+    "month": 12,
+    "day": 30,
+    "text": "Jose Rizal's execution",
+    "image": {
+      "url": null,
+      "local": "images/jose-rizal-execution.webp"
+    },
+    "source": {
+      "text": "National Parks Development Committee. (n.d.). Light and Sound Complex.",
+      "url": "https://npdc.gov.ph/light-and-sound-complex/"
+    }
+  },
+  {
+    "id": "c37f3354-779c-4c81-a069-c40b017d59aa",
+    "year": 1897,
+    "month": 5,
+    "day": 10,
+    "text": "Andres Bonifacio is captured and executed",
+    "image": {
+      "url": null,
+      "local": "images/andres-bonifacio-execution.webp"
+    },
+    "source": {
+      "text": "Library of Congress. (n.d.). Andres Bonifacio.",
+      "url": "https://guides.loc.gov/world-of-1898/andres-bonifacio"
+    }
+  },
+  {
+    "id": "138b105c-5e0d-40bf-8b43-1d0f86f0ec06",
+    "year": 1898,
+    "month": 6,
+    "day": 12,
+    "text": "Philippine declaration of independence",
+    "image": {
+      "url": null,
+      "local": "images/philippine-declaration-of-independence.webp"
+    },
+    "source": {
+      "text": "Macapagal D. (1963 May 20). Proclamation No. 110. Malacan Palace.",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/7/86083"
     }
   }
 ]
