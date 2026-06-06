@@ -1,6 +1,14 @@
 import { seededRandom } from './seeded-random.js';
 
-const MAX_PER_PERIOD = 3;
+// Per-period maximum events per puzzle
+const MAX_PER_PERIOD = {
+  'pre-1898': 1,
+  'modern': 3,
+  'contemporary-early': 3,
+  'contemporary-modern': 3
+};
+const GLOBAL_MAX_PER_PERIOD = Math.max(...Object.values(MAX_PER_PERIOD));
+
 const MIN_PERIODS = 4;
 const EVENTS_PER_PUZZLE = 7;
 
@@ -26,9 +34,8 @@ function isChronologicallySorted(display) {
 }
 
 // Generate a random valid distribution of 7 events across periods
-// Periods: pre-1898, modern, contemporary-early, contemporary-modern
+// Respects GLOBAL_MAX_PER_PERIOD so no count exceeds any period's cap
 function generateDistribution(numPeriods, rng) {
-  // Distributions for different numbers of periods, sum = 7, max = 4 (temp)
   const distributionsByPeriods = {
     2: [[4, 3], [3, 4]],
     3: [[3, 3, 1], [3, 2, 2], [4, 2, 1]],
@@ -38,9 +45,16 @@ function generateDistribution(numPeriods, rng) {
     7: [[1, 1, 1, 1, 1, 1, 1]]
   };
 
-  const valid = distributionsByPeriods[numPeriods] || distributionsByPeriods[7];
-  const idx = Math.floor(rng() * valid.length);
-  return [...valid[idx]]; // Return a copy
+  // Filter out distributions where any count exceeds the global max cap
+  const candidates = (distributionsByPeriods[numPeriods] || distributionsByPeriods[7])
+    .filter(dist => dist.every(count => count <= GLOBAL_MAX_PER_PERIOD));
+
+  if (candidates.length === 0) {
+    throw new Error(`No valid distribution found for ${numPeriods} periods with max ${GLOBAL_MAX_PER_PERIOD}`);
+  }
+
+  const idx = Math.floor(rng() * candidates.length);
+  return [...candidates[idx]]; // Return a copy
 }
 
 export function generatePuzzle(dateStr, availableEvents) {
@@ -73,10 +87,15 @@ export function generatePuzzle(dateStr, availableEvents) {
       periodCounts[shuffledPeriods[i]] = dist[i];
     }
 
-    // Check if each period has enough events
+    // Check if each period has enough events and respects per-period max cap
     let feasible = true;
     for (const [period, count] of Object.entries(periodCounts)) {
       if (!byPeriod[period] || byPeriod[period].length < count) {
+        feasible = false;
+        break;
+      }
+      const maxForPeriod = MAX_PER_PERIOD[period] ?? GLOBAL_MAX_PER_PERIOD;
+      if (count > maxForPeriod) {
         feasible = false;
         break;
       }
