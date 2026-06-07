@@ -1,7 +1,7 @@
 import { MAX_TRIES, EVENTS_PER_PUZZLE, getManilaDateStr } from './config.js';
 import { fetchToday, submitAnswer } from './api.js';
-import { loadStats, updateStats, loadDayState, saveDayState } from './storage.js';
-import { initAuth, getCurrentUser, signIn, signUp, signOut } from './auth.js';
+import { loadStats, updateStats, loadDayState, saveDayState, syncStatsToServer } from './storage.js';
+import { initAuth, getCurrentUser, sendMagicLink, signOut, getSupabaseClient } from './auth.js';
 import { fmtDate, dayNumber } from './game.js';
 import * as ui from './ui.js';
 
@@ -13,9 +13,6 @@ let triesUsed = 0;
 // Reading mode
 const READING_MODE_KEY = 'chronos_reading_mode';
 const readingModeInput = document.getElementById('reading-mode-input');
-
-// Auth modal state
-let authMode = 'login'; // 'login' or 'signup'
 
 function initReadingMode() {
   if (!readingModeInput) return;
@@ -120,6 +117,7 @@ function restoreFinishedState(state) {
     const stats = loadStats();
     ui.showOverlay(false, state.triesUsed || state.tries || MAX_TRIES, stats, answerEvents);
   }
+  showPostgameSignInCtaIfNeeded();
 }
 
 function restoreInProgressState(state) {
@@ -229,6 +227,7 @@ async function handleSubmit() {
         ui.finalizeLossState(userOrder, result.answerOrder, result.answerEvents);
         ui.showOverlay(false, triesUsed, stats, result.answerEvents);
       }
+      showPostgameSignInCtaIfNeeded();
     } else {
       ui.submitBtn.textContent = 'Submit again';
       const mobileSubmitBtn2 = document.getElementById('mobile-submit-btn');
@@ -280,88 +279,106 @@ function generateShareText(won) {
 
 // ===================== AUTH UI =====================
 
-const authOverlay = document.getElementById('auth-overlay');
-const authFormTitle = document.getElementById('auth-form-title');
-const authEmail = document.getElementById('auth-email');
-const authPassword = document.getElementById('auth-password');
-const authActionBtn = document.getElementById('auth-action-btn');
-const authToggle = document.getElementById('auth-toggle');
-const authError = document.getElementById('auth-error');
-const authClose = document.getElementById('auth-close');
+const SIGNED_IN_KEY = 'chronos_signed_in';
+const magicLinkOverlay = document.getElementById('magic-link-overlay');
+const magicLinkEmail = document.getElementById('magic-link-email');
+const magicLinkSendBtn = document.getElementById('magic-link-send-btn');
+const magicLinkClose = document.getElementById('magic-link-close');
+const magicLinkError = document.getElementById('magic-link-error');
+const magicLinkSuccess = document.getElementById('magic-link-success');
+const postgameSignInCta = document.getElementById('postgame-sign-in-cta');
+const postgameSignInBtn = document.getElementById('postgame-sign-in-btn');
 
-function openAuth(mode = 'login') {
-  authMode = mode;
-  authEmail.value = '';
-  authPassword.value = '';
-  authError.textContent = '';
-  updateAuthFormUI();
-  authOverlay.classList.add('show');
-  authOverlay.setAttribute('aria-hidden', 'false');
+let currentUser = null;
+
+function openMagicLinkModal() {
+  if (!magicLinkOverlay) return;
+  magicLinkEmail.value = '';
+  magicLinkError.textContent = '';
+  magicLinkSuccess.style.display = 'none';
+  magicLinkSendBtn.style.display = 'block';
+  magicLinkSendBtn.disabled = false;
+  magicLinkSendBtn.textContent = 'Send Magic Link';
+  magicLinkOverlay.classList.add('show');
+  magicLinkOverlay.setAttribute('aria-hidden', 'false');
 }
 
-function closeAuth() {
-  authOverlay.classList.remove('show');
-  authOverlay.setAttribute('aria-hidden', 'true');
+function closeMagicLinkModal() {
+  if (!magicLinkOverlay) return;
+  magicLinkOverlay.classList.remove('show');
+  magicLinkOverlay.setAttribute('aria-hidden', 'true');
 }
 
-function updateAuthFormUI() {
-  if (authMode === 'login') {
-    authFormTitle.textContent = 'Sign In';
-    authActionBtn.textContent = 'Sign In';
-    authToggle.textContent = 'Need an account? Sign up';
-  } else {
-    authFormTitle.textContent = 'Sign Up';
-    authActionBtn.textContent = 'Sign Up';
-    authToggle.textContent = 'Already have an account? Sign in';
-  }
-}
-
-async function handleAuthAction(e) {
+async function handleSendMagicLink(e) {
   e.preventDefault();
-  authError.textContent = '';
-  const email = authEmail.value.trim();
-  const password = authPassword.value.trim();
+  magicLinkError.textContent = '';
+  const email = magicLinkEmail.value.trim();
 
-  if (!email || !password) {
-    authError.textContent = 'Please enter email and password.';
+  if (!email) {
+    magicLinkError.textContent = 'Please enter your email.';
     return;
   }
 
-  authActionBtn.disabled = true;
-  authActionBtn.textContent = authMode === 'login' ? 'Signing in...' : 'Signing up...';
+  magicLinkSendBtn.disabled = true;
+  magicLinkSendBtn.textContent = 'Sending...';
 
   try {
-    if (authMode === 'login') {
-      await signIn(email, password);
-    } else {
-      await signUp(email, password);
-      // Supabase may require email confirmation depending on settings
-      alert('Check your email for a confirmation link!');
-    }
-    closeAuth();
+    await sendMagicLink(email);
+    magicLinkSendBtn.style.display = 'none';
+    magicLinkSuccess.style.display = 'block';
   } catch (err) {
-    authError.textContent = err.message || 'Authentication failed.';
-  } finally {
-    authActionBtn.disabled = false;
-    updateAuthFormUI();
+    magicLinkError.textContent = err.message || 'Failed to send magic link.';
+    magicLinkSendBtn.disabled = false;
+    magicLinkSendBtn.textContent = 'Send Magic Link';
   }
 }
 
 function updateAuthSectionUI(user) {
+  currentUser = user;
   if (!ui.authSection) return;
   if (user) {
+    localStorage.setItem(SIGNED_IN_KEY, 'true');
+    hidePostgameSignInCta();
     ui.authSection.innerHTML = `
       <span class="user-name">${user.email}</span>
       <button id="logout-btn" class="secondary">Log out</button>
     `;
     document.getElementById('logout-btn').addEventListener('click', async () => {
       await signOut();
+      localStorage.removeItem(SIGNED_IN_KEY);
     });
+    // Sync stats on sign-in
+    syncLocalStatsToServer();
   } else {
     ui.authSection.innerHTML = `
       <button id="login-btn" class="secondary">Sign In</button>
     `;
-    document.getElementById('login-btn').addEventListener('click', () => openAuth('login'));
+    document.getElementById('login-btn').addEventListener('click', openMagicLinkModal);
+  }
+}
+
+function hidePostgameSignInCta() {
+  if (postgameSignInCta) postgameSignInCta.style.display = 'none';
+}
+
+function showPostgameSignInCtaIfNeeded() {
+  if (!postgameSignInCta) return;
+  const hasSignedIn = localStorage.getItem(SIGNED_IN_KEY);
+  const user = currentUser;
+  if (!hasSignedIn && !user) {
+    postgameSignInCta.style.display = 'block';
+  } else {
+    postgameSignInCta.style.display = 'none';
+  }
+}
+
+async function syncLocalStatsToServer() {
+  const supabase = getSupabaseClient();
+  const user = await getCurrentUser();
+  if (!supabase || !user) return;
+  const success = await syncStatsToServer(supabase, user.id);
+  if (success) {
+    ui.showError('Stats synced!');
   }
 }
 
@@ -369,12 +386,34 @@ window.addEventListener('auth-state-changed', (e) => {
   updateAuthSectionUI(e.detail.user);
 });
 
-if (authActionBtn) authActionBtn.addEventListener('click', handleAuthAction);
-if (authToggle) authToggle.addEventListener('click', () => {
-  authMode = authMode === 'login' ? 'signup' : 'login';
-  updateAuthFormUI();
-});
-if (authClose) authClose.addEventListener('click', closeAuth);
+if (magicLinkSendBtn) magicLinkSendBtn.addEventListener('click', handleSendMagicLink);
+if (magicLinkClose) magicLinkClose.addEventListener('click', closeMagicLinkModal);
+if (magicLinkOverlay) {
+  magicLinkOverlay.querySelector('.overlay-bg')?.addEventListener('click', closeMagicLinkModal);
+}
+if (postgameSignInBtn) {
+  postgameSignInBtn.addEventListener('click', openMagicLinkModal);
+}
+
+// Handle magic link redirect on page load
+async function handleMagicLinkRedirect() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return;
+  
+  // Check if we have a hash fragment (magic link redirect)
+  if (window.location.hash && window.location.hash.includes('access_token')) {
+    // Supabase handles the token automatically via getSession
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (session?.user) {
+      currentUser = session.user;
+      localStorage.setItem(SIGNED_IN_KEY, 'true');
+      await syncLocalStatsToServer();
+      updateAuthSectionUI(session.user);
+      // Clean up URL hash
+      window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+    }
+  }
+}
 
 // ===================== READING MODE =====================
 
@@ -542,7 +581,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const supabaseKey = window.SUPABASE_ANON_KEY || '';
   if (supabaseUrl && supabaseKey) {
     initAuth(supabaseUrl, supabaseKey);
-    getCurrentUser().then(user => updateAuthSectionUI(user));
+    getCurrentUser().then(user => {
+      updateAuthSectionUI(user);
+      // Handle magic link redirect if present
+      handleMagicLinkRedirect();
+    });
   }
   initReadingMode();
   start();

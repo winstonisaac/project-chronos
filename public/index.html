@@ -84,26 +84,30 @@
       <button id="share-btn" class="secondary">Share</button>
       <button id="close-modal-btn" class="secondary">Close</button>
     </div>
+    <div class="sign-in-cta" id="postgame-sign-in-cta" style="display:none">
+      <div class="sign-in-divider"></div>
+      <p>Sign in to save your stats across devices.</p>
+      <button id="postgame-sign-in-btn" class="secondary">Sign in</button>
+    </div>
   </div>
 </div>
 
-<!-- Auth Overlay -->
-<div class="overlay auth-modal" id="auth-overlay" aria-hidden="true">
+<!-- Magic Link Email Overlay -->
+<div class="overlay" id="magic-link-overlay" aria-hidden="true">
   <div class="overlay-bg"></div>
-  <div class="modal">
-    <h2 id="auth-form-title">Sign In</h2>
+  <div class="modal magic-link-modal">
+    <h2>Sign In to Chronos</h2>
+    <p class="magic-link-hint">Enter your email and we'll send you a magic link to sign in instantly.</p>
     <div class="input-group">
-      <label for="auth-email">Email</label>
-      <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" />
+      <label for="magic-link-email">Email</label>
+      <input type="email" id="magic-link-email" placeholder="you@example.com" autocomplete="email" />
     </div>
-    <div class="input-group">
-      <label for="auth-password">Password</label>
-      <input type="password" id="auth-password" placeholder="••••••••" autocomplete="current-password" />
+    <div class="magic-link-error" id="magic-link-error"></div>
+    <button id="magic-link-send-btn">Send Magic Link</button>
+    <button id="magic-link-close" class="secondary" style="margin-top: 10px; width: 100%;">Close</button>
+    <div class="magic-link-success" id="magic-link-success" style="display:none">
+      <p>✓ Magic link sent! Check your inbox.</p>
     </div>
-    <div class="auth-error" id="auth-error"></div>
-    <button id="auth-action-btn">Sign In</button>
-    <div class="auth-toggle" id="auth-toggle">Need an account? Sign up</div>
-    <button id="auth-close" class="secondary" style="margin-top: 10px; width: 100%;">Close</button>
   </div>
 </div>
 
