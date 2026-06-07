@@ -156,6 +156,7 @@ function startNewGame() {
   triesUsed = 0;
   gameFinished = false;
   ui.setGameOver(false);
+  document.querySelector('.layout')?.classList.remove('game-over');
   ui.updateTriesUI(triesUsed);
   ui.renderSlots(puzzle.events, new Set());
   ui.initSortable(ui.clearMarks);

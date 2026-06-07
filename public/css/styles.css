@@ -252,6 +252,17 @@ h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
   cursor: grab;
 }
 
+/* Postgame: hide drag handles and flush-right dates */
+.layout.game-over .event-item .drag-handle {
+  display: none;
+}
+
+.layout.game-over .event-item .event-year.revealed {
+  text-align: right;
+  min-width: auto;
+  flex: 1;
+}
+
 .actions {
   display: flex;
   gap: 10px;

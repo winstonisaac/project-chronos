@@ -361,6 +361,7 @@ export function revealAll(eventsWithDates) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
 }
 
@@ -397,6 +398,7 @@ export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
 }
 
@@ -424,6 +426,7 @@ export function renderUserGuess(userOrderIds, events) {
     const sourceEl = item.querySelector('.event-source');
     if (sourceEl) sourceEl.classList.add('visible');
   });
+  document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
 }
 
