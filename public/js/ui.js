@@ -87,10 +87,12 @@ function createEventItem(ev) {
 
   let sourceText = ev.source?.text || ev.source_text || '';
   const sourceUrl = ev.source?.url || ev.source_url || '';
-  if (readingMode && sourceText) {
+  // Only redact during active gameplay
+  if (readingMode && !isGameOver && sourceText) {
     sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
   }
-  const showSource = readingMode;
+  // In postgame, always show unredacted source regardless of reading mode
+  const showSource = isGameOver || readingMode;
   const sourceVisible = showSource && sourceText ? 'visible' : '';
   const sourceHtml = sourceText
     ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
