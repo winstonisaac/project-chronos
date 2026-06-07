@@ -30,7 +30,7 @@ export async function sendMagicLink(email) {
   const { error } = await supabaseClient.auth.signInWithOtp({ 
     email,
     options: {
-      emailRedirectTo: window.location.origin + window.location.pathname
+      emailRedirectTo: 'https://project-chronos-xi.vercel.app/'
     }
   });
   if (error) throw error;
