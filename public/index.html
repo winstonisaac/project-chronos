@@ -20,7 +20,10 @@
 <div class="layout">
   <aside class="sidebar">
     <div class="sidebar-header">
-      <h1>Chronos</h1>
+      <div class="logo-row">
+        <h1>Chronos</h1>
+        <button class="help-btn" id="desktop-help-btn" title="How to play">?</button>
+      </div>
       <div class="sub" id="date-display">Loading…</div>
     </div>
 
@@ -122,6 +125,7 @@
       <span>🔥 <span id="mobile-streak-val">0</span></span>
       <span>🏆 <span id="mobile-best-val">0</span></span>
     </div>
+    <button class="mobile-help-btn" id="mobile-help-btn" title="How to play">?</button>
     <button class="mobile-settings-btn" id="mobile-settings-btn" aria-label="Settings">⚙️</button>
   </div>
 
@@ -176,6 +180,56 @@
 
 <!-- Error Toast -->
 <div class="error-toast" id="error-toast"></div>
+
+<!-- Onboarding Overlay -->
+<div class="overlay" id="onboarding-overlay" aria-hidden="true">
+  <div class="overlay-bg"></div>
+  <div class="onboarding-card">
+    <button class="onboarding-close" id="onboarding-close" aria-label="Close">&times;</button>
+
+    <!-- Slide 1 -->
+    <div class="onboarding-slide active" data-slide="0">
+      <h2>Welcome to Chronos</h2>
+      <p class="onboarding-body">Sort 7 events from Philippine history into chronological order — earliest to latest.</p>
+      <p class="onboarding-body">A new puzzle every day. 3 tries. Let's go!</p>
+    </div>
+
+    <!-- Slide 2: Desktop -->
+    <div class="onboarding-slide desktop-only" data-slide="1">
+      <h2>How to Play</h2>
+      <p class="onboarding-body"><strong>Drag</strong> the cards into the correct chronological order.</p>
+      <p class="onboarding-body">Press <strong>Submit</strong> when you think you've got it right.</p>
+      <p class="onboarding-body">Correctly placed events <strong>lock in place</strong> so you can focus on the rest.</p>
+    </div>
+
+    <!-- Slide 2: Mobile -->
+    <div class="onboarding-slide mobile-only" data-slide="1">
+      <h2>How to Play</h2>
+      <p class="onboarding-body"><strong>Tap</strong> a thumbnail to focus on that event.</p>
+      <p class="onboarding-body"><strong>Swipe</strong> the big card left/right to browse.</p>
+      <p class="onboarding-body">Tap <strong>Earlier</strong> or <strong>Later</strong> to move the focused event.</p>
+      <p class="onboarding-body">Correctly placed events <strong>lock in place</strong>.</p>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="onboarding-slide" data-slide="2">
+      <h2>Rules</h2>
+      <p class="onboarding-body">You have <strong>3 tries</strong> to get the correct order.</p>
+      <p class="onboarding-body">Streaks are tracked — play every day to build yours!</p>
+      <p class="onboarding-body">Come back tomorrow for a new puzzle.</p>
+    </div>
+
+    <div class="onboarding-footer">
+      <div class="onboarding-dots">
+        <span class="dot active" data-dot="0"></span>
+        <span class="dot" data-dot="1"></span>
+        <span class="dot" data-dot="2"></span>
+      </div>
+      <button class="onboarding-next" id="onboarding-next">Next</button>
+      <button class="onboarding-got-it hidden" id="onboarding-got-it">Got it!</button>
+    </div>
+  </div>
+</div>
 
 <script type="module" src="js/main.js"></script>
 </body>

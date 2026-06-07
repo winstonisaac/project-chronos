@@ -451,6 +451,90 @@ if (mobileShowCorrectBtn && mobileShowGuessBtn) {
   });
 }
 
+// ===================== ONBOARDING =====================
+
+const ONBOARDED_KEY = 'chronos_onboarded';
+const onboardingOverlay = document.getElementById('onboarding-overlay');
+const onboardingNext = document.getElementById('onboarding-next');
+const onboardingGotIt = document.getElementById('onboarding-got-it');
+const onboardingClose = document.getElementById('onboarding-close');
+const desktopHelpBtn = document.getElementById('desktop-help-btn');
+const mobileHelpBtn = document.getElementById('mobile-help-btn');
+
+let currentSlide = 0;
+const totalSlides = 3;
+
+function showOnboardingSlide(index) {
+  const slides = document.querySelectorAll('.onboarding-slide');
+  slides.forEach(s => s.classList.remove('active'));
+
+  // Pick the correct variant (desktop/mobile) for slide 1
+  if (index === 1) {
+    const isMobile = window.innerWidth <= 480;
+    const variant = document.querySelector(`.onboarding-slide[data-slide="1"].${isMobile ? 'mobile-only' : 'desktop-only'}`);
+    if (variant) variant.classList.add('active');
+  } else {
+    const slide = document.querySelector(`.onboarding-slide[data-slide="${index}"]:not(.mobile-only):not(.desktop-only)`);
+    if (slide) slide.classList.add('active');
+  }
+
+  // Update dots
+  document.querySelectorAll('.onboarding-dots .dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+
+  // Toggle Next / Got it buttons
+  if (index === totalSlides - 1) {
+    onboardingNext?.classList.add('hidden');
+    onboardingGotIt?.classList.remove('hidden');
+  } else {
+    onboardingNext?.classList.remove('hidden');
+    onboardingGotIt?.classList.add('hidden');
+  }
+}
+
+function openOnboarding() {
+  currentSlide = 0;
+  showOnboardingSlide(0);
+  onboardingOverlay?.classList.add('show');
+  onboardingOverlay?.setAttribute('aria-hidden', 'false');
+}
+
+function closeOnboarding() {
+  onboardingOverlay?.classList.remove('show');
+  onboardingOverlay?.setAttribute('aria-hidden', 'true');
+  localStorage.setItem(ONBOARDED_KEY, 'true');
+}
+
+if (onboardingNext) {
+  onboardingNext.addEventListener('click', () => {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      showOnboardingSlide(currentSlide);
+    }
+  });
+}
+
+if (onboardingGotIt) {
+  onboardingGotIt.addEventListener('click', closeOnboarding);
+}
+
+if (onboardingClose) {
+  onboardingClose.addEventListener('click', closeOnboarding);
+}
+
+if (onboardingOverlay) {
+  onboardingOverlay.querySelector('.overlay-bg')?.addEventListener('click', closeOnboarding);
+}
+
+if (desktopHelpBtn) {
+  desktopHelpBtn.addEventListener('click', openOnboarding);
+}
+
+if (mobileHelpBtn) {
+  mobileHelpBtn.addEventListener('click', openOnboarding);
+}
+
 // ===================== INIT =====================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -462,4 +546,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   initReadingMode();
   start();
+
+  // Show onboarding for first-time visitors
+  const hasOnboarded = localStorage.getItem(ONBOARDED_KEY);
+  if (!hasOnboarded) {
+    setTimeout(openOnboarding, 800);
+  }
 });
