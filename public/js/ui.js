@@ -509,6 +509,10 @@ export function disableGame() {
   if (mobileReorderBar) mobileReorderBar.style.display = 'none';
   if (mobileEarlierBtn) mobileEarlierBtn.disabled = true;
   if (mobileLaterBtn) mobileLaterBtn.disabled = true;
+
+  // Hide reading mode toggle in postgame (sources are always visible)
+  const readingToggle = document.querySelector('.reading-mode-toggle');
+  if (readingToggle) readingToggle.style.display = 'none';
 }
 
 export function showError(msg) {

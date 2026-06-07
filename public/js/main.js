@@ -157,6 +157,11 @@ function startNewGame() {
   gameFinished = false;
   ui.setGameOver(false);
   document.querySelector('.layout')?.classList.remove('game-over');
+
+  // Restore reading mode toggle for new game
+  const readingToggle = document.querySelector('.reading-mode-toggle');
+  if (readingToggle) readingToggle.style.display = '';
+
   ui.updateTriesUI(triesUsed);
   ui.renderSlots(puzzle.events, new Set());
   ui.initSortable(ui.clearMarks);
