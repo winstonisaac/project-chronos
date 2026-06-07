@@ -25,24 +25,21 @@ export async function getAuthToken() {
   return session?.access_token || null;
 }
 
-export async function sendMagicLink(email) {
+export async function signUp(email, password) {
   if (!supabaseClient) throw new Error('Auth not initialized');
-  const { error } = await supabaseClient.auth.signInWithOtp({ 
-    email,
-    options: {
-      emailRedirectTo: 'https://project-chronos-xi.vercel.app/'
-    }
-  });
+  const { data, error } = await supabaseClient.auth.signUp({ email, password });
   if (error) throw error;
-  return true;
+  return data;
+}
+
+export async function signIn(email, password) {
+  if (!supabaseClient) throw new Error('Auth not initialized');
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  return data;
 }
 
 export async function signOut() {
   if (!supabaseClient) return;
   await supabaseClient.auth.signOut();
-}
-
-// Get supabase client for storage sync
-export function getSupabaseClient() {
-  return supabaseClient;
 }
