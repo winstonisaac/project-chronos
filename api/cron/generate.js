@@ -2,7 +2,7 @@ import { supabaseAdmin } from '../lib/supabase.js';
 import { getManilaDateStr, subtractDaysManila } from '../lib/time.js';
 import { generatePuzzle } from '../lib/puzzle-generator.js';
 
-const COOLDOWN_DAYS = 30;
+const COOLDOWN_DAYS = 5;
 
 export default async function handler(req, res) {
   // Vercel Cron jobs send POST requests

@@ -2,7 +2,7 @@ import { supabase, supabaseAdmin, createUserClient } from './lib/supabase.js';
 import { getManilaDateStr, subtractDaysManila } from './lib/time.js';
 import { generatePuzzle } from './lib/puzzle-generator.js';
 
-const COOLDOWN_DAYS = 30;
+const COOLDOWN_DAYS = 5;
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
