@@ -508,5 +508,410 @@
       "text": "Inquirer Research. (2016, November 23). Fast facts: Maguindanao massacre. INQUIRER.net.",
       "url": "https://newsinfo.inquirer.net/846981/fast-facts-maguindanao-massacre"
     }
+  },
+  {
+    "id": "81e61ce1-66c5-45d7-8e7a-f19f392ce4ae",
+    "year": 1987,
+    "month": 7,
+    "day": 15,
+    "text": "Cordillera Administrative Region (CAR) is formed",
+    "image": {
+      "url": null,
+      "local": "images/cordillera-administrative-region.webp"
+    },
+    "source": {
+      "text": "Aquino, C. (1987, July 15). Executive Order No. 220. Malacañan Palace.",
+      "url": "https://lawphil.net/executive/execord/eo1987/eo_220_1987.html"
+    }
+  },
+  {
+    "id": "3ccfe39e-0db4-44e8-b2dd-8a212e1359cd",
+    "year": 1987,
+    "month": 10,
+    "day": 18,
+    "text": "St. Lorenzo Ruiz is canonized, making him the first Filipino saint",
+    "image": {
+      "url": null,
+      "local": "images/saint-lorenzo-ruiz.webp"
+    },
+    "source": {
+      "text": "Archdiocese of Chicago (n.d.). Asian Icons.",
+      "url": "https://aci.archchicago.org/asian-icons/st-lorenzo-ruiz"
+    }
+  },
+  {
+    "id": "b760d3dc-4b55-407e-b8e8-fb478574d153",
+    "year": 1988,
+    "month": 10,
+    "day": 24,
+    "text": "MV Doña Marilyn sinks off Leyte killing 389",
+    "image": {
+      "url": null,
+      "local": "images/dona-marilyn-sinking.webp"
+    },
+    "source": {
+      "text": "Sulpicio Lines, Inc. v. Domingo, et. al., G.R. No. 157009. (2010).",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/53742"
+    }
+  },
+  {
+    "id": "e8e5abb2-8ad7-484c-a75a-5662e6f97c52",
+    "year": 1989,
+    "month": 8,
+    "day": 1,
+    "text": "The  Autonomous Region in Muslim Mindanao is created",
+    "image": {
+      "url": null,
+      "local": "images/armm-created.webp"
+    },
+    "source": {
+      "text": "Republic of the Philippines, Congress. (1989). Republic Act No. 6734.",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/2015"
+    }
+  },
+  {
+    "id": "4d94a2ed-d60c-42b4-a1d9-52eca921e419",
+    "year": 1990,
+    "month": 7,
+    "day": 16,
+    "text": "7.8-magnitude earthquake rocks Luzon killing an estimated 1,621",
+    "image": {
+      "url": null,
+      "local": "images/luzon-earthquake.webp"
+    },
+    "source": {
+      "text": "Salvacio, S. (2026, June 18). Luzon joins national quake drill; recalls deadly ---- earthquake. GMA Regional News.",
+      "url": "https://www.gmanetwork.com/regionaltv/news/114483/luzon-joins-national-quake-drill-recalls-deadly-1990-earthquake/story/"
+    }
+  },
+  {
+    "id": "78204819-7d9a-4353-9e67-61436b34146e",
+    "year": 1991,
+    "month": 1,
+    "day": 29,
+    "text": "The Philippine National Police is formed",
+    "image": {
+      "url": null,
+      "local": "images/pnp-established.webp"
+    },
+    "source": {
+      "text": "Senate Bill No. 1834. 17th Congress. (2018).",
+      "url": "https://legacy.senate.gov.ph/lisdata/2797424349!.pdf"
+    }
+  },
+  {
+    "id": "c155c2b3-3694-4c0b-8605-cab840ffae6c",
+    "year": 1992,
+    "month": 6,
+    "day": 30,
+    "text": "Fidel V. Ramos takes his oath as President of the country",
+    "image": {
+      "url": null,
+      "local": "images/fvr-presidency.webp"
+    },
+    "source": {
+      "text": "FVR Legacy. (n.d.). Timeline.",
+      "url": "https://www.fvrlegacy.org/timeline"
+    }
+  },
+  {
+    "id": "7d61f21e-12a4-4b5c-8867-ecf86780dd1c",
+    "year": 1993,
+    "month": 9,
+    "day": 7,
+    "text": "Former President Marcos Sr.'s body is returned to Ilocos Norte",
+    "image": {
+      "url": null,
+      "local": "images/marcos-sr-returns.webp"
+    },
+    "source": {
+      "text": "Philippine Daily Inquirer. (2016, November 19). Marcos timeline from birth to burial. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/845767/marcos-timeline-from-birth-to-burial"
+    }
+  },
+  {
+    "id": "631acdf0-eb17-46c6-aeae-7905af7e3d73",
+    "year": 1995,
+    "month": 1,
+    "day": 6,
+    "text": "Metro Pacific acquired rights to develop Fort Santiago (now BGC) for $1.6B",
+    "image": {
+      "url": null,
+      "local": "images/metro-pacific-bgc.webp"
+    },
+    "source": {
+      "text": "Raagas, R. (1995, January 6). Metro Pacific to develop prime Manila land. United Press International.",
+      "url": "https://www.upi.com/Archives/1995/01/06/Metro-Pacific-to-develop-prime-Manila-land/3606789368400/"
+    }
+  },
+  {
+    "id": "4c9e0a27-e0eb-4318-9458-4d43840b2cc7",
+    "year": 1995,
+    "month": 4,
+    "day": 7,
+    "text": "Construction of the Metro Manila Skyway starts",
+    "image": {
+      "url": null,
+      "local": "images/skyway-construction.webp"
+    },
+    "source": {
+      "text": "Eñano, R. (2021, January 26). What gave rise to the Skyway project? Manila Standard.",
+      "url": "https://manilastandard.net/?p=345380"
+    }
+  },
+  {
+    "id": "876dacd7-7760-4fa0-aad8-40e4b040a878",
+    "year": 1996,
+    "month": 3,
+    "day": 11,
+    "text": "\"Marimar\" first airs in the Philippines, starting the Mexicanovela craze",
+    "image": {
+      "url": null,
+      "local": "images/marimar-premiere.webp"
+    },
+    "source": {
+      "text": "Cordero, K. (2024, January 8). Interesting! ---- calendar can be reused this 2024. PEP.",
+      "url": "https://www.pep.ph/pepalerts/fyi/178198/1996-calendar-2024-a4888-20240108"
+    }
+  },
+  {
+    "id": "7ba22a6c-3620-4025-9db9-b6da9dec92e4",
+    "year": 1996,
+    "month": 6,
+    "day": 16,
+    "text": "Clark International Airport has its first commercial flight",
+    "image": {
+      "url": null,
+      "local": "images/clark-intl-airport-debut.webp"
+    },
+    "source": {
+      "text": "Due, J. (2016, July 7). That Clark Maiden Flight 20 years ago; Afterthought the last elections. iOrbit News.",
+      "url": "https://iorbitnews.com/clark-maiden-flight-20-years-ago-afterthought-last-elections/"
+    }
+  },
+  {
+    "id": "5f99b626-fdab-4189-bef5-0115e631c7ad",
+    "year": 2000,
+    "month": 1,
+    "day": 4,
+    "text": "Alex Bartolome becomes the last criminal to be executed",
+    "image": {
+      "url": null,
+      "local": "images/alex-bartolome-execution.webp"
+    },
+    "source": {
+      "text": "INQUIRER.net. (2016, May 17). In the know: death penalty.",
+      "url": "https://newsinfo.inquirer.net/785954/in-the-know-death-penalty"
+    }
+  },
+  {
+    "id": "2cf41ab2-79b6-4aa6-99af-c2b8f7176f4c",
+    "year": 2000,
+    "month": 3,
+    "day": 21,
+    "text": "President Erap Estrada declares all-out war against the MILF",
+    "image": {
+      "url": null,
+      "local": "images/erap-allout-war-milf.webp"
+    },
+    "source": {
+      "text": "Melican, N. (2015, January 27). Estrada stands by all-out war strategy vs MILF. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/668386/estrada-stands-by-all-out-war-strategy-vs-milf"
+    }
+  },
+  {
+    "id": "19a6de90-80d5-44fc-becb-18ac86326b3e",
+    "year": 2000,
+    "month": 4,
+    "day": 19,
+    "text": "Air Philippines Flight 541 crashes killing 131",
+    "image": {
+      "url": null,
+      "local": "images/air-philippines-541.webp"
+    },
+    "source": {
+      "text": "Guardian Unlimited. (2000, April 19). 131 killed in Philippines' worst air crash. The Guardian.",
+      "url": "https://www.theguardian.com/world/2000/apr/19/philippines"
+    }
+  },
+  {
+    "id": "9fae0fb9-4d79-4941-afda-2ce1f37bbdd4",
+    "year": 2001,
+    "month": 8,
+    "day": 11,
+    "text": "DepEd is formed (renamed from DECS)",
+    "image": {
+      "url": null,
+      "local": "images/deped-from-decs.webp"
+    },
+    "source": {
+      "text": "Republic of the Philippines, Congress. (2001). Republic Act No. 9155.",
+      "url": "https://lawphil.net/statutes/repacts/ra2001/ra_9155_2001.html"
+    }
+  },
+  {
+    "id": "5389516d-5acc-423d-81e0-2834c907c496",
+    "year": 2001,
+    "month": 11,
+    "day": 7,
+    "text": "Actress Nida Blanca is found murdered",
+    "image": {
+      "url": null,
+      "local": "images/nida-blanca-murder.webp"
+    },
+    "source": {
+      "text": "The PEP Squad. (2018, November 7). PEP LOOKBACK: The gruesome murder of veteran actress Nida Blanca. PEP.",
+      "url": "https://www.pep.ph/news/local/70959/a-lookback-the-gruesome-murder-of-veteran-actress-nida-blanca"
+    }
+  },
+  {
+    "id": "0e367d03-b0b2-4663-b4ab-a55411d4a3f7",
+    "year": 2002,
+    "month": 3,
+    "day": 29,
+    "text": "Actor Rico Yan passes away while asleep",
+    "image": {
+      "url": null,
+      "local": "images/rico-yan-death.webp"
+    },
+    "source": {
+      "text": "Lo, R. (2002, March 31). 'Bangungot' kills Rico Yan; Claudine still in shock. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2002/03/31/155539/145bangungot146-kills-rico-yan-claudine-still-shock"
+    }
+  },
+  {
+    "id": "18beaf6b-cb23-4b38-aca1-1f986f3ee782",
+    "year": 2002,
+    "month": 10,
+    "day": 27,
+    "text": "GMA launches its \"Kapuso\" branding",
+    "image": {
+      "url": null,
+      "local": "images/gma-kapuso.webp"
+    },
+    "source": {
+      "text": "SOP. (2002, October 27). GMA Network.",
+      "url": "https://www.youtube.com/watch?v=hhWa4CUlw1Q"
+    }
+  },
+  {
+    "id": "44082248-db4f-4928-938a-b29470e04d63",
+    "year": 2003,
+    "month": 2,
+    "day": 3,
+    "text": "Republic Act No. 9189 is enacted into law, letting OFWs vote",
+    "image": {
+      "url": null,
+      "local": "images/ofw-absentee-voting.webp"
+    },
+    "source": {
+      "text": "Republic of the Philippines, Congress. (2003). Republic Act No. 9189.",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/22142"
+    }
+  },
+  {
+    "id": "eebb7a9b-38a8-4b77-b729-aef146e6eb4d",
+    "year": 2004,
+    "month": 2,
+    "day": 27,
+    "text": "SuperFerry 14 is bombed killing 116, the deadliest terrorist attack in the country",
+    "image": {
+      "url": null,
+      "local": "images/superferry14-bombed.webp"
+    },
+    "source": {
+      "text": "Carrasco II, L. (2019, March 3). The ---- Superferry 14 incident: Hope bigger than fear. SunStar.",
+      "url": "https://www.sunstar.com.ph/cagayan-de-oro/feature/the-2004-superferry-14-incident-hope-bigger-than-fear"
+    }
+  },
+  {
+    "id": "f6a4102c-aefe-4c59-9ade-5fb4c70ad99c",
+    "year": 2004,
+    "month": 6,
+    "day": 30,
+    "text": "Gloria Macapagal-Arroyo starts her second term as president",
+    "image": {
+      "url": null,
+      "local": "images/gma-reelected.webp"
+    },
+    "source": {
+      "text": "Lloyd, P. (2000, June 30). Arroyo sworn in for second term. ABC Australia.",
+      "url": "https://www.abc.net.au/news/2004-06-30/arroyo-sworn-in-for-second-term/2001974"
+    }
+  },
+  {
+    "id": "d3aa9d05-7331-42ae-9953-9f18bb778b61",
+    "year": 2004,
+    "month": 7,
+    "day": 7,
+    "text": "OFW Angelo dela Cruz is kidnapped by militants in Iraq",
+    "image": {
+      "url": null,
+      "local": "images/angelo-dela-cruz-kidnapping.webp"
+    },
+    "source": {
+      "text": "Gomez, J. (2004, July 22). Filipino Hostage Tells His Story. CBS News.",
+      "url": "https://www.cbsnews.com/news/filipino-hostage-tells-his-story/"
+    }
+  },
+  {
+    "id": "a1e3e14f-68b5-465e-b87e-84833b450564",
+    "year": 2005,
+    "month": 11,
+    "day": 27,
+    "text": "Philippines hosts the 23rd Southeast Asian Games",
+    "image": {
+      "url": null,
+      "local": "images/23rd-sea-games.webp"
+    },
+    "source": {
+      "text": "Villar, J., & Beltran, N. (2005, November 28). GMA opens 23rd SEA Games. Philstar.com.",
+      "url": "https://www.philstar.com/sports/2005/11/28/309128/gma-opens-23rd-sea-games"
+    }
+  },
+  {
+    "id": "4bcbc063-7dda-4720-b63f-bf9eb6abf9f1",
+    "year": 2006,
+    "month": 6,
+    "day": 24,
+    "text": "Death penalty is abolished in the country",
+    "image": {
+      "url": null,
+      "local": "images/death-penalty-prohibited.webp"
+    },
+    "source": {
+      "text": "Republic of the Philippines, Congress. (2006). Republic Act No. 9346.",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/245"
+    }
+  },
+  {
+    "id": "325a5cd0-86d9-4a60-a608-a74df7800334",
+    "year": 2006,
+    "month": 9,
+    "day": 26,
+    "text": "Typhoon Milenyo makes landfall in Samar",
+    "image": {
+      "url": null,
+      "local": "images/milenyo-landfall.webp"
+    },
+    "source": {
+      "text": "NASA Earth Observatory. (2006, September 26). Typhoon Xangsane.",
+      "url": "https://science.nasa.gov/earth/earth-observatory/typhoon-xangsane-17427/"
+    }
+  },
+  {
+    "id": "5a13a5c1-2d06-4dfb-9662-959350528747",
+    "year": 2009,
+    "month": 5,
+    "day": 22,
+    "text": "H1N1 pandemic enters the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/h1n1-pandemic.webp"
+    },
+    "source": {
+      "text": "Reuters. (2009, May 22). Philippines records first case of new flu.",
+      "url": "https://www.reuters.com/article/business/healthcare-pharmaceuticals/philippines-records-first-case-of-new-flu-idUSTRE54K4NC/"
+    }
   }
 ]
