@@ -67,6 +67,7 @@ async function start() {
 }
 
 function restoreFinishedState(state) {
+  ui.disableGame(); // MUST be before renderSlots so createEventItem knows game is over
   const answerEvents = state.answerEvents || puzzle.events;
   const answerOrder = state.answerOrder || [];
   const userOrder = state.order || [];
@@ -112,7 +113,6 @@ function restoreFinishedState(state) {
   }
 
   ui.showAnswerToggle();
-  ui.disableGame();
   ui.instructionCard.innerHTML = state.won
     ? '<strong>You already played today.</strong> See you tomorrow for the next puzzle!'
     : '<strong>You already played today.</strong> Here is the correct order.';
@@ -139,11 +139,11 @@ function restoreInProgressState(state) {
   ui.updateTriesUI(triesUsed);
 
   if (triesUsed >= MAX_TRIES) {
+    ui.disableGame(); // MUST be before finalizeLossState so createEventItem knows game is over
     const answerOrder = state.answerOrder || [];
     if (answerOrder.length === EVENTS_PER_PUZZLE) {
       ui.finalizeLossState(orderIds, answerOrder, puzzle.events);
     }
-    ui.disableGame();
     return;
   }
 

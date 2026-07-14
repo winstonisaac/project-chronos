@@ -85,9 +85,10 @@ function createEventItem(ev) {
     ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.textContent='${thumbLetter}'">`
     : thumbLetter;
 
-  let sourceText = ev.source?.text || ev.source_text || '';
+  const sourceTextOriginal = ev.source?.text || ev.source_text || '';
   const sourceUrl = ev.source?.url || ev.source_url || '';
   // Only redact during active gameplay
+  let sourceText = sourceTextOriginal;
   if (readingMode && !isGameOver && sourceText) {
     sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
   }
@@ -95,7 +96,7 @@ function createEventItem(ev) {
   const showSource = isGameOver || readingMode;
   const sourceVisible = showSource && sourceText ? 'visible' : '';
   const sourceHtml = sourceText
-    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
+    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener" data-original-source="${sourceTextOriginal}">${sourceText}</a>`
     : '';
 
   li.dataset.event = JSON.stringify(ev);
@@ -147,13 +148,21 @@ function refreshAllEventItems() {
     const sourceEl = item.querySelector('.event-source');
     if (!sourceEl) return;
 
+    if (isGameOver) {
+      // Postgame: always show unredacted source
+      sourceEl.classList.add('visible');
+      const original = sourceEl.dataset.originalSource;
+      if (original) sourceEl.textContent = original;
+      return;
+    }
+
     // Re-apply reading mode visibility
     if (readingMode) {
       sourceEl.classList.add('visible');
-      // Re-apply redaction
-      const originalText = sourceEl.textContent;
-      if (!originalText.includes('■■■■')) {
-        sourceEl.textContent = originalText.replace(/\([^)]*\)/g, '(■■■■)');
+      // Re-apply redaction from original text
+      const original = sourceEl.dataset.originalSource || sourceEl.textContent;
+      if (original && !sourceEl.textContent.includes('■■■■')) {
+        sourceEl.textContent = original.replace(/\([^)]*\)/g, '(■■■■)');
       }
     } else {
       if (!slot.classList.contains('locked')) {
@@ -361,7 +370,11 @@ export function revealAll(eventsWithDates) {
     }
     yearEl.classList.add('revealed');
     const sourceEl = item.querySelector('.event-source');
-    if (sourceEl) sourceEl.classList.add('visible');
+    if (sourceEl) {
+      const original = sourceEl.dataset.originalSource;
+      if (original) sourceEl.textContent = original;
+      sourceEl.classList.add('visible');
+    }
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
@@ -398,7 +411,11 @@ export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
       item.classList.add('wrong');
     }
     const sourceEl = item.querySelector('.event-source');
-    if (sourceEl) sourceEl.classList.add('visible');
+    if (sourceEl) {
+      const original = sourceEl.dataset.originalSource;
+      if (original) sourceEl.textContent = original;
+      sourceEl.classList.add('visible');
+    }
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
@@ -426,7 +443,11 @@ export function renderUserGuess(userOrderIds, events) {
     if (ev) yearEl.textContent = fmtDate(ev);
     yearEl.classList.add('revealed');
     const sourceEl = item.querySelector('.event-source');
-    if (sourceEl) sourceEl.classList.add('visible');
+    if (sourceEl) {
+      const original = sourceEl.dataset.originalSource;
+      if (original) sourceEl.textContent = original;
+      sourceEl.classList.add('visible');
+    }
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
@@ -604,7 +625,7 @@ function moveActiveEvent(direction) {
   return true;
 }
 
-function createMobileBigCardHtml(ev, isLocked, showDate) {
+function createMobileBigCardHtml(ev, isLocked, showDate, gameOver) {
   if (!ev) {
     return '<div class="mobile-placeholder">Loading puzzle…</div>';
   }
@@ -615,14 +636,16 @@ function createMobileBigCardHtml(ev, isLocked, showDate) {
     ? `<img src="${imgUrl}" alt="" data-img-url="${imgUrl}" data-caption="${ev.text.replace(/"/g, '&quot;')}" onerror="this.parentElement.innerHTML='<span>${thumbLetter}</span>'">`
     : `<span>${thumbLetter}</span>`;
 
-  let sourceText = ev.source?.text || ev.source_text || '';
+  const sourceTextOriginal = ev.source?.text || ev.source_text || '';
   const sourceUrl = ev.source?.url || ev.source_url || '';
-  if (readingMode && sourceText) {
+  let sourceText = sourceTextOriginal;
+  if (readingMode && !gameOver && sourceText) {
     sourceText = sourceText.replace(/\([^)]*\)/g, '(■■■■)');
   }
-  const sourceVisible = readingMode && sourceText ? 'visible' : '';
+  const showSource = gameOver || readingMode;
+  const sourceVisible = showSource && sourceText ? 'visible' : '';
   const sourceHtml = sourceText
-    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener">${sourceText}</a>`
+    ? `<a class="event-source ${sourceVisible}" href="${sourceUrl || '#'}" target="_blank" rel="noopener" data-original-source="${sourceTextOriginal}">${sourceText}</a>`
     : '';
 
   const dateHtml = showDate ? `<div class="mobile-big-date">${fmtDate(ev)}</div>` : '';
@@ -643,9 +666,9 @@ export function updateMobileView() {
   const slots = getSlots();
   if (slots.length === 0) return;
 
-  // Determine if game is over (dates revealed on any item)
+  // Determine if game is over (dates revealed on any item) or already flagged
   const firstItem = slots[0]?.querySelector('.event-item');
-  const isGameOver = firstItem ? firstItem.querySelector('.event-year')?.classList.contains('revealed') || false : false;
+  const gameOver = isGameOver || (firstItem ? firstItem.querySelector('.event-year')?.classList.contains('revealed') || false : false);
 
   // Render slot strip
   if (mobileSlotStrip) {
@@ -692,7 +715,7 @@ export function updateMobileView() {
     const activeItem = activeSlot ? activeSlot.querySelector('.event-item') : null;
     const ev = activeItem ? getEventFromItem(activeItem) : null;
     const isLocked = activeSlot ? activeSlot.classList.contains('locked') : false;
-    mobileBigCard.innerHTML = createMobileBigCardHtml(ev, isLocked, isGameOver);
+    mobileBigCard.innerHTML = createMobileBigCardHtml(ev, isLocked, gameOver, gameOver);
 
     // Wire up lightbox on the big card image
     const bigThumb = mobileBigCard.querySelector('.mobile-big-thumb');
@@ -706,7 +729,7 @@ export function updateMobileView() {
   }
 
   // Update standalone reorder buttons
-  if (isGameOver) {
+  if (gameOver) {
     if (mobileReorderBar) mobileReorderBar.style.display = 'none';
     if (mobileEarlierBtn) mobileEarlierBtn.disabled = true;
     if (mobileLaterBtn) mobileLaterBtn.disabled = true;
