@@ -30,6 +30,66 @@
     }
   },
   {
+    "id": "648f6f1c-5c5b-439d-827d-a1cd8bf355fa",
+    "year": 2010,
+    "month": 8,
+    "day": 24,
+    "text": "Venus Raj places 4th runner-up in Miss Universe",
+    "image": {
+      "url": null,
+      "local": "images/venus-raj-4th-runner-up.webp"
+    },
+    "source": {
+      "text": "Santiago, E. (2010, August 24). Maria Venus Raj is fourth runner-up in Miss Universe; Mexico takes the crown. PEP.",
+      "url": "https://www.pep.ph/lifestyle/23013/maria-venus-raj-is-fourth-runner-up-in-miss-universe-2010-mexico-takes-the-crown"
+    }
+  },
+  {
+    "id": "086d30e7-39cb-4439-a5de-e41a07a91ca6",
+    "year": 2010,
+    "month": 11,
+    "day": 13,
+    "text": "Pacquiao defeats Margarito to take WBC super welterweight championship",
+    "image": {
+      "url": null,
+      "local": "images/pacquiao-margarito.webp"
+    },
+    "source": {
+      "text": "Ramos, G. (2020, March 29). Margarito regrets refusing to stop [...] title fight vs Pacquiao. Spin.ph.",
+      "url": "https://www.spin.ph/boxing/margarito-regrets-not-stopping-title-fight-against-pacquiao-in-2010-a793-20200329"
+    }
+  },
+  {
+    "id": "879f969a-5656-4f54-9824-41d08a560a6c",
+    "year": 2011,
+    "month": 1,
+    "day": 11,
+    "text": "Reynaldo Dagsa takes a photo, which later becomes viral, of his own killer",
+    "image": {
+      "url": null,
+      "local": "images/reynaldo-dagsa-killed.webp"
+    },
+    "source": {
+      "text": "Fujita, A. (2011, January 4). Dead Man's Final Photo Captures Killer Aiming Gun at Him. ABC News.",
+      "url": "https://abcnews.com/International/murdered-filipino-captures-alleged-gunman-camera/story?id=12535914"
+    }
+  },
+  {
+    "id": "a947a591-b4ce-4a2e-ab16-a3fd2661c679",
+    "year": 2011,
+    "month": 2,
+    "day": 8,
+    "text": "Retired General Angelo Reyes commits suicide in the wake of corruption inquiry",
+    "image": {
+      "url": null,
+      "local": "images/angelo-reyes-suicide.webp"
+    },
+    "source": {
+      "text": "Gloria, G. (2016, February 8). The troubled times of Angie Reyes. Rappler.",
+      "url": "https://www.rappler.com/newsbreak/121348-troubled-times-angelo-reyes/"
+    }
+  },
+  {
     "id": "2d20106d-94af-4e51-9d97-5fbb668b5cfd",
     "year": 2011,
     "month": 2,
@@ -60,6 +120,21 @@
     }
   },
   {
+    "id": "3f70c8ca-b808-4975-86da-f795f7b08480",
+    "year": 2012,
+    "month": 4,
+    "day": 12,
+    "text": "Benham Rise is approved as Philippine territory by the UN",
+    "image": {
+      "url": null,
+      "local": "images/benham-rise-approved.webp"
+    },
+    "source": {
+      "text": "Fernandez, R. (2016, May 18). Benham Rise: Philippines's 'new territory'. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2016/05/18/1584439/benham-rise-philippiness-new-territory"
+    }
+  },
+  {
     "id": "b32dfd3e-a171-41a0-80bf-984bb1727c60",
     "year": 2012,
     "month": 5,
@@ -75,6 +150,66 @@
     }
   },
   {
+    "id": "f4ab743f-c8bf-4a02-8d2f-d8a3e116947f",
+    "year": 2012,
+    "month": 6,
+    "day": 23,
+    "text": "Cityhood of Bacoor is approved by plebiscite",
+    "image": {
+      "url": null,
+      "local": "images/bacoor-cityhood-plebiscite.webp"
+    },
+    "source": {
+      "text": "Bacoor Government Center. (n.d.). Historical Background of Bacoor.",
+      "url": "https://bacoor.gov.ph/historical-background-of-bacoor/"
+    }
+  },
+  {
+    "id": "cf80ca93-85a6-477e-86a6-9aaf533f6c89",
+    "year": 2012,
+    "month": 7,
+    "day": 10,
+    "text": "Comedy legend Dolphy dies",
+    "image": {
+      "url": null,
+      "local": "images/dolphy-death.webp"
+    },
+    "source": {
+      "text": "Quilingguing, U. (2012, July 10). Dolphy dies at 83. SunStar.",
+      "url": "https://www.sunstar.com.ph/more-articles/dolphy-dies-at-83"
+    }
+  },
+  {
+    "id": "45725337-fa19-4535-a478-8b2ecf9997bd",
+    "year": 2012,
+    "month": 8,
+    "day": 18,
+    "text": "Jesse Robredo dies in a plane crash",
+    "image": {
+      "url": null,
+      "local": "images/jesse-robredo-plane-crash.webp"
+    },
+    "source": {
+      "text": "Mendez, C. (2012, September 11). Jesse plane crash: No foul play. Philstar.com.",
+      "url": "https://www.philstar.com/headlines/2012/09/11/847705/jesse-plane-crash-no-foul-play"
+    }
+  },
+  {
+    "id": "3df22010-d52b-4f29-b0b3-961e85b32f32",
+    "year": 2012,
+    "month": 9,
+    "day": 5,
+    "text": "Tito Sotto delivers a speech plagiarized from Robert F. Kennedy",
+    "image": {
+      "url": null,
+      "local": "images/tito-sotto-plagiarism.webp"
+    },
+    "source": {
+      "text": "Panela, S. (2012, November 12). Kennedy daughter confirms plagiarism complaint vs Sotto. GMA News.",
+      "url": "https://www.gmanetwork.com/news/topstories/nation/281953/kennedy-daughter-confirms-plagiarism-complaint-vs-sotto/story/"
+    }
+  },
+  {
     "id": "d313540b-1d36-43cd-bcf9-4639bff4da27",
     "year": 2012,
     "month": 9,
@@ -87,6 +222,81 @@
     "source": {
       "text": "Republic of the Philippines. (2012, September 12). Republic Act No. 10175. Official Gazette.",
       "url": "https://www.officialgazette.gov.ph/2012/09/12/republic-act-no-10175/"
+    }
+  },
+  {
+    "id": "7b0219df-c8bc-49a1-91fb-d3c49422bc11",
+    "year": 2012,
+    "month": 9,
+    "day": 20,
+    "text": "The Cybercrime Prevention Act is signed into law",
+    "image": {
+      "url": null,
+      "local": "images/cybercrime-law-signed.webp"
+    },
+    "source": {
+      "text": "Franco, S., & Yu Sin, Y. (2012, October 31). President Aquino and the 2012 Cybercrime Prevention Act. East Asia Forum.",
+      "url": "https://eastasiaforum.org/2012/10/31/president-aquino-and-the-2012-cybercrime-prevention-act/"
+    }
+  },
+  {
+    "id": "cca7e826-82c7-468f-89b3-c421579bbba4",
+    "year": 2012,
+    "month": 10,
+    "day": 21,
+    "text": "St. Pedro Calungsod is canonized, making him the second Filipino saint",
+    "image": {
+      "url": null,
+      "local": "images/saint-pedro-calungsod-canon.webp"
+    },
+    "source": {
+      "text": "Jesuits Global. (n.d.). Saint Pedro Calungsod.",
+      "url": "https://www.jesuits.global/saint-blessed/saint-pedro-calungsod/"
+    }
+  },
+  {
+    "id": "0781a6c4-269a-4ed2-91e4-721044360592",
+    "year": 2012,
+    "month": 12,
+    "day": 8,
+    "text": "Pacquiao loses to Juan Manuel Marquez in their 4th fight",
+    "image": {
+      "url": null,
+      "local": "images/pacquiao-marquez-4.webp"
+    },
+    "source": {
+      "text": "Thomas, L. (2012, December 9). Pacquiao vs. Marquez 4 results: Juan Manuel Marquez knocks out Manny Pacquiqo in sixth round. MMA Fighting.",
+      "url": "https://www.mmafighting.com/2012/12/9/3745840/pacquiao-vs-marquez-4-results-juan-manuel-marquez-knocks-manny"
+    }
+  },
+  {
+    "id": "3c52932b-b1d5-472e-8b59-ec97390cbd03",
+    "year": 2012,
+    "month": 12,
+    "day": 21,
+    "text": "The Reproductive Health Bill is signed into law",
+    "image": {
+      "url": null,
+      "local": "images/rh-bill-signed.webp"
+    },
+    "source": {
+      "text": "Bonocan, K. (2012, December 28). RH Bill finally signed into law. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/331395/gonzales-aquino-signed-rh-bill-into-law"
+    }
+  },
+  {
+    "id": "348aebdf-aff4-4491-a6b7-91c24a016b39",
+    "year": 2013,
+    "month": 3,
+    "day": 16,
+    "text": "Solaire opens in Parañaque, being one of the country's first gambling resort",
+    "image": {
+      "url": null,
+      "local": "images/solaire-opens.webp"
+    },
+    "source": {
+      "text": "Aiger, M. (2013, March 14). Solaire Resort and Casino opens Saturday; promises 'new tourism'. INQUIRER.net.",
+      "url": "https://lifestyle.inquirer.net/93973/solaire-resort-and-casino-opens-saturday-promises-new-tourism/"
     }
   },
   {
@@ -120,6 +330,21 @@
     }
   },
   {
+    "id": "9ae98f9a-e465-4172-b5cb-897bf5ca6829",
+    "year": 2013,
+    "month": 8,
+    "day": 28,
+    "text": "Janet Napoles surrenders amidst corruption investigation",
+    "image": {
+      "url": null,
+      "local": "images/napoles-surrenders.webp"
+    },
+    "source": {
+      "text": "Gutierrez, J. (2013, August 29). Woman in $230mn scandal surrenders to Philippine leader. Yahoo! News.",
+      "url": "https://sg.news.yahoo.com/woman-230-mn-scandal-surrenders-philippine-leader-030520997.html"
+    }
+  },
+  {
     "id": "b06e1271-7868-4f95-aaea-c3bbe0c81f97",
     "year": 2013,
     "month": 11,
@@ -150,6 +375,21 @@
     }
   },
   {
+    "id": "14e57e87-16ec-4be7-9881-b8376f8931da",
+    "year": 2014,
+    "month": 4,
+    "day": 28,
+    "text": "EDCA (Enhanced Defense Cooperation Agreement) is signed",
+    "image": {
+      "url": null,
+      "local": "images/edca-signed.webp"
+    },
+    "source": {
+      "text": "Galang, M. (2024, April 18). EDCA and the Philippines-US Alliance. Royal United Services Institute.",
+      "url": "https://www.rusi.org/explore-our-research/publications/commentary/decade-edca-and-philippines-us-alliance"
+    }
+  },
+  {
     "id": "b1aa6815-42c5-43a2-9e50-73f458ca02ca",
     "year": 2014,
     "month": 7,
@@ -162,6 +402,21 @@
     "source": {
       "text": "Ybanez, D. (2014, July 21). Aquino lauds Iglesia Ni Cristo on its victories during PHL Arena inauguration. Eagle News.",
       "url": "https://www.eaglenews.ph/aquino-lauds-iglesia-ni-cristo-on-its-victories-during-phl-arena-inauguration/"
+    }
+  },
+  {
+    "id": "9d2e1fc4-9595-4dc6-bc75-f3da8294735c",
+    "year": 2014,
+    "month": 10,
+    "day": 11,
+    "text": "Jennifer Laude is killed by US Marine Pemberton",
+    "image": {
+      "url": null,
+      "local": "images/jennifer-laude-killed.webp"
+    },
+    "source": {
+      "text": "Abad, M. (2020, September 9). TIMELINE: The killing of Jennifer Laude and release of Joseph Scott Pemberton. Rappler. ",
+      "url": "https://www.rappler.com/newsbreak/iq/timeline-jennifer-laude-killing-joseph-scott-pemberton-release/"
     }
   },
   {
@@ -210,6 +465,21 @@
     }
   },
   {
+    "id": "cfd5d303-36aa-4ffa-a186-63d0047c82a1",
+    "year": 2015,
+    "month": 7,
+    "day": 20,
+    "text": "Kentex Factory (suspected sweatshop) fire kills at least 72 workers",
+    "image": {
+      "url": null,
+      "local": "images/kentex-factory-fire.webp"
+    },
+    "source": {
+      "text": "van der Zee, B. (2015, July 20). The inside story of the Kentex disaster: '74 workers died but no one is in prison'. The Guardian.",
+      "url": "https://www.theguardian.com/global-development-professionals-network/2015/jul/20/the-inside-story-of-the-kentex-disaster-74-workers-died-but-no-one-is-in-prison"
+    }
+  },
+  {
     "id": "b4daee3a-6537-4d43-b446-e0cbf5bbbebe",
     "year": 2015,
     "month": 10,
@@ -255,6 +525,66 @@
     }
   },
   {
+    "id": "2a37bc73-ac1d-45f2-b3d1-f6389e304a12",
+    "year": 2016,
+    "month": 6,
+    "day": 30,
+    "text": "Rodrigo Duterte takes oath as President",
+    "image": {
+      "url": null,
+      "local": "images/digong-oath.webp"
+    },
+    "source": {
+      "text": "Corrales, N. (2016, June 30). Duterte takes oath as PH's 16th President. INQUIRER.net.",
+      "url": "https://newsinfo.inquirer.net/793306/duterte-takes-oath-as-phs-16th-president"
+    }
+  },
+  {
+    "id": "9df3463e-7b66-4bfe-bc77-8cf29e99f52d",
+    "year": 2016,
+    "month": 7,
+    "day": 19,
+    "text": "GMA is acquitted of plunder by the Supreme Court",
+    "image": {
+      "url": null,
+      "local": "images/gma-acquitted.webp"
+    },
+    "source": {
+      "text": "Panganiban, A. (2017, December 3). GMA acquitted; why not Jinggoy, too?. INQUIRER.net.",
+      "url": "https://opinion.inquirer.net/109182/gma-acquitted-not-jinggoy"
+    }
+  },
+  {
+    "id": "a818d078-7c64-46f7-a176-94167d68aca4",
+    "year": 2016,
+    "month": 11,
+    "day": 18,
+    "text": "Former President Marcos Sr.'s remains transferred to Libingan ng mga Bayani",
+    "image": {
+      "url": null,
+      "local": "images/former-president-marcos-lnmb.webp"
+    },
+    "source": {
+      "text": "Parrocha, A. (2022, August 9). Bongbong Marcos visits father's tomb at Libingan ng mga Bayani. Philippine News Agency.",
+      "url": "https://www.pna.gov.ph/articles/1180920"
+    }
+  },
+  {
+    "id": "e34e4aed-d2cc-4e37-8bd0-3464d37e209f",
+    "year": 2017,
+    "month": 5,
+    "day": 8,
+    "text": "Mocha Uson is named PCOO Assistant Secretary",
+    "image": {
+      "url": null,
+      "local": "images/mocha-uson-pcoo.webp"
+    },
+    "source": {
+      "text": "Bartolome, J. (2017, May 9). Mocha Uson appointed assistant secretary at Duterte's comms office. GMA News.",
+      "url": "https://www.gmanetwork.com/news/topstories/nation/610076/mocha-uson-appointed-assistant-secretary-at-duterte-s-comms-office/story/"
+    }
+  },
+  {
     "id": "30cedc58-b011-4b12-b7b4-7e7295bc3a7f",
     "year": 2017,
     "month": 5,
@@ -282,6 +612,36 @@
     "source": {
       "text": "Cabuenas, J. (2018, April 16). Uber officially ends PHL operations. GMA News.",
       "url": "https://www.gmanetwork.com/news/money/motoring/650238/uber-officially-ends-phl-operations/story/"
+    }
+  },
+  {
+    "id": "954913dc-ac2b-4329-a103-34b2135e7239",
+    "year": 2018,
+    "month": 5,
+    "day": 11,
+    "text": "Chief Justice Sereno is removed from office",
+    "image": {
+      "url": null,
+      "local": "images/sereno-removed.webp"
+    },
+    "source": {
+      "text": "Gil, E. (2018, May 30). Philippines: Supreme Court decision removing its Chief Justice contributes to deterioration of the rule of law. International Commission of Jurists.",
+      "url": "https://www.icj.org/philippines-supreme-court-decision-removing-its-chief-justice-contributes-to-deterioration-of-the-rule-of-law/"
+    }
+  },
+  {
+    "id": "9b4e8579-3aef-457c-9a69-06d8baa151d0",
+    "year": 2018,
+    "month": 12,
+    "day": 18,
+    "text": "The Balangiga Bells are returned to the Philippines",
+    "image": {
+      "url": null,
+      "local": "images/balangiga-bells-return.webp"
+    },
+    "source": {
+      "text": "McCarthy, J. (2018, December 11). U.S. Returns Balangiga Church Bells To The Philippines After More Than A Century. NPR.",
+      "url": "https://www.npr.org/2018/12/11/675505073/after-117-years-balangiga-bells-will-be-returned-to-the-philippines"
     }
   },
   {
