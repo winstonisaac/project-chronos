@@ -136,6 +136,10 @@ export function renderSlots(items, lockedIndices = new Set()) {
       item.draggable = false;
       item.style.cursor = 'default';
     }
+    if (isGameOver) {
+      item.draggable = false;
+      item.style.cursor = 'default';
+    }
   });
   updateMobileView();
 }
@@ -179,7 +183,7 @@ let sourceSlot = null;
 function initDnD() {
   slotsContainer.addEventListener('dragstart', (e) => {
     const item = e.target.closest('.event-item');
-    if (!item || item.classList.contains('locked')) {
+    if (isGameOver || !item || item.classList.contains('locked')) {
       e.preventDefault();
       return;
     }
@@ -262,7 +266,7 @@ function getSlotIndex(slot) {
 
 slotsContainer.addEventListener('touchstart', (e) => {
   const item = e.target.closest('.event-item');
-  if (!item || item.classList.contains('locked')) return;
+  if (isGameOver || !item || item.classList.contains('locked')) return;
   const slot = item.parentElement;
   if (!slot || slot.classList.contains('locked')) return;
 
@@ -375,6 +379,8 @@ export function revealAll(eventsWithDates) {
       if (original) sourceEl.textContent = original;
       sourceEl.classList.add('visible');
     }
+    item.draggable = false;
+    item.style.cursor = 'default';
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
@@ -416,6 +422,8 @@ export function finalizeLossState(userOrderIds, answerOrderIds, puzzleEvents) {
       if (original) sourceEl.textContent = original;
       sourceEl.classList.add('visible');
     }
+    item.draggable = false;
+    item.style.cursor = 'default';
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
@@ -448,6 +456,8 @@ export function renderUserGuess(userOrderIds, events) {
       if (original) sourceEl.textContent = original;
       sourceEl.classList.add('visible');
     }
+    item.draggable = false;
+    item.style.cursor = 'default';
   });
   document.querySelector('.layout')?.classList.add('game-over');
   updateMobileView();
